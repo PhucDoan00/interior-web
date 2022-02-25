@@ -1,0 +1,40 @@
+.containerCustome {
+  height: calc(100vh - 64px);
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  position: relative;
+  top: -120px;
+}
+
+.input {
+  position: relative;
+  top: -80px;
+}
+
+.img {
+  position: relative;
+  right: -150px;
+}
+
+.btnCustom {
+  color: #fff !important;
+  background-color: #924b54 !important;
+  width: 120px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+  top: -30px;
+  transition: 0.3s;
+}
+
+.btnCustom:hover {
+  background-color: #793841 !important;
+}
