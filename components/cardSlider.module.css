@@ -1,6 +1,7 @@
+
 .cardWrapper {
   width: 100%;
-  height: 650px;
+  height: 620px;
   background-color: rgba(251, 244, 237, 0.8);
   /* position: relative;
   overflow: hidden; */
@@ -8,6 +9,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* padding: 50px; */
 }
 
 .cardSlider{
@@ -15,10 +17,15 @@
   flex-direction: row;
 }
 
+.cardCustomActive{
 
+}
 .cardCustom {
 margin : 0 10px;
+/* display: none; */
 }
+
+
 
 .btnCustomOutlinePrimary {
   color: #924b54 !important;
