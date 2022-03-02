@@ -8,7 +8,7 @@ export default function CardSlider() {
   return (
     <div className={styles.cardWrapper}>
      <div className={styles.cardSlider}>
-      <div className={`card ${styles.cardCustom} `} style={{ width: 65 + 'rem' , height: 30 + 'em'}}>
+      <div className={`card ${styles.cardCustomActive} `} style={{ width: 55 + 'rem' , height: 25 + 'em'}}>
         <img src='/slider1.png' alt="img1" className=" mt-0 card-img-top" />
         <div className="card-body">
           <h5 className="card-title d-flex justify-content-center">Card title</h5>
@@ -18,7 +18,7 @@ export default function CardSlider() {
           </p>
         </div>
       </div>
-      <div className={`card ${styles.cardCustom}`} style={{ width: 65 + 'rem' , height: 30 + 'em'}}>
+      <div className={`card ${styles.cardCustom}`} style={{ width: 55 + 'rem' , height: 25 + 'em'}}>
         <img src='/slider2.png' alt="img2" className=" mt-0 card-img-top" />
         <div className="card-body">
           <h5 className="card-title d-flex justify-content-center">Card title</h5>
@@ -28,7 +28,7 @@ export default function CardSlider() {
           </p>
         </div>
       </div>
-      <div className={`card ${styles.cardCustom}`} style={{ width: 65 + 'rem' , height: 30 + 'em'}}>
+      <div className={`card ${styles.cardCustom}`} style={{ width: 55 + 'rem' , height: 25 + 'em'}}>
         <img src='/slider3.png' alt="img3" className=" mt-0 card-img-top" />
         <div className="card-body">
           <h5 className="card-title d-flex justify-content-center">Card title</h5>
@@ -38,6 +38,24 @@ export default function CardSlider() {
           </p>
         </div>
       </div>
+      {/* <button
+        className="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev"
+      >
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Previous</span>
+      </button>
+      <button
+        className="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next"
+      >
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Next</span>
+      </button> */}
       </div>   
       <button type="button" className={`btn btn-outline mx-2 ${styles.btnCustomOutlinePrimary}`}>Browse all ideas</button>
     </div>
