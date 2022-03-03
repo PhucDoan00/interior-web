@@ -1,8 +1,8 @@
+.content {
+  text-align: left !important;
+}
+
 .title {
-  /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start; */
   font-size: 45px;
   line-height: 3.75rem;
   margin: 1rem auto;
@@ -31,9 +31,36 @@
   margin: 0 auto;
 }
 
-.mainGraphic{
-    vertical-align: middle;
-    border-style: none;
-    height: auto;
-    max-width: 100%;
+.mainGraphic {
+  vertical-align: middle;
+  border-style: none;
+  height: auto;
+  max-width: 100%;
+}
+
+.btnCustom {
+  color: #fff !important;
+  background-color: #924b54 !important;
+  width: 150px;
+  transition: 0.3s;
+}
+
+.btnCustom:hover {
+  background-color: #793841 !important;
+}
+
+.quizSection{
+  padding: 2.75rem;
+  background-color: #F4EEE9;
+  height: 100%;
+
+}
+.imgLeft{
+  /* order: 0; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 595px;
+  height: 330px;
 }

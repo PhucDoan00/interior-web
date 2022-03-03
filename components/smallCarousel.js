@@ -6,7 +6,7 @@ export default function SmallCarousel() {
 <div className="container">
   <div className="row justify-content-around">
     <div className="col d-flex flex-column justify-content-center">
-      <h1 className={`my-3 ${styles.title}`}> This is title </h1>
+      <h1 className={`my-3 ${styles.title}`}> Turn Your Result Into Reality </h1>
       <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo</p>
     </div>
     <div className="col">
@@ -35,6 +35,11 @@ export default function SmallCarousel() {
 </div>
     </div>
   </div>
+  <div
+        style={{ height: 35 + "px" }}
+        aria-hidden="true"
+        className={`wp-block-spacer ${styles.wpBlockSpacer}`}
+      ></div>
 </div>
   );
 }
