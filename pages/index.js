@@ -2,9 +2,8 @@ import Topbar from '../components/topbar'
 import Layout from "../components/layout";
 import Footer from '../components/footer';
 import Carousel from '../components/carousel';
-import CardSlider from '../components/cardSlider';
 import SmallCarousel from '../components/smallCarousel';
-import CardSliderTest from '../components/cardSliderTest';
+import CardSlider from '../components/cardSliderTest';
 
 export default function Index() {
   return (
@@ -17,9 +16,7 @@ Index.getLayout = function getLayout(page) {
     <Layout>
       <Topbar />
       <Carousel/>
-      {/* <CardSlider/> */}
-      <CardSliderTest />
-      {/* {page} */}
+      <CardSlider/>
       <SmallCarousel/>
       <Footer />
     </Layout>
