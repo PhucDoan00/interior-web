@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/link-passhref */
 /* eslint-disable @next/next/no-img-element */
 import Layout from "../components/layout";
 import Topbar from "../components/topbar";
@@ -5,6 +6,7 @@ import Footer from "../components/footer";
 import styles from "../styles/StyleQuiz.module.css";
 import SmallCarousel from "../components/smallCarousel";
 import TakeTheQuiz from "../components/takeTheQuiz";
+import Link from "next/link";
 
 export default function StyleQuiz() {
   return (
@@ -28,18 +30,20 @@ export default function StyleQuiz() {
                     <p>
                       Need help identifying your personal design style? With all
                       the inspiration out there, uncovering your style can be
-                      overwhelming. Enter: the Sparkle interior design style quiz.
-                      Our fast, free style quiz will help you pinpoint your
-                      interior design style, all in a few minutes or less.
+                      overwhelming. Enter: the Sparkle interior design style
+                      quiz. Our fast, free style quiz will help you pinpoint
+                      your interior design style, all in a few minutes or less.
                     </p>
                     <p>
-                      <button
-                        type="button"
-                        className={`btn ${styles.btnCustom} `}
-                        style={{ marginTop: 0.5 + "em" }}
-                      >
-                        Take The Quiz
-                      </button>
+                      <Link href="/takestylequiz">
+                        <button
+                          type="button"
+                          className={`btn ${styles.btnCustom} `}
+                          style={{ marginTop: 0.5 + "em" }}
+                        >
+                          Take The Quiz
+                        </button>
+                      </Link>
                     </p>
                   </div>
                 </div>
@@ -62,28 +66,26 @@ export default function StyleQuiz() {
         <div className="container">
           <div className="row d-flex flex-row justify-content-center align-items-center flex-wrap ">
             <div className={`col-6  ${styles.imgLeft} mx-4 my-4`}>
-             <img src="/stylequizbody.png" alt="Main Graphic" />
-              </div>
+              <img src="/stylequizbody.png" alt="Main Graphic" />
+            </div>
 
             <div className={`col-6 ${styles.contentRight}`}>
-
-             <h2>
+              <h2>
                 Our Approach:
                 <br />
                 One Style Doesn’t Fit All
               </h2>
               <p>
-                At Sparkle, we believe personal style is incredibly
-                nuanced—so we took a very nuanced approach when developing
-                our home style quiz. Rather than label you with a single
-                design style, we introduce you to a unique, blended result
-                that’s incredibly personal. You’re not just stuck with a
-                style like “rustic” or “minimalist,” because most people
-                prefer a look that’s a blend of several different interior
-                design styles. Your quiz results will reflect your
-                nuanced, personal preferences and give you the tools to
-                bring your style to life in your real space. </p>
-              
+                At Sparkle, we believe personal style is incredibly nuanced—so
+                we took a very nuanced approach when developing our home style
+                quiz. Rather than label you with a single design style, we
+                introduce you to a unique, blended result that’s incredibly
+                personal. You’re not just stuck with a style like “rustic” or
+                “minimalist,” because most people prefer a look that’s a blend
+                of several different interior design styles. Your quiz results
+                will reflect your nuanced, personal preferences and give you the
+                tools to bring your style to life in your real space.{" "}
+              </p>
             </div>
           </div>
         </div>
@@ -103,7 +105,7 @@ StyleQuiz.getLayout = function getLayout(page) {
       <Topbar />
       {page}
       <SmallCarousel />
-      <TakeTheQuiz/>
+      <TakeTheQuiz />
       <Footer />
     </Layout>
   );
