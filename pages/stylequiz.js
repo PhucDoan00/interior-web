@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/link-passhref */
 /* eslint-disable @next/next/no-img-element */
-import Layout from "../components/layout";
-import Topbar from "../components/topbar";
-import Footer from "../components/footer";
-import styles from "../styles/StyleQuiz.module.css";
-import SmallCarousel from "../components/smallCarousel";
-import TakeTheQuiz from "../components/takeTheQuiz";
-import Link from "next/link";
+import Layout from '../components/layout'
+import Topbar from '../components/topbar'
+import Footer from '../components/footer'
+import styles from '../styles/StyleQuiz.module.css'
+import SmallCarousel from '../components/smallCarousel'
+import TakeTheQuiz from '../components/takeTheQuiz'
+import Link from 'next/link'
 
 export default function StyleQuiz() {
   return (
@@ -16,7 +16,7 @@ export default function StyleQuiz() {
         id="block_60022a56a11a8"
       >
         <div className={`row align-items-center ${styles.rowCustome}`}>
-          <div className={"col-12 col-sm-6 text-center text-center color"}>
+          <div className={'col-12 col-sm-6 text-center text-center color'}>
             <div className="row">
               <div className={`content ${styles.contentCustome}`}>
                 <div className={`${styles.contentWidth}`}>
@@ -28,18 +28,17 @@ export default function StyleQuiz() {
                       <br />
                     </h1>
                     <p>
-                      Need help identifying your personal design style? With all
-                      the inspiration out there, uncovering your style can be
-                      overwhelming. Enter: the Sparkle interior design style
-                      quiz. Our fast, free style quiz will help you pinpoint
-                      your interior design style, all in a few minutes or less.
+                      Need help identifying your personal design style? With all the inspiration out
+                      there, uncovering your style can be overwhelming. Enter: the Sparkle interior
+                      design style quiz. Our fast, free style quiz will help you pinpoint your
+                      interior design style, all in a few minutes or less.
                     </p>
                     <p>
                       <Link href="/takestylequiz">
                         <button
                           type="button"
                           className={`btn ${styles.btnCustom} `}
-                          style={{ marginTop: 0.5 + "em" }}
+                          style={{ marginTop: 0.5 + 'em' }}
                         >
                           Take The Quiz
                         </button>
@@ -58,7 +57,7 @@ export default function StyleQuiz() {
         </div>
       </section>
       <div
-        style={{ height: 35 + "px" }}
+        style={{ height: 35 + 'px' }}
         aria-hidden="true"
         className={`wp-block-spacer ${styles.wpBlockSpacer}`}
       ></div>
@@ -76,27 +75,25 @@ export default function StyleQuiz() {
                 One Style Doesn’t Fit All
               </h2>
               <p>
-                At Sparkle, we believe personal style is incredibly nuanced—so
-                we took a very nuanced approach when developing our home style
-                quiz. Rather than label you with a single design style, we
-                introduce you to a unique, blended result that’s incredibly
-                personal. You’re not just stuck with a style like “rustic” or
-                “minimalist,” because most people prefer a look that’s a blend
-                of several different interior design styles. Your quiz results
-                will reflect your nuanced, personal preferences and give you the
-                tools to bring your style to life in your real space.{" "}
+                At Sparkle, we believe personal style is incredibly nuanced—so we took a very
+                nuanced approach when developing our home style quiz. Rather than label you with a
+                single design style, we introduce you to a unique, blended result that’s incredibly
+                personal. You’re not just stuck with a style like “rustic” or “minimalist,” because
+                most people prefer a look that’s a blend of several different interior design
+                styles. Your quiz results will reflect your nuanced, personal preferences and give
+                you the tools to bring your style to life in your real space.{' '}
               </p>
             </div>
           </div>
         </div>
       </section>
       <div
-        style={{ height: 35 + "px" }}
+        style={{ height: 35 + 'px' }}
         aria-hidden="true"
         className={`wp-block-spacer ${styles.wpBlockSpacer}`}
       ></div>
     </div>
-  );
+  )
 }
 
 StyleQuiz.getLayout = function getLayout(page) {
@@ -108,5 +105,5 @@ StyleQuiz.getLayout = function getLayout(page) {
       <TakeTheQuiz />
       <Footer />
     </Layout>
-  );
-};
+  )
+}
