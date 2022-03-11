@@ -1,0 +1,23 @@
+.imgSection {
+  /* background-color: aqua; */
+}
+
+.img {
+  max-width: 100%;
+  width: 1920px;
+  height: auto;
+}
+
+.title {
+  margin: 0;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 310px;
+  color: #fff;
+  font-size: 1.5rem;
+  letter-spacing: 5px;
+}
