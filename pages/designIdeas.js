@@ -1,35 +1,71 @@
+/* eslint-disable @next/next/link-passhref */
+/* eslint-disable @next/next/no-img-element */
 import Layout from '../components/layout'
 import Topbar from '../components/topbar'
 import Footer from '../components/footer'
+import styles from '../styles/designIdeas.module.css'
+import Link from 'next/link'
+import CardSlider from '../components/cardSlider'
 
 export default function DesignIdeas() {
   return (
-    <section>
-      <h2>Layout Example (Design Ideas)</h2>
-      <p>
-        This example adds a property <code>getLayout</code> to your page,
-        allowing you to return a React component for the layout. This allows you
-        to define the layout on a per-page basis. Since we're returning a
-        function, we can have complex nested layouts if desired.
-      </p>
-      <p>
-        When navigating between pages, we want to persist page state (input
-        values, scroll position, etc.) for a Single-Page Application (SPA)
-        experience.
-      </p>
-      <p>
-        This layout pattern will allow for state persistence because the React
-        component tree is persisted between page transitions. To preserve state,
-        we need to prevent the React component tree from being discarded between
-        page transitions.
-      </p>
-      <h3>Try It Out</h3>
-      <p>
-        To visualize this, try tying in the search input in the{' '}
-        <code>Sidebar</code> and then changing routes. You'll notice the input
-        state is persisted.
-      </p>
-    </section>
+    <div className={styles.designWrapper}>
+      <section className={styles.imageSection}>
+        <div className={styles.content}>
+          <div className={styles.text}>
+            <p>{'"The details are not the details. They make the design"'}</p>
+          </div>
+          <div className={styles.line}></div>
+        </div>
+      </section>
+
+      <section className={styles.rooms}>
+        <div className="title my-5">
+          <h3>Select Room Category</h3>
+        </div>
+        <div className={` mb-5 justify-content-evenly ${styles.category}`}>
+          <Link href="/rooms/livingroom">
+            <div
+              className={`card ${styles.cardHover}`}
+              style={{ width: 13 + 'rem', height: 13 + 'rem' }}
+            >
+              <img src="/designIdeas/living.jpg" className="card-img-top" alt="Living Room" />
+              <h5 className={`card-title ${styles.cardTitle}`}>Living Room</h5>
+            </div>
+          </Link>
+          <Link href="/rooms/bedroom">
+            <div className={`card ${styles.cardHover}`} style={{ width: 13 + 'rem' }}>
+              <img src="/designIdeas/bed.jpg" className="card-img-top" alt="Bed Room" />
+              <h5 className={`card-title ${styles.cardTitle}`}>Bed Room</h5>
+            </div>
+          </Link>
+          <Link href="/rooms/diningroom">
+            <div className={`card ${styles.cardHover}`} style={{ width: 13 + 'rem' }}>
+              <img src="/designIdeas/dining.jpg" className="card-img-top" alt="Dining Room" />
+              <h5 className={`card-title ${styles.cardTitle}`}>Dining Room</h5>
+            </div>
+          </Link>
+          <Link href="/rooms/office">
+            <div className={`card ${styles.cardHover}`} style={{ width: 13 + 'rem' }}>
+              <img src="/designIdeas/office.jpg" className="card-img-top" alt="Office" />
+              <h5 className={`card-title ${styles.cardTitle}`}>Office</h5>
+            </div>
+          </Link>
+          <Link href="/rooms/kidsroom">
+            <div className={`card ${styles.cardHover}`} style={{ width: 13 + 'rem' }}>
+              <img src="/designIdeas/kids.jpg" className="card-img-top" alt="Kid's Room" />
+              <h5 className={`card-title ${styles.cardTitle}`}>{`Kid's Room`}</h5>
+            </div>
+          </Link>
+          <Link href="/rooms/nursey">
+            <div className={`card ${styles.cardHover}`} style={{ width: 13 + 'rem' }}>
+              <img src="/designIdeas/nursey.jpg" className="card-img-top" alt="Nursey" />
+              <h5 className={`card-title ${styles.cardTitle}`}>Nursey</h5>
+            </div>
+          </Link>
+        </div>
+      </section>
+    </div>
   )
 }
 
@@ -38,7 +74,8 @@ DesignIdeas.getLayout = function getLayout(page) {
     <Layout>
       <Topbar />
       {page}
-      <Footer/>
+      <CardSlider />
+      <Footer />
     </Layout>
   )
 }

@@ -1,0 +1,66 @@
+.content {
+  text-align: left !important;
+}
+
+.title {
+  font-size: 45px;
+  line-height: 3.75rem;
+  margin: 1rem auto;
+  /* font-size: 50px ; */
+  font-family: "GeorgiaPro Web", Georgia, serif;
+  font-weight: 700;
+  text-align: left !important;
+}
+
+.rowCustome {
+  margin-left: 0;
+  margin-right: 0;
+}
+.contentCustome {
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+}
+
+.contentWidth {
+  width: 70%;
+  font-family: "ProximaNova Web", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 0 auto;
+}
+
+.mainGraphic {
+  vertical-align: middle;
+  border-style: none;
+  height: auto;
+  max-width: 100%;
+}
+
+.btnCustom {
+  color: #fff !important;
+  background-color: #924b54 !important;
+  width: 150px;
+  transition: 0.3s;
+}
+
+.btnCustom:hover {
+  background-color: #793841 !important;
+}
+
+.quizSection{
+  padding: 2.75rem;
+  background-color: #F4EEE9;
+  height: 100%;
+
+}
+.imgLeft{
+  /* order: 0; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 595px;
+  height: 330px;
+}

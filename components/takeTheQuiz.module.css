@@ -1,0 +1,16 @@
+.btnTakeQuiz{
+    background-color: #F4EEE9;
+    width: 100%;
+    height: 190px;
+}
+
+.btnCustom {
+    color: #fff !important;
+    background-color: #924b54 !important;
+    width: 150px;
+    transition: 0.3s;
+  }
+  
+  .btnCustom:hover {
+    background-color: #793841 !important;
+  }
