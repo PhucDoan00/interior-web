@@ -4,38 +4,50 @@ import Image from "next/image"
 
 export default function Toprecommend() {
   return (
-    <div class="container-fluid">
-  <div class="row">
-    <div class="col-6">
-        <p className={styles.a}> This is title </p>
-        <div class="row">
+    <div className="container-fluid">
+  
+        <div className="row">
+         <div className="col-1"> 
+            </div>
+            <div className="col-6"> 
+                <p className={styles.a}> This is title </p>
+            </div>
+            <div className="col-3">
+               <p className={styles.b}> Top Recommend </p>
+            </div>
+        </div>
+    <div className="row">
+    <div className="col-6">
+        <div className="row">
             <div className="col-2"></div>
-            <div class="col-4">
+           
+            <div className="col-4">
                 <div>
-                    <Image src={'/6.png'} width={208.62} height={309.47} />
+                    <Image src={'/6.png'} width={208.62} height={230.47} />
                 </div>
 
                 <div>
-                    <Image src={'/8.png'} width={208.62} height={309.47} />     
+                    <Image src={'/8.png'} width={208.62} height={267.47} />     
                 </div>
                 <div className="col-2"></div>
             </div>
-            <div class="col-4">
+            <div className="col-4">
+                
                 <div>
-               <Image src={'/7.png'} width={208.62} height={402.96} />     
+               <Image src={'/7.png'} width={208.62} height={315.96} />     
                 </div>
                 <div>
-                <Image src={'/9.png'} width={208.62} height={219.92} />
+                <Image src={'/9.png'} width={208.62} height={182.92} />
                 </div>
                 
             </div>
         </div>
     </div>
-    <div class="col-6">
-       <p className={styles.b}> Top Recommend </p>
-        <div class="row">
+    <div className="col-6">
+       
+        <div className="row">
             <div className="col-2"></div>
-            <div class="col-4">
+            <div className="col-4">
                 <div>
                     <div className="row">
                         <div className="col-7">
@@ -108,7 +120,7 @@ export default function Toprecommend() {
                 <div className="col-2">
                 </div>
             </div>
-            <div class="col-2">
+            <div className="col-2">
             </div>
         </div>
     </div>
