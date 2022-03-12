@@ -34,7 +34,7 @@ export default function StyleQuiz() {
                       interior design style, all in a few minutes or less.
                     </p>
                     <p>
-                      <Link href="/takestylequiz">
+                      <Link href="/stylequizresult">
                         <button
                           type="button"
                           className={`btn ${styles.btnCustom} `}
@@ -87,11 +87,7 @@ export default function StyleQuiz() {
           </div>
         </div>
       </section>
-      <div
-        style={{ height: 35 + 'px' }}
-        aria-hidden="true"
-        className={`wp-block-spacer ${styles.wpBlockSpacer}`}
-      ></div>
+      <div style={{ height: 35 + 'px' }} aria-hidden="true" className="wp-block-spacer"></div>
     </div>
   )
 }
