@@ -1,5 +1,5 @@
 .imgSection {
-  /* background-color: aqua; */
+  height: fit-content;
 }
 
 .img {
@@ -38,4 +38,9 @@
 
 .cardHover:hover {
   box-shadow: 0 0 20px rgba(33, 33, 33, 0.2);
+}
+
+.headertitle {
+  display: inline-block;
+  margin: 0;
 }
