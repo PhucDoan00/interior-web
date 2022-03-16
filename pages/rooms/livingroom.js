@@ -9,13 +9,72 @@ import Topbar from '../../components/topbar'
 import styles from '../../styles/rooms/livingrooms.module.css'
 import React, { useEffect } from 'react'
 
-export default function LivingRoom() {
-  // useEffect(() => {
-  //   const header = document.getElementsByClassName('card-title')
-  //   console.log(header.innerText)
-  //   console.log('hello')
-  // }, [])
+const rooms = [
+  {
+    id: 1,
+    roomStyle: 'Modern Living Room Ideas',
+    img: '/designIdeas/livingroom/6.png',
+  },
+  {
+    id: 2,
+    roomStyle: 'Mid-Century Living Room Ideas',
+    img: '/designIdeas/livingroom/5.png',
+  },
+  {
+    id: 3,
+    roomStyle: 'Rustic Living Room Ideas',
+    img: '/designIdeas/livingroom/8.png',
+  },
+  {
+    id: 4,
+    roomStyle: 'Eclectic Living Room Ideas',
+    img: '/designIdeas/livingroom/7.png',
+  },
+  {
+    id: 5,
+    roomStyle: 'Coastal Living Room Ideas',
+    img: '/designIdeas/livingroom/4.png',
+  },
+  {
+    id: 6,
+    roomStyle: 'Industrial Living Room Ideas',
+    img: '/designIdeas/livingroom/3.png',
+  },
+  {
+    id: 7,
+    roomStyle: 'Traditional Living Room Ideas',
+    img: '/designIdeas/livingroom/1.png',
+  },
+  {
+    id: 8,
+    roomStyle: 'Glam Living Room Ideas',
+    img: '/designIdeas/livingroom/2.png',
+  },
+]
 
+function clickHandle() {
+  console.log('Click Text')
+}
+
+function Living({ roomStyle, img }) {
+  return (
+    <button onClick={clickHandle}>
+      <div className="col">
+        <div className="p-0">
+          {/* Card */}
+          <div
+            className={`card ${styles.cardHover}`}
+            style={{ width: 18 + 'rem', height: 16 + 'rem' }}
+          >
+            <img src={img} className="card-img-top" alt={roomStyle} />
+            <h5 className={`card-title ${styles.cardTitle}`}>{roomStyle}</h5>
+          </div>
+        </div>
+      </div>
+    </button>
+  )
+}
+export default function LivingRoom() {
   return (
     <div className="livingWrapper">
       <section className={styles.imgSection}>
@@ -25,125 +84,11 @@ export default function LivingRoom() {
 
       <section className="roomStyles mb-5">
         <div className="container">
-          <div className={` ${styles.headertitle}`}>
-            <h4> Living rooms by style</h4>
-          </div>
           <div className="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
-            {/* 1st col */}
-            <Link href="/rooms/ideas/livingroomideas">
-              <div className="col">
-                <div className="p-0">
-                  {/* Card */}
-                  <div
-                    className={`card ${styles.cardHover}`}
-                    style={{ width: 18 + 'rem', height: 16 + 'rem' }}
-                  >
-                    <img
-                      src="/designIdeas/livingroom/6.png"
-                      className="card-img-top"
-                      alt="Office"
-                    />
-                    <h5 className={`card-title ${styles.cardTitle}`}>Modern Living Room Ideas</h5>
-                  </div>
-                </div>
-              </div>
-            </Link>
-
-            {/* 2nd col */}
-            <div className="col">
-              <div className="p-0">
-                {/* Card */}
-                <div
-                  className={`card ${styles.cardHover}`}
-                  style={{ width: 18 + 'rem', height: 16 + 'rem' }}
-                >
-                  <img src="/designIdeas/livingroom/5.png" className="card-img-top" alt="Office" />
-                  <h5 className={`card-title ${styles.cardTitle}`}>
-                    Mid-Century Living Room Ideas
-                  </h5>
-                </div>
-              </div>
-            </div>
-            {/* 3rd col */}
-            <div className="col">
-              <div className="p-0">
-                {/* Card */}
-                <div
-                  className={`card ${styles.cardHover}`}
-                  style={{ width: 18 + 'rem', height: 16 + 'rem' }}
-                >
-                  <img src="/designIdeas/livingroom/8.png" className="card-img-top" alt="Office" />
-                  <h5 className={`card-title ${styles.cardTitle}`}>Rustic Living Room Ideas</h5>
-                </div>
-              </div>
-            </div>
-            {/* 4th col */}
-            <div className="col">
-              <div className="p-0">
-                {/* Card */}
-                <div
-                  className={`card ${styles.cardHover}`}
-                  style={{ width: 18 + 'rem', height: 16 + 'rem' }}
-                >
-                  <img src="/designIdeas/livingroom/7.png" className="card-img-top" alt="Office" />
-                  <h5 className={`card-title ${styles.cardTitle}`}>Eclectic Living Room Ideas</h5>
-                </div>
-              </div>
-            </div>
-            {/* 5th col */}
-            <div className="col">
-              <div className="p-0">
-                {/* Card */}
-                <div
-                  className={`card ${styles.cardHover}`}
-                  style={{ width: 18 + 'rem', height: 16 + 'rem' }}
-                >
-                  <img src="/designIdeas/livingroom/4.png" className="card-img-top" alt="Office" />
-                  <h5 className={`card-title ${styles.cardTitle}`}>Coastal Living Room Ideas</h5>
-                </div>
-              </div>
-            </div>
-            {/* 6th col */}
-            <div className="col">
-              <div className="p-0">
-                {/* Card */}
-                <div
-                  className={`card ${styles.cardHover}`}
-                  style={{ width: 18 + 'rem', height: 16 + 'rem' }}
-                >
-                  <img src="/designIdeas/livingroom/3.png" className="card-img-top" alt="Office" />
-                  <h5 className={`card-title ${styles.cardTitle}`}>Industrial Living Room Ideas</h5>
-                </div>
-              </div>
-            </div>
-            {/* 7th col */}
-            <div className="col">
-              <div className="p-0">
-                {/* Card */}
-                <div
-                  className={`card ${styles.cardHover}`}
-                  style={{ width: 18 + 'rem', height: 16 + 'rem' }}
-                >
-                  <img src="/designIdeas/livingroom/1.png" className="card-img-top" alt="Office" />
-                  <h5 className={`card-title ${styles.cardTitle}`}>
-                    Traditional Living Room Ideas
-                  </h5>
-                </div>
-              </div>
-            </div>
-            {/* 8th col */}
-            <div className="col">
-              <div className="p-0">
-                {/* Card */}
-                <div
-                  className={`card ${styles.cardHover}`}
-                  style={{ width: 18 + 'rem', height: 16 + 'rem' }}
-                >
-                  <img src="/designIdeas/livingroom/2.png" className="card-img-top" alt="Office" />
-                  <h5 className={`card-title ${styles.cardTitle}`}>Glam Living Room Ideas</h5>
-                </div>
-              </div>
-            </div>
+            {/* Card */}
+            {rooms.map((room, index) => (
+              <Living key={index} roomStyle={room.roomStyle} img={room.img} />
+            ))}
           </div>
         </div>
       </section>
