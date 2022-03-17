@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/link-passhref */
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
-// import { useEffect } from 'react/cjs/react.production.min'
 import CardSlider from '../../components/cardSlider'
 import Footer from '../../components/footer'
 import Layout from '../../components/layout'
 import Topbar from '../../components/topbar'
 import styles from '../../styles/rooms/livingrooms.module.css'
 import React, { useEffect } from 'react'
+import Button from '../../components/button'
 
 const rooms = [
   {
@@ -89,6 +89,9 @@ export default function LivingRoom() {
               <Living key={index} roomStyle={room.roomStyle} img={room.img} />
             ))}
           </div>
+        </div>
+        <div className="container">
+          <Button />
         </div>
       </section>
     </div>

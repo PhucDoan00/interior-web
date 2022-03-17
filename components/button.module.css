@@ -1,0 +1,15 @@
+.btnCustom {
+  color: #924b54 !important;
+  border-color: #924b54 !important;
+  width: 100px;
+  transition: 0.3s;
+  position: relative;
+  /* top: 35px; */
+}
+
+.btnCustom:hover {
+  background-color: #924b54 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
