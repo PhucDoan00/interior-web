@@ -52,16 +52,12 @@ const rooms = [
   },
 ]
 
-function clickHandle() {
-  console.log('Click Text')
-}
-
 function Living({ roomStyle, img }) {
   return (
-    <button onClick={clickHandle}>
-      <div className="col">
-        <div className="p-0">
-          {/* Card */}
+    <div className="col">
+      <div className="p-0">
+        {/* Card_Button */}
+        <button className={styles.btnCard}>
           <div
             className={`card ${styles.cardHover}`}
             style={{ width: 18 + 'rem', height: 16 + 'rem' }}
@@ -69,9 +65,9 @@ function Living({ roomStyle, img }) {
             <img src={img} className="card-img-top" alt={roomStyle} />
             <h5 className={`card-title ${styles.cardTitle}`}>{roomStyle}</h5>
           </div>
-        </div>
+        </button>
       </div>
-    </button>
+    </div>
   )
 }
 export default function LivingRoom() {
@@ -84,6 +80,9 @@ export default function LivingRoom() {
 
       <section className="roomStyles mb-5">
         <div className="container">
+          <div className={` ${styles.headertitle}`}>
+            <h4> Living rooms by style</h4>
+          </div>
           <div className="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
             {/* Card */}
             {rooms.map((room, index) => (
