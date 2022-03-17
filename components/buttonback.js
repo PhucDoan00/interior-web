@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from './button.module.css'
+import styles from './buttonback.module.css'
 
-export default function Button() {
+export default function ButtonBack() {
   return (
     <div className="btnWrapper">
       <button type="button" className={`btn ${styles.btnCustom} `}>

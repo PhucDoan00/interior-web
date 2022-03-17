@@ -7,7 +7,7 @@ import Layout from '../../components/layout'
 import Topbar from '../../components/topbar'
 import styles from '../../styles/rooms/livingrooms.module.css'
 import React, { useEffect } from 'react'
-import Button from '../../components/button'
+import ButtonBack from '../../components/buttonback'
 
 const rooms = [
   {
@@ -90,8 +90,8 @@ export default function LivingRoom() {
             ))}
           </div>
         </div>
-        <div className="container">
-          <Button />
+        <div className="container my-3">
+          <ButtonBack />
         </div>
       </section>
     </div>
