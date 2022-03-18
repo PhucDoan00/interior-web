@@ -6,7 +6,7 @@ export default function Loveit() {
   return (
  <div style={{backgroundColor: '#faf4ed'}}>
      
-    <div className="container" >
+    <div className="container mb-5" >
         <div className="row">
                  <div className="col-4">
             </div>
