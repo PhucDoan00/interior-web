@@ -8,6 +8,8 @@ import Topbar from '../../components/topbar'
 import styles from '../../styles/rooms/livingrooms.module.css'
 import React, { useEffect } from 'react'
 import ButtonBack from '../../components/buttonback'
+import LivingRoomIdeas from './ideas/livingroomideas'
+import { useState } from 'react'
 
 const rooms = [
   {
@@ -52,12 +54,12 @@ const rooms = [
   },
 ]
 
-function Living({ roomStyle, img }) {
+function Living({ roomStyle, img, handleShowInfo, handleTitle }) {
   return (
     <div className="col">
       <div className="p-0">
         {/* Card_Button */}
-        <button className={styles.btnCard}>
+        <button className={styles.btnCard} onClick={() => (handleShowInfo(false), handleTitle(roomStyle))}>
           <div
             className={`card ${styles.cardHover}`}
             style={{ width: 18 + 'rem', height: 16 + 'rem' }}
@@ -71,30 +73,43 @@ function Living({ roomStyle, img }) {
   )
 }
 export default function LivingRoom() {
-  return (
-    <div className="livingWrapper">
-      <section className={styles.imgSection}>
-        <img className={styles.img} src="../../designIdeas/livingroom/mainImg.png" alt="Main Img" />
-        <p className={styles.title}>Living Room Design Ideas</p>
-      </section>
+  const [flagShowIdeas, setFlagShowIdeas] = useState(true);
+  const [title, setTitle] = useState('');
 
-      <section className="roomStyles mb-5">
-        <div className="container">
-          <div className={` ${styles.headertitle}`}>
-            <h4> Living rooms by style</h4>
-          </div>
-          <div className="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
-            {/* Card */}
-            {rooms.map((room, index) => (
-              <Living key={index} roomStyle={room.roomStyle} img={room.img} />
-            ))}
-          </div>
+  return (
+    <>
+      {flagShowIdeas ? (
+        <>
+        <div className="livingWrapper">
+          <section className={styles.imgSection}>
+            <img className={styles.img} src="../../designIdeas/livingroom/mainImg.png" alt="Main Img" />
+            <p className={styles.title}>Living Room Design Ideas</p>
+          </section>
+          <section className="roomStyles mb-5">
+            <div className="container">
+              <div className={` ${styles.headertitle}`}>
+                <h4> Living rooms by style</h4>
+              </div>
+              <div className="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+                {/* Card */}
+                {rooms.map((room, index) => (
+                  <Living key={index} roomStyle={room.roomStyle} img={room.img} handleShowInfo={setFlagShowIdeas} handleTitle={setTitle} />
+                ))}
+              </div>
+            </div>
+          </section>
         </div>
-        <div className="container my-3">
-          <ButtonBack />
+        <CardSlider />
+        </>
+      ) : (
+        <div className="livingWrapper">
+          <LivingRoomIdeas title={title} handleShowInfo={setFlagShowIdeas} />
+          <div className="container">
+              <ButtonBack handleClickButton={setFlagShowIdeas}/>
+            </div>
         </div>
-      </section>
-    </div>
+      )}
+    </>
   )
 }
 
@@ -103,7 +118,6 @@ LivingRoom.getLayout = function getLayout(page) {
     <Layout>
       <Topbar />
       {page}
-      <CardSlider />
       <Footer />
     </Layout>
   )

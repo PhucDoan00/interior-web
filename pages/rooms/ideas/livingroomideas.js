@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/link-passhref */
 /* eslint-disable @next/next/no-img-element */
-import Link from 'next/link'
+import ButtonBack from '../../../components/buttonback'
 import Footer from '../../../components/footer'
 import Layout from '../../../components/layout'
 import Topbar from '../../../components/topbar'
@@ -68,16 +68,15 @@ function LvRoomStyle({ styleName, img }) {
     </div>
   )
 }
-
-export default function LivingRoomIdeas() {
+export default function LivingRoomIdeas({title, setFlagShowIdeas}) {
   return (
-    <div className="livingWrapper">
+    <>
       <section
         className={styles.imgSection}
         style={{ backgroundImage: 'url(/designIdeas/livingroom/ideas/mainImg.png)' }}
       >
         <div className={styles.content}>
-          <h2 className={styles.title}>Modern Living Room Design Ideas</h2>
+          <h2 className={styles.title}>{title}Modern Living Room Design Ideas</h2>
           <p className={styles.paragraph}>
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
             dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
@@ -94,7 +93,7 @@ export default function LivingRoomIdeas() {
           </div>
         </div>
       </section>
-    </div>
+      </>
   )
 }
 // row row-cols-2 row-cols-lg-3 g-2 g-lg-3
