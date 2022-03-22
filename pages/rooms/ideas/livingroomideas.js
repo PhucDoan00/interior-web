@@ -68,15 +68,16 @@ function LvRoomStyle({ styleName, img }) {
     </div>
   )
 }
-export default function LivingRoomIdeas({title, setFlagShowIdeas}) {
+export default function LivingRoomIdeas({ title, img, setFlagShowIdeas }) {
   return (
     <>
       <section
         className={styles.imgSection}
-        style={{ backgroundImage: 'url(/designIdeas/livingroom/ideas/mainImg.png)' }}
+        // style={{ backgroundImage: 'url(/designIdeas/livingroom/ideas/mainImg.png)' }}
+        style={{ backgroundImage: `url(${img})`, width: 18 + 'rem', height: 18 + 'rem' }}
       >
         <div className={styles.content}>
-          <h2 className={styles.title}>{title}Modern Living Room Design Ideas</h2>
+          <h2 className={styles.title}>{title}</h2>
           <p className={styles.paragraph}>
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
             dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
@@ -93,7 +94,7 @@ export default function LivingRoomIdeas({title, setFlagShowIdeas}) {
           </div>
         </div>
       </section>
-      </>
+    </>
   )
 }
 // row row-cols-2 row-cols-lg-3 g-2 g-lg-3

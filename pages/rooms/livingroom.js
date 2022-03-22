@@ -10,6 +10,7 @@ import React, { useEffect } from 'react'
 import ButtonBack from '../../components/buttonback'
 import LivingRoomIdeas from './ideas/livingroomideas'
 import { useState } from 'react'
+import Router from 'next/router'
 
 const rooms = [
   {
@@ -54,12 +55,15 @@ const rooms = [
   },
 ]
 
-function Living({ roomStyle, img, handleShowInfo, handleTitle }) {
+function Living({ roomStyle, img, handleShowInfo, handleTitle, handleImg }) {
   return (
     <div className="col">
       <div className="p-0">
         {/* Card_Button */}
-        <button className={styles.btnCard} onClick={() => (handleShowInfo(false), handleTitle(roomStyle))}>
+        <button
+          className={styles.btnCard}
+          onClick={() => (handleShowInfo(false), handleTitle(roomStyle), handleImg(img))}
+        >
           <div
             className={`card ${styles.cardHover}`}
             style={{ width: 18 + 'rem', height: 16 + 'rem' }}
@@ -73,40 +77,63 @@ function Living({ roomStyle, img, handleShowInfo, handleTitle }) {
   )
 }
 export default function LivingRoom() {
-  const [flagShowIdeas, setFlagShowIdeas] = useState(true);
-  const [title, setTitle] = useState('');
+  const [flagShowIdeas, setFlagShowIdeas] = useState(true)
+  const [title, setTitle] = useState('')
+  const [img, setImg] = useState('')
 
   return (
     <>
       {flagShowIdeas ? (
         <>
-        <div className="livingWrapper">
-          <section className={styles.imgSection}>
-            <img className={styles.img} src="../../designIdeas/livingroom/mainImg.png" alt="Main Img" />
-            <p className={styles.title}>Living Room Design Ideas</p>
-          </section>
-          <section className="roomStyles mb-5">
-            <div className="container">
-              <div className={` ${styles.headertitle}`}>
-                <h4> Living rooms by style</h4>
+          <div className="livingWrapper">
+            <section className={styles.imgSection}>
+              <img
+                className={styles.img}
+                src="../../designIdeas/livingroom/mainImg.png"
+                alt="Main Img"
+              />
+              <p className={styles.title}>Living Room Design Ideas</p>
+            </section>
+            <section className="roomStyles mb-5">
+              <div className="container">
+                <div className={` ${styles.headertitle}`}>
+                  <h4> Living rooms by style</h4>
+                </div>
+                <div className="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+                  {/* Card */}
+                  {rooms.map((room, index) => (
+                    <Living
+                      key={index}
+                      roomStyle={room.roomStyle}
+                      img={room.img}
+                      handleShowInfo={setFlagShowIdeas}
+                      handleTitle={setTitle}
+                      handleImg={setImg}
+                    />
+                  ))}
+                </div>
               </div>
-              <div className="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
-                {/* Card */}
-                {rooms.map((room, index) => (
-                  <Living key={index} roomStyle={room.roomStyle} img={room.img} handleShowInfo={setFlagShowIdeas} handleTitle={setTitle} />
-                ))}
+              <div className="container">
+                <div className="btnWrapper">
+                  <button
+                    type="button"
+                    className={`btn ${styles.btnCustom} `}
+                    onClick={() => Router.push('/designIdeas')}
+                  >
+                    Back
+                  </button>
+                </div>
               </div>
-            </div>
-          </section>
-        </div>
-        <CardSlider />
+            </section>
+          </div>
+          <CardSlider />
         </>
       ) : (
         <div className="livingWrapper">
-          <LivingRoomIdeas title={title} handleShowInfo={setFlagShowIdeas} />
+          <LivingRoomIdeas title={title} img={img} handleShowInfo={setFlagShowIdeas} />
           <div className="container">
-              <ButtonBack handleClickButton={setFlagShowIdeas}/>
-            </div>
+            <ButtonBack handleClickButton={setFlagShowIdeas} />
+          </div>
         </div>
       )}
     </>
