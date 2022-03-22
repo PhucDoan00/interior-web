@@ -1,0 +1,12 @@
+.btnCustom {
+  color: #924b54 !important;
+  border-color: #924b54 !important;
+  width: 100px;
+  transition: 0.5s;
+}
+
+.btnCustom:hover {
+  background-color: #924b54 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
