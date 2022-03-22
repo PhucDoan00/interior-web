@@ -1,0 +1,69 @@
+.imageSection {
+  background-image: url(/designIdeas/mainImg.png);
+  height: 850px;
+  max-width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.text {
+  position: relative;
+  bottom: 90px;
+  font-size: 24px;
+  color: #fff;
+  opacity: 0.8;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.line {
+  position: relative;
+  bottom: 89px;
+  width: 25em;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 10px;
+  opacity: 0.5;
+}
+
+.rooms {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.category {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.cardTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 10px;
+  font-size: 18px;
+  font-weight: 400;
+}
+.cardHover {
+  transition: box-shadow 0.3s;
+  /* border-radius: 10px; */
+  /* border: 1px solid #ccc; */
+  border: none;
+}
+
+.cardHover:hover {
+  box-shadow: 0 0 20px rgba(33, 33, 33, 0.2);
+  /* background-color: aqua; */
+}

@@ -1,0 +1,74 @@
+.a {font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 72px;
+/* or 300% */
+
+letter-spacing: -0.015em;
+
+color: #000000;}
+.b{font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 26px;
+/* or 200% */
+
+letter-spacing: -0.015em;
+
+color: rgba(0, 0, 0, 0.8);}
+.c
+{position: static;
+width: 96px;
+height: 26px;
+left: 18px;
+top: 4px;
+
+/* Common/Caption */
+
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size: 13px;
+line-height: 26px;
+/* identical to box height, or 200% */
+
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: -0.015em;
+
+/* Primary main color */
+
+color: #924B54;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+margin: 0px 0px;}
+  .btnCustomOutlinePrimary {
+    color: #924b54 !important;
+    border-color: #924b54 !important;
+    width: 150px;
+    transition: 0.3s;
+    position: relative;
+    top: 35px;
+  }
+  
+  .btnCustomOutlinePrimary:hover {
+    background-color: #924b54 !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btnCustomOutlinePrimary:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+ 
