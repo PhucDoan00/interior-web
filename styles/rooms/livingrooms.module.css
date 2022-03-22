@@ -64,3 +64,18 @@
   border-color: #ffffff !important;
   color: #ffffff !important;
 }
+
+.btnCustomLVIdeas {
+  color: #924b54 !important;
+  border-color: #924b54 !important;
+  width: 100px;
+  transition: 0.5s;
+  /* margin-top: 2rem; */
+  margin-left: 8rem;
+}
+
+.btnCustomLVIdeas:hover {
+  background-color: #924b54 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}

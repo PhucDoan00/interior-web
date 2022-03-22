@@ -185,7 +185,7 @@ export default function LivingRoom() {
             <div className="btnWrapper">
               <button
                 type="button"
-                className={`btn ${styles.btnCustom} `}
+                className={`btn ${styles.btnCustomLVIdeas} `}
                 onClick={() => {
                   setFlagShowIdeas(true)
                 }}
