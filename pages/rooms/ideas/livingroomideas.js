@@ -68,20 +68,13 @@ function LvRoomStyle({ styleName, img }) {
     </div>
   )
 }
-export default function LivingRoomIdeas({ title, img }) {
+export default function LivingRoomIdeas({ title, imgBackGround, paragrah }) {
   return (
     <>
-      <section
-        className={styles.imgSection}
-        // style={{ backgroundImage: 'url(/designIdeas/livingroom/ideas/mainImg.png)' }}
-        style={{ backgroundImage: `url(${img})`, width: 18 + 'rem', height: 18 + 'rem' }}
-      >
+      <section className={styles.imgSection} style={{ backgroundImage: `url(${imgBackGround})` }}>
         <div className={styles.content}>
           <h2 className={styles.title}>{title}</h2>
-          <p className={styles.paragraph}>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-            dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-          </p>
+          <p className={styles.paragraph}>{paragrah}</p>
         </div>
       </section>
 
@@ -97,7 +90,6 @@ export default function LivingRoomIdeas({ title, img }) {
     </>
   )
 }
-// row row-cols-2 row-cols-lg-3 g-2 g-lg-3
 LivingRoomIdeas.getLayout = function getLayout(page) {
   return (
     <Layout>
