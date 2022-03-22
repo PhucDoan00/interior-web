@@ -1,16 +1,14 @@
 /* eslint-disable @next/next/link-passhref */
 /* eslint-disable @next/next/no-img-element */
-import Link from 'next/link'
+import Router from 'next/router'
+import React, { useRef, useState } from 'react'
+import { useEffect } from 'react'
 import CardSlider from '../../components/cardSlider'
 import Footer from '../../components/footer'
 import Layout from '../../components/layout'
 import Topbar from '../../components/topbar'
 import styles from '../../styles/rooms/livingrooms.module.css'
-import React, { useEffect } from 'react'
-import ButtonBack from '../../components/buttonback'
 import LivingRoomIdeas from './ideas/livingroomideas'
-import { useState } from 'react'
-import Router from 'next/router'
 
 const rooms = [
   {
@@ -81,6 +79,10 @@ export default function LivingRoom() {
   const [title, setTitle] = useState('')
   const [img, setImg] = useState('')
 
+  useEffect(() => {
+  window.scrollTo(0, 0)
+  }, [flagShowIdeas])
+
   return (
     <>
       {flagShowIdeas ? (
@@ -132,7 +134,11 @@ export default function LivingRoom() {
         <div className="livingWrapper">
           <LivingRoomIdeas title={title} img={img} handleShowInfo={setFlagShowIdeas} />
           <div className="container">
-            <ButtonBack handleClickButton={setFlagShowIdeas} />
+            <div className="btnWrapper">
+              <button type="button" className={`btn ${styles.btnCustom} `} onClick={() => {setFlagShowIdeas(true)}}>
+                Back
+              </button>
+            </div>
           </div>
         </div>
       )}

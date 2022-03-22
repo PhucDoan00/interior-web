@@ -68,7 +68,7 @@ function LvRoomStyle({ styleName, img }) {
     </div>
   )
 }
-export default function LivingRoomIdeas({ title, img, setFlagShowIdeas }) {
+export default function LivingRoomIdeas({ title, img }) {
   return (
     <>
       <section
