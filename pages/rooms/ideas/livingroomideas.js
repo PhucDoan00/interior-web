@@ -71,7 +71,10 @@ function LvRoomStyle({ styleName, img }) {
 export default function LivingRoomIdeas({ title, imgBackGround, paragrah }) {
   return (
     <>
-      <section className={styles.imgSection} style={{ backgroundImage: `url(${imgBackGround})` }}>
+      <section
+        className={styles.imgSection}
+        style={{ backgroundImage: `url(/designIdeas/livingroom/ideas/${imgBackGround})` }}
+      >
         <div className={styles.content}>
           <h2 className={styles.title}>{title}</h2>
           <p className={styles.paragraph}>{paragrah}</p>
