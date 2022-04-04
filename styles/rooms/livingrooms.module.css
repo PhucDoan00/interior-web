@@ -1,10 +1,10 @@
 .imgSection {
-  /* background-color: aqua; */
+  height: fit-content;
 }
 
 .img {
   max-width: 100%;
-  width: 1920px;
+  width: 100%;
   height: auto;
 }
 
@@ -38,4 +38,44 @@
 
 .cardHover:hover {
   box-shadow: 0 0 20px rgba(33, 33, 33, 0.2);
+}
+
+.headertitle {
+  display: inline-block;
+  margin: 0;
+}
+
+.btnCard {
+  padding: 0;
+  border: none;
+  width: fit-content;
+}
+
+.btnCustom {
+  color: #924b54 !important;
+  border-color: #924b54 !important;
+  width: 100px;
+  transition: 0.5s;
+  margin-top: 2rem;
+}
+
+.btnCustom:hover {
+  background-color: #924b54 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+.btnCustomLVIdeas {
+  color: #924b54 !important;
+  border-color: #924b54 !important;
+  width: 100px;
+  transition: 0.5s;
+  /* margin-top: 2rem; */
+  margin-left: 8rem;
+}
+
+.btnCustomLVIdeas:hover {
+  background-color: #924b54 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
 }
