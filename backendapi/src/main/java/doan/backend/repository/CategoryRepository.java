@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import doan.backend.entity.Category;
-import doan.backend.entity.Color;
 
 public interface CategoryRepository extends JpaRepository<Category, Long>{
 

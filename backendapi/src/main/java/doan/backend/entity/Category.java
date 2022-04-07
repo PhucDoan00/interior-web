@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +30,17 @@ public class Category implements Serializable{
 	@ManyToMany(mappedBy = "categories")
 	private Set<Product> products = new HashSet<>();
 	
+	@OneToMany(mappedBy = "categoryFK")
+	private Set<DesignIdea> designIdeas;
+	
+	public Set<DesignIdea> getDesignIdeas() {
+		return designIdeas;
+	}
+
+	public void setDesignIdeas(Set<DesignIdea> designIdeas) {
+		this.designIdeas = designIdeas;
+	}
+
 	public Category() {
 		// TODO Auto-generated constructor stub
 	}
