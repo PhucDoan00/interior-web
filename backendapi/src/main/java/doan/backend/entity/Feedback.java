@@ -26,10 +26,10 @@ public class Feedback implements Serializable{
 	
 	@Column(name = "customer_id", nullable = false)
 	private Long customerId;
-	
+	/*
 	@Column(name = "fb_title", nullable = false)
 	private Long fbTitle;
-	
+	*/
 	@Column(name = "fb_content", nullable = false)
 	private String fbContent;
 	
@@ -39,7 +39,7 @@ public class Feedback implements Serializable{
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "customer_id", nullable = false, updatable = false, insertable = false)
 	private Account account;
-	
+	/*
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fb_title", nullable = false, updatable = false, insertable = false)
 	private FeedbackTitle feedbackTitle;
@@ -51,7 +51,7 @@ public class Feedback implements Serializable{
 	public void setFeedbackTitle(FeedbackTitle feedbackTitle) {
 		this.feedbackTitle = feedbackTitle;
 	}
-
+*/
 	public Account getAccount() {
 		return account;
 	}
@@ -78,14 +78,6 @@ public class Feedback implements Serializable{
 
 	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
-	}
-
-	public Long getFbTitle() {
-		return fbTitle;
-	}
-
-	public void setFbTitle(Long fbTitle) {
-		this.fbTitle = fbTitle;
 	}
 
 	public String getFbContent() {

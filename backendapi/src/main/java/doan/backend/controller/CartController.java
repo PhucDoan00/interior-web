@@ -1,5 +1,6 @@
 package doan.backend.controller;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,8 @@ import doan.backend.service.CartService;
 @RestController
 @RequestMapping("/api/v1/cart")
 public class CartController {
+	
+	private static final DecimalFormat dfZero = new DecimalFormat("0.00");
 
 	@Autowired
 	private AccountRepository accountRepository;
@@ -61,8 +64,8 @@ public class CartController {
 				result += item.getPrice() * item.getQuantity();
 			}
 			finalCart.setProductTotal(result);
-			float fee = (float) (result * 0.1);
-			finalCart.setShippingFee((float)(Math.round(fee * 100.0) / 100.0));
+			double fee = result * 0.1;
+			finalCart.setShippingFee(Float.parseFloat(dfZero.format(fee)));
 			
 			return new ResponseEntity<>(finalCart, HttpStatus.OK);
 		}

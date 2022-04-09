@@ -64,6 +64,18 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	
 	@Transactional
 	@Modifying
+	@Query(value = "update Product set quantity = :param1 where product_id = :param2", nativeQuery = true)
+	void editProductQuantity(@Param("param1") int param1,
+					   		 @Param("param2") long param2);
+	
+	@Transactional
+	@Modifying
+	@Query(value = "update Product set bought_count = :param1 where product_id = :param2", nativeQuery = true)
+	void editProductBoughtCount(@Param("param1") int param1,
+					   		 @Param("param2") long param2);
+	
+	@Transactional
+	@Modifying
 	@Query(value = "delete from product_color where product_id = :param1", nativeQuery = true)
 	void deleteProductColor(@Param("param1") long param1);
 	
