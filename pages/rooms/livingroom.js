@@ -15,7 +15,7 @@ const rooms = [
   {
     id: 1,
     roomStyle: 'Modern Living Room Ideas',
-    img: '/designIdeas/livingroom/6.png',
+    img: '6.png',
     imgBackGround: 'modern.png',
     paragraph:
       "Modern design is all about chic furniture and statement pieces. For a modern living room, you'll want to blend sleek elements with comfort. To achieve a livable modern living room, find cozy fabrics and plush rugs, and pair them with striking decor and materials!",
@@ -24,7 +24,7 @@ const rooms = [
   {
     id: 2,
     roomStyle: 'Mid-Century Living Room Ideas',
-    img: '/designIdeas/livingroom/5.png',
+    img: '5.png',
     imgBackGround: 'midcentury.png',
     paragraph:
       'A mid-century modern living room layout is characterized by its uncluttered design and clean lines. This iconic style blends comfort with modern design elements and a retro aesthetic. There’s something nostalgic about mid-century modern design—which makes sense since it first came on the scene after WWII',
@@ -32,7 +32,7 @@ const rooms = [
   {
     id: 3,
     roomStyle: 'Rustic Living Room Ideas',
-    img: '/designIdeas/livingroom/8.png',
+    img: '8.png',
     imgBackGround: 'rustic.png',
     paragraph:
       "A living room is just that; a space where we live! It's used for a multitude of needs, from TV watching, family game nights, gathering of friends, solo reading afternoons and everything in between. This means a living room needs to be both beautiful and functional. A sofa should be both something you enjoy looking at.For those reasons, we can't think of a cozier style than Rustic.",
@@ -40,7 +40,7 @@ const rooms = [
   {
     id: 4,
     roomStyle: 'Eclectic Living Room Ideas',
-    img: '/designIdeas/livingroom/7.png',
+    img: '7.png',
     imgBackGround: 'eclectic.png',
     paragraph:
       'If a space that is both approachable and informal, globally-inspired and multi-style and highly curated sounds like your cup of tea, than an eclectic living room design may be what you need. Eclectic style is all about mixing elements and covers a wide range of looks from bohemian to more elegant and polished',
@@ -48,7 +48,7 @@ const rooms = [
   {
     id: 5,
     roomStyle: 'Coastal Living Room Ideas',
-    img: '/designIdeas/livingroom/4.png',
+    img: '4.png',
     imgBackGround: 'coastal.png',
     paragraph:
       'Whether you have a beach cottage or just want an easy living room reminiscent of the seaside, coastal style design is a beautiful solution. With staples like white linen sofas, natural fibers, and weathered woods, coastal living rooms are nothing short of airy and inviting!',
@@ -56,7 +56,7 @@ const rooms = [
   {
     id: 6,
     roomStyle: 'Industrial Living Room Ideas',
-    img: '/designIdeas/livingroom/3.png',
+    img: '3.png',
     imgBackGround: 'industrial.png',
     paragraph:
       "Effortlessly cool. Easy going. Undeniably chic. These are all aspects of an industrial-style living room. Exposed brick, piping, concrete or natural wood floors are structural elements that make Industrial style what it is, but even if your home is anything but Industrial, don't despair; you can still bring this coveted cool look to your home with the right decor and furniture!",
@@ -64,7 +64,7 @@ const rooms = [
   {
     id: 7,
     roomStyle: 'Traditional Living Room Ideas',
-    img: '/designIdeas/livingroom/1.png',
+    img: '1.png',
     imgBackGround: 'traditional.png',
     paragraph:
       'Traditional design is classic and elegant. A traditional living room can be both timeless and cozy for the whole family. It all depends on the materials used. However, every traditional living room design does have a discerning color palette, curated artwork and decor, and elegant lighting that makes a statement',
@@ -72,7 +72,7 @@ const rooms = [
   {
     id: 8,
     roomStyle: 'Glam Living Room Ideas',
-    img: '/designIdeas/livingroom/2.png',
+    img: '2.png',
     imgBackGround: 'glam.png',
     paragraph:
       "A glam living room design is for you if you want your living space to make a show-stopping statement. Glam living rooms tend to be more polished and upscale, and often make a pretty bold statement. They're great for entertaining, with their highly styled and considered approach.",
@@ -106,7 +106,7 @@ function Living({
             className={`card ${styles.cardHover}`}
             style={{ width: 18 + 'rem', height: 16 + 'rem' }}
           >
-            <img src={img} className="card-img-top" alt={roomStyle} />
+            <img src={`/designIdeas/livingroom/${img}`} className="card-img-top" alt={roomStyle} />
             <h5 className={`card-title ${styles.cardTitle}`}>{roomStyle}</h5>
           </div>
         </button>
