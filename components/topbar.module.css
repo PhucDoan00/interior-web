@@ -4,8 +4,10 @@
   background-color: #fafafa;
   padding: 9px;
   border-right: 1px solid #eaeaea;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }
-
 .topbar > a {
   margin: 8px 0;
   text-decoration: none;
