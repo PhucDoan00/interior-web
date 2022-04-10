@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Configuration
 @EnableWebSecurity
@@ -32,12 +34,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/**").permitAll()
-                .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/v1/**").permitAll()
+                //.antMatchers(HttpMethod.GET, "/api/**").permitAll()
+                .antMatchers("/api/auth/signin").anonymous()
+                .antMatchers("/api/auth/signup").anonymous()
+                .antMatchers("/api/auth/signupstaff").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/v1/products/{id}").hasRole("CUSTOMER")
+                .antMatchers("/api/v1/products/**").permitAll()
+                .antMatchers("/api/v1/createproduct").hasRole("STAFF")
+                .antMatchers("/api/v1/editproduct/**").hasRole("STAFF")
+                .antMatchers("/api/v1/deleteproduct/**").hasRole("STAFF")
+                .antMatchers("/api/v1/cart/**").hasRole("CUSTOMER")
+                .antMatchers("/api/v1/checkout").hasRole("CUSTOMER")
+                .antMatchers("/api/v1/designidea/{id1}").permitAll()
+                .antMatchers("/api/v1/designidea/{id1}/{id2}").permitAll()
+                .antMatchers("/api/v1/designidea/idea/id").permitAll()
+                .antMatchers("/api/v1/feedback").hasRole("CUSTOMER")
+                .antMatchers("/").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
+                .logout()
+             		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+             	.and()
                 .httpBasic();
     }
 

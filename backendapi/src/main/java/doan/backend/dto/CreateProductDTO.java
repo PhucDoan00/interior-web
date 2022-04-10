@@ -1,34 +1,24 @@
 package doan.backend.dto;
 
-import java.util.List;
+import java.util.Set;
 
 import lombok.Data;
 
 @Data
-public class ProductInformationDTO {
+public class CreateProductDTO {
 
-	private Long productId;
 	private String productName;
 	private float price;
 	private int quantity;
 	private String image;
 	private String description;
-	private int boughtCount;
 	private String material;
 	private String dimension;
-	private List<String> colors;
-	private List<String> categories;
+	private Set<Long> colorIds;
+	private Set<Long> categoryIds;
 	
-	public ProductInformationDTO() {
+	public CreateProductDTO() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public Long getProductId() {
-		return productId;
-	}
-
-	public void setProductId(Long productId) {
-		this.productId = productId;
 	}
 
 	public String getProductName() {
@@ -71,14 +61,6 @@ public class ProductInformationDTO {
 		this.description = description;
 	}
 
-	public int getBoughtCount() {
-		return boughtCount;
-	}
-
-	public void setBoughtCount(int boughtCount) {
-		this.boughtCount = boughtCount;
-	}
-
 	public String getMaterial() {
 		return material;
 	}
@@ -95,20 +77,20 @@ public class ProductInformationDTO {
 		this.dimension = dimension;
 	}
 
-	public List<String> getColors() {
-		return colors;
+	public Set<Long> getColorIds() {
+		return colorIds;
 	}
 
-	public void setColors(List<String> colors) {
-		this.colors = colors;
+	public void setColorIds(Set<Long> colorIds) {
+		this.colorIds = colorIds;
 	}
 
-	public List<String> getCategories() {
-		return categories;
+	public Set<Long> getCategoryIds() {
+		return categoryIds;
 	}
 
-	public void setCategories(List<String> categories) {
-		this.categories = categories;
+	public void setCategoryIds(Set<Long> categoryIds) {
+		this.categoryIds = categoryIds;
 	}
-	
+
 }

@@ -66,6 +66,20 @@ public class Product implements Serializable {
 	)
 	private Set<Color> colors = new HashSet<>();
 	
+	@ManyToMany(mappedBy = "products")
+	private Set<Cart> carts = new HashSet<>();
+	
+	@ManyToMany(mappedBy = "products")
+	private Set<DesignIdea> designIdeas;
+	
+	public Set<DesignIdea> getDesignIdeas() {
+		return designIdeas;
+	}
+
+	public void setDesignIdeas(Set<DesignIdea> designIdeas) {
+		this.designIdeas = designIdeas;
+	}
+
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
@@ -160,6 +174,14 @@ public class Product implements Serializable {
 
 	public void setColors(Set<Color> colors) {
 		this.colors = colors;
+	}
+
+	public Set<Cart> getCarts() {
+		return carts;
+	}
+
+	public void setCarts(Set<Cart> carts) {
+		this.carts = carts;
 	}
 	
 }

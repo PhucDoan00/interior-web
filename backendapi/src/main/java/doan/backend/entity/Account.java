@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -49,6 +50,28 @@ public class Account implements Serializable{
 	)
 	private Set<Role> roles;
 	
+	@OneToMany(mappedBy = "account")
+	private Set<Cart> carts;
+	
+	@OneToMany(mappedBy = "account")
+	private Set<Feedback> feedbacks;
+	
+	public Set<Cart> getCarts() {
+		return carts;
+	}
+
+	public void setCarts(Set<Cart> carts) {
+		this.carts = carts;
+	}
+
+	public Set<Feedback> getFeedbacks() {
+		return feedbacks;
+	}
+
+	public void setFeedbacks(Set<Feedback> feedbacks) {
+		this.feedbacks = feedbacks;
+	}
+
 	public Account() {
 		// TODO Auto-generated constructor stub
 	}
@@ -112,7 +135,5 @@ public class Account implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
 	
 }
