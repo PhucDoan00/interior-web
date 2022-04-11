@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Configuration
 @EnableWebSecurity
@@ -49,6 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/api/v1/designidea/{id1}/{id2}").permitAll()
                 .antMatchers("/api/v1/designidea/idea/id").permitAll()
                 .antMatchers("/api/v1/feedback").hasRole("CUSTOMER")
+                .antMatchers("/api/v1/profile/**").authenticated()
+                .antMatchers("/api/v1/viewbill/**").hasRole("CUSTOMER")
                 .antMatchers("/").permitAll()
                 .anyRequest()
                 .authenticated()
