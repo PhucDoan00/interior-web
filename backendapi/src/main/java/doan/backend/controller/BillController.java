@@ -172,6 +172,29 @@ public class BillController {
 		return new ResponseEntity<List<ViewBillDTO>> (viewbills, HttpStatus.OK);
 	}
 	
+	@GetMapping("/viewallbills/{id}")
+	public ResponseEntity<?> viewOneBill(@PathVariable(value = "id") Long billId) throws ParseException {
+		Bill bill = billRepository.getById(billId);
+		ViewBillDTO viewbill = new ViewBillDTO();
+		
+		viewbill.setBillId(bill.getBillId());
+		viewbill.setCartId(bill.getCartId());
+		viewbill.setBillStatus(billStatusRepository.getById(bill.getBillStatus()).getStatus());
+		viewbill.setProductTotal(Float.parseFloat(dfZero.format(bill.getProductTotal())));
+		viewbill.setShippingFee(Float.parseFloat(dfZero.format(bill.getShippingFee())));
+		viewbill.setTotalPrice(Float.parseFloat(dfZero.format(bill.getTotalPrice())));
+		viewbill.setCustomerName(bill.getCustomerName());
+		viewbill.setPhone(bill.getPhone());
+		viewbill.setEmail(bill.getEmail());
+		viewbill.setAddress(bill.getAddress());
+		viewbill.setPurchasedAt(formatter.format(bill.getPurchasedAt()));
+		
+		List<CartItemDTO> items = cartService.getItemsInCart(bill.getCartId());
+		viewbill.setCartItem(items);
+		
+		return new ResponseEntity<ViewBillDTO> (viewbill, HttpStatus.OK);
+	}
+	
 	@GetMapping("/checkout")
 	public ResponseEntity<?> checkout(HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();

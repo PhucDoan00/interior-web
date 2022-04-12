@@ -21,6 +21,7 @@ import doan.backend.entity.Account;
 import doan.backend.entity.Cart;
 import doan.backend.repository.AccountRepository;
 import doan.backend.repository.CartRepository;
+import doan.backend.repository.ProductRepository;
 import doan.backend.service.CartService;
 
 @RestController
@@ -31,6 +32,9 @@ public class CartController {
 
 	@Autowired
 	private AccountRepository accountRepository;
+	
+	@Autowired
+	private ProductRepository productRepository;
 	
 	@Autowired
 	private CartService cartService;
@@ -72,7 +76,7 @@ public class CartController {
 	}
 
 	@PostMapping("")
-	public ResponseEntity<?> deleteItemFromCart(@RequestBody Integer productId, HttpServletRequest request) {
+	public ResponseEntity<?> deleteItemFromCart(@RequestBody Long productId, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
 		Account account = accountRepository.findByEmail(email) 
 				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
@@ -88,5 +92,60 @@ public class CartController {
 			cartRepository.updateCartStatus(2, cart.getCartId());
 		}
 		return new ResponseEntity<>("Item removed!", HttpStatus.OK);
+	}
+	
+	@PostMapping("/plus")
+	public ResponseEntity<?> addQuantity(@RequestBody Long productId, HttpServletRequest request) {
+		String email = request.getUserPrincipal().getName();
+		Account account = accountRepository.findByEmail(email) 
+				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
+		long customerId = account.getAccountId();
+		
+		Cart cart = cartRepository.findActiveCartByCustomerId(customerId);
+		if (cartRepository.findAvailableItem(cart.getCartId(), productId) == 0) return new ResponseEntity<>("Product not found", HttpStatus.OK);
+		
+		int quantityLeft = productRepository.getById(productId).getQuantity();
+		CartItemDTO item = cartService.findItemInCart(cart.getCartId(), productId);
+		int quantityCurrent = item.getQuantity();
+		
+		if (quantityCurrent + 1 > quantityLeft) {
+			cartRepository.updateItemQuantity(quantityLeft, cart.getCartId(), productId);
+			int count = cartRepository.countItemsInCart(cart.getCartId());
+			System.out.println(count);
+			if (count == 0) {
+				cartRepository.updateCartStatus(2, cart.getCartId());
+			}
+			return new ResponseEntity<>("This product only has " + quantityLeft + " left!", HttpStatus.OK);
+		} else cartRepository.updateItemQuantity(quantityCurrent + 1, cart.getCartId(), productId); 
+		
+		return new ResponseEntity<>("Item quantity added!", HttpStatus.OK);
+	}
+	
+	@PostMapping("/minus")
+	public ResponseEntity<?> minusQuantity(@RequestBody Long productId, HttpServletRequest request) {
+		String email = request.getUserPrincipal().getName();
+		Account account = accountRepository.findByEmail(email) 
+				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
+		long customerId = account.getAccountId();
+		
+		Cart cart = cartRepository.findActiveCartByCustomerId(customerId);
+		if (cartRepository.findAvailableItem(cart.getCartId(), productId) == 0) return new ResponseEntity<>("Product not found", HttpStatus.OK);
+		
+		int quantityLeft = productRepository.getById(productId).getQuantity();
+		CartItemDTO item = cartService.findItemInCart(cart.getCartId(), productId);
+		int quantityCurrent = item.getQuantity();
+		
+		if (quantityCurrent - 1 > quantityLeft) {
+			cartRepository.updateItemQuantity(quantityLeft, cart.getCartId(), productId);
+			int count = cartRepository.countItemsInCart(cart.getCartId());
+			System.out.println(count);
+			if (count == 0) {
+				cartRepository.updateCartStatus(2, cart.getCartId());
+			}
+			return new ResponseEntity<>("This product only has " + quantityLeft + " left!", HttpStatus.OK);
+		} else cartRepository.updateItemQuantity(quantityCurrent - 1, cart.getCartId(), productId); 
+		
+		
+		return new ResponseEntity<>("Item quantity removed!", HttpStatus.OK);
 	}
 }
