@@ -34,7 +34,7 @@ export default function StyleQuiz() {
                       interior design style, all in a few minutes or less.
                     </p>
                     <p>
-                      <Link href="/stylequizresult">
+                      <Link href="/takestylequiz">
                         <button
                           type="button"
                           className={`btn ${styles.btnCustom} `}

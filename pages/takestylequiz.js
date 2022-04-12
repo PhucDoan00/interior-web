@@ -5,6 +5,7 @@ import Layout from "../components/layout";
 import styles from "../styles/TakeStyleQuiz.module.css";
 import Topbar from "../components/topbar";
 import Link from "next/link";
+import StyleQuizCard from "../components/stylequizcard";
 
 export default function TakeStyleQuiz() {
   const [opacity1, setOpacity1] = useState(1);
@@ -15,6 +16,50 @@ export default function TakeStyleQuiz() {
   const [opacity6, setOpacity6] = useState(1);
   const [count, setCount] = useState(0);
   const [isDisabled, setDisabled] = useState(true);
+
+  const rooms = [
+    {
+      id: 1,
+      style: 'Modern Living Room Ideas',
+      img: '/designIdeas/livingroom/6.png',
+      selected: true,
+    },
+    {
+      id: 2,
+      style: 'Mid-Century Living Room Ideas',
+      img: '/designIdeas/livingroom/5.png',
+    },
+    {
+      id: 3,
+      style: 'Rustic Living Room Ideas',
+      img: '/designIdeas/livingroom/8.png',
+    },
+    {
+      id: 4,
+      style: 'Eclectic Living Room Ideas',
+      img: '/designIdeas/livingroom/7.png',
+    },
+    {
+      id: 5,
+      style: 'Coastal Living Room Ideas',
+      img: '/designIdeas/livingroom/4.png',
+    },
+    {
+      id: 6,
+      style: 'Industrial Living Room Ideas',
+      img: '/designIdeas/livingroom/3.png',
+    },
+    {
+      id: 7,
+      style: 'Traditional Living Room Ideas',
+      img: '/designIdeas/livingroom/1.png',
+    },
+    {
+      id: 8,
+      style: 'Glam Living Room Ideas',
+      img: '/designIdeas/livingroom/2.png',
+    },
+  ]
 
   function handleClickSubmit(key) {
     switch (key) {
@@ -53,13 +98,13 @@ export default function TakeStyleQuiz() {
   return (
     <div>
       <div className={`${styles.takeStyleQuizWrapper}`}>
-        <div className="container d-flex justify-content-between align-items-center ">
-          <div className="col">
+        <div className="container justify-content-between align-items-center">
+          <div className="col-4 justify-content-between align-items-center position-fixed">
             <h1>Which 3 rooms appeal to you most?</h1>
             <span>Show us what your dream home looks like.</span>
           </div>
-          <div className="col">
-            <div className="row">
+          <div className="col-8 offset-sm-6">
+            {/* <div className="row">
               <div className="col">
                 <button
                   onClick={() => {
@@ -171,6 +216,18 @@ export default function TakeStyleQuiz() {
                     style={{ opacity: opacity6 }}
                   />
                 </button>
+              </div>
+            </div> */}
+            <div className="container">
+              <div className="row row-cols-3 row-cols-lg-2 g-2 g-lg-3">
+                {/* Card */}
+                {rooms.map((room, index) => (
+                  <StyleQuizCard
+                    key={index}
+                    style={room.style}
+                    img={room.img}
+                  />
+                ))}
               </div>
             </div>
           </div>

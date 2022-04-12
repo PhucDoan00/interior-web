@@ -35,3 +35,11 @@
 .buttonNext:hover {
   background-color: #793841 !important;
 }
+
+.navcolumn {
+  overflow: hidden;
+}
+
+.contentcolumn {
+  overflow: scroll;
+}
