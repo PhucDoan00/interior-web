@@ -10,6 +10,7 @@ public class DesignIdeaStep4DTO {
 	private String categoryName;
 	private String styleName;
 	private String bigThumbnail;
+	private String description;
 	private List<DesignIdeaItemsDTO> itemList;
 	
 	public DesignIdeaStep4DTO() {
@@ -40,6 +41,13 @@ public class DesignIdeaStep4DTO {
 	public void setItemList(List<DesignIdeaItemsDTO> itemList) {
 		this.itemList = itemList;
 	}
-	
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	
 }

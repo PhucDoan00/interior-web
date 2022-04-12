@@ -1,6 +1,9 @@
 package doan.backend.controller;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,15 +13,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import doan.backend.dto.CartItemDTO;
+import doan.backend.dto.ViewBillDTO;
 import doan.backend.entity.Account;
 import doan.backend.entity.Bill;
 import doan.backend.entity.Cart;
 import doan.backend.repository.AccountRepository;
 import doan.backend.repository.BillRepository;
+import doan.backend.repository.BillStatusRepository;
 import doan.backend.repository.CartRepository;
 import doan.backend.repository.ProductRepository;
 import doan.backend.service.CartService;
@@ -28,6 +35,7 @@ import doan.backend.service.CartService;
 public class BillController {
 
 	private static final DecimalFormat dfZero = new DecimalFormat("0.00");
+	SimpleDateFormat formatter = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss z");
 	
 	@Autowired
 	private AccountRepository accountRepository;
@@ -42,7 +50,127 @@ public class BillController {
 	private BillRepository billRepository;
 	
 	@Autowired
+	private BillStatusRepository billStatusRepository;
+	
+	@Autowired
 	private ProductRepository productRepository;
+	
+	@GetMapping("/viewbill")
+	public ResponseEntity<?> viewBillList(HttpServletRequest request) throws ParseException {
+		String email = request.getUserPrincipal().getName();
+		Account acc = accountRepository.findByEmail(email) 
+				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
+		int count = billRepository.countBills(acc.getAccountId());
+		if (count == 0) return new ResponseEntity<>("You have no bills!", HttpStatus.OK);
+		List<ViewBillDTO> viewbills = new ArrayList<ViewBillDTO>();
+		List<Bill> bills = billRepository.findAll();
+		
+		for (Bill bill : bills) {
+			ViewBillDTO viewbill = new ViewBillDTO();
+			viewbill.setBillId(bill.getBillId());
+			viewbill.setCartId(bill.getCartId());
+			viewbill.setBillStatus(billStatusRepository.getById(bill.getBillStatus()).getStatus());
+
+			List<CartItemDTO> items = cartService.getItemsInCart(bill.getCartId());
+			float result = 0;
+			for (CartItemDTO item : items) {
+				result += item.getPrice() * item.getQuantity();
+			}
+			viewbill.setProductTotal(result);
+			
+			double fee = result * 0.1;
+			viewbill.setShippingFee(Float.parseFloat(dfZero.format(fee)));
+			
+			viewbill.setTotalPrice(bill.getProductTotal() + bill.getShippingFee());
+			viewbill.setCustomerName(bill.getCustomerName());
+			viewbill.setPhone(bill.getPhone());
+			viewbill.setEmail(bill.getEmail());
+			viewbill.setAddress(bill.getAddress());
+			viewbill.setPurchasedAt(formatter.format(bill.getPurchasedAt()));
+			viewbill.setCartItem(items);
+			
+			viewbills.add(viewbill);
+		}
+		
+		return new ResponseEntity<List<ViewBillDTO>> (viewbills, HttpStatus.OK);
+	}
+	
+	@GetMapping("/viewbill/{id}")
+	public ResponseEntity<?> viewBill(HttpServletRequest request, @PathVariable(value = "id") Long billId) {
+		String email = request.getUserPrincipal().getName();
+		Account acc = accountRepository.findByEmail(email) 
+				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
+		Bill bill = billRepository.getById(billId);
+		long customerId = cartRepository.getById(bill.getCartId()).getCustomerId();
+		if (acc.getAccountId() != customerId) return new ResponseEntity<>("You cannot view this bill!", HttpStatus.BAD_REQUEST);
+		ViewBillDTO viewbill = new ViewBillDTO();
+		
+		viewbill.setBillId(bill.getBillId());
+		viewbill.setCartId(bill.getCartId());
+		viewbill.setBillStatus(billStatusRepository.getById(bill.getBillStatus()).getStatus());
+		viewbill.setProductTotal(Float.parseFloat(dfZero.format(bill.getProductTotal())));
+		viewbill.setShippingFee(Float.parseFloat(dfZero.format(bill.getShippingFee())));
+		viewbill.setTotalPrice(Float.parseFloat(dfZero.format(bill.getTotalPrice())));
+		viewbill.setCustomerName(bill.getCustomerName());
+		viewbill.setPhone(bill.getPhone());
+		viewbill.setEmail(bill.getEmail());
+		viewbill.setAddress(bill.getAddress());
+		viewbill.setPurchasedAt(formatter.format(bill.getPurchasedAt()));
+		
+		List<CartItemDTO> items = cartService.getItemsInCart(bill.getCartId());
+		viewbill.setCartItem(items);
+		
+		return new ResponseEntity<ViewBillDTO> (viewbill, HttpStatus.OK);
+	}
+	
+	@PutMapping("/viewbill/{id}")
+	public ResponseEntity<?> cancelBill(HttpServletRequest request, @PathVariable(value = "id") Long billId) {
+		String email = request.getUserPrincipal().getName();
+		Account acc = accountRepository.findByEmail(email) 
+				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
+		Bill bill = billRepository.getById(billId);
+		long customerId = cartRepository.getById(bill.getCartId()).getCustomerId();
+		if (acc.getAccountId() != customerId) return new ResponseEntity<>("You cannot cancel this bill!", HttpStatus.BAD_REQUEST);
+		if (bill.getBillStatus() != 1) return new ResponseEntity<>("You cannot cancel this bill!", HttpStatus.BAD_REQUEST);
+		billRepository.updateBillStatus(2, billId);
+		return new ResponseEntity<>("Cancel Successfully!", HttpStatus.OK);
+	}
+	
+	@GetMapping("/viewallbills")
+	public ResponseEntity<?> viewAllBill() throws ParseException {
+		
+		List<ViewBillDTO> viewbills = new ArrayList<ViewBillDTO>();
+		List<Bill> bills = billRepository.findAll();
+		
+		for (Bill bill : bills) {
+			ViewBillDTO viewbill = new ViewBillDTO();
+			viewbill.setBillId(bill.getBillId());
+			viewbill.setCartId(bill.getCartId());
+			viewbill.setBillStatus(billStatusRepository.getById(bill.getBillStatus()).getStatus());
+
+			List<CartItemDTO> items = cartService.getItemsInCart(bill.getCartId());
+			float result = 0;
+			for (CartItemDTO item : items) {
+				result += item.getPrice() * item.getQuantity();
+			}
+			viewbill.setProductTotal(result);
+			
+			double fee = result * 0.1;
+			viewbill.setShippingFee(Float.parseFloat(dfZero.format(fee)));
+			
+			viewbill.setTotalPrice(bill.getProductTotal() + bill.getShippingFee());
+			viewbill.setCustomerName(bill.getCustomerName());
+			viewbill.setPhone(bill.getPhone());
+			viewbill.setEmail(bill.getEmail());
+			viewbill.setAddress(bill.getAddress());
+			viewbill.setPurchasedAt(formatter.format(bill.getPurchasedAt()));
+			viewbill.setCartItem(items);
+			
+			viewbills.add(viewbill);
+		}
+		
+		return new ResponseEntity<List<ViewBillDTO>> (viewbills, HttpStatus.OK);
+	}
 	
 	@GetMapping("/checkout")
 	public ResponseEntity<?> checkout(HttpServletRequest request) {
@@ -76,7 +204,7 @@ public class BillController {
 				
 				int preQuantity = productRepository.getById(item.getProductId()).getQuantity();
 				productRepository.editProductQuantity(preQuantity - item.getQuantity(), item.getProductId());
-				productRepository.editProductBoughtCount(productRepository.getById(item.getProductId()).getBoughtCount() + 1, item.getProductId());
+				productRepository.editProductBoughtCount(productRepository.getById(item.getProductId()).getBoughtCount() + item.getQuantity(), item.getProductId());
 			}
 			bill.setProductTotal(result);
 			

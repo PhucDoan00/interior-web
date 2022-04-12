@@ -71,6 +71,7 @@ public class CartServiceImpl implements CartService{
 	
 	@Override
 	public int addProductToCart(long customerId, long productId, int quantity) {
+		if (quantity > productRepository.getById(productId).getQuantity()) return 1;
 		Account account = accountRepository.getById(customerId);
 		Product product = productRepository.getOne(productId);
 		if (cartRepository.countAvailableCart(customerId) == 0) {
@@ -82,8 +83,11 @@ public class CartServiceImpl implements CartService{
 		else {
 			Cart cart = cartRepository.findActiveCartByCustomerId(customerId);
 			if (cartRepository.findAvailableItem(cart.getCartId(), productId) == 0) {
-				cartRepository.insertCartItem(cart.getCartId(), productId, quantity, product.getPrice());
-				return 0;
+				if (quantity <= productRepository.getById(productId).getQuantity()) {
+					cartRepository.insertCartItem(cart.getCartId(), productId, quantity, product.getPrice());
+					return 0;
+				}
+				return 1;
 			} else {
 				CartItemDTO cartItem = cartService.findItemInCart(cart.getCartId(), productId);
 				if ((quantity + cartItem.getQuantity()) > product.getQuantity()) return 1;

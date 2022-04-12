@@ -91,6 +91,16 @@ public class DesignIdeaController {
 		String livingroomsmall[] = categoryService.livingroomsmall();
 		String[][] smallthumbnail = new String[6][9];
 		
+		String livingroombig[] = categoryService.livingroombig();
+		String[][] bigthumbnail = new String[6][9];
+		String livingroomDes[] = designIdeaService.livingroomDescription();
+		for (int i = 0; i < 8; i++) {
+			bigthumbnail[1][i+1] = bedroom[i];
+			bigthumbnail[5][i+1] = livingroombig[i];
+			System.out.println(bigthumbnail[1][i+1]);
+			System.out.println(bigthumbnail[5][i+1]);
+		}
+		
 		List<DesignIdeaThumbnailDTO> list = new ArrayList<DesignIdeaThumbnailDTO>();
 		List<Style> styles = styleRepository.findAll();
 		
@@ -102,15 +112,20 @@ public class DesignIdeaController {
 			
 			for (Style style : styles) {
 				DesignIdeaThumbnailDTO thumbnail = new DesignIdeaThumbnailDTO();
-				thumbnail.setStyleName(style.getStyleName());
+				thumbnail.setStyleName(style.getStyleName() + " " + cateName);
 				thumbnail.setImage(smallthumbnail[categoryId.intValue()][style.getStyleId().intValue()]);
+				thumbnail.setImageBig(bigthumbnail[categoryId.intValue()][style.getStyleId().intValue()]);
+				if (categoryId == 5) thumbnail.setDescription(livingroomDes[style.getStyleId().intValue()-1]);
+				else thumbnail.setDescription(style.getStyleName() + " " + cateName);
 				list.add(thumbnail);
 			}
 		} else {
 			for (Style style : styles) {
 				DesignIdeaThumbnailDTO thumbnail = new DesignIdeaThumbnailDTO();
-				thumbnail.setStyleName(style.getStyleName());
+				thumbnail.setStyleName(style.getStyleName() + " " + cateName);
 				thumbnail.setImage(defaultImageS);
+				thumbnail.setImageBig(defaultImageB);
+				thumbnail.setDescription(style.getStyleName() + " " + cateName);
 				list.add(thumbnail);
 			}
 		}
@@ -144,6 +159,10 @@ public class DesignIdeaController {
 		
 		List<DesignIdeaItemsDTO> itemList = designIdeaService.getDesignIdeaList(categoryId, styleId);
 		result.setItemList(itemList);
+		
+		String livingroomDes[] = designIdeaService.livingroomDescription();
+		if (categoryId == 5) result.setDescription(livingroomDes[styleId.intValue() - 1]);
+		else result.setDescription(style.getStyleName() + " " + cateName);
 		
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}

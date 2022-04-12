@@ -10,4 +10,6 @@ public interface DesignIdeaService {
 	List<DesignIdeaItemsDTO> getDesignIdeaList(long categoryId, long styleId);
 	
 	List<ProductInformationDTO> getDesignIdeaItems(long ideaId);
+	
+	String[] livingroomDescription();
 }
