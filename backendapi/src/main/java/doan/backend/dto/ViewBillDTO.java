@@ -18,7 +18,7 @@ public class ViewBillDTO {
 	private String phone;
 	private String email;
 	private String address;
-	private Date purchasedAt;
+	private String purchasedAt;
 	private List<CartItemDTO> cartItem;
 	
 	public ViewBillDTO() {
@@ -105,11 +105,11 @@ public class ViewBillDTO {
 		this.address = address;
 	}
 
-	public Date getPurchasedAt() {
+	public String getPurchasedAt() {
 		return purchasedAt;
 	}
 
-	public void setPurchasedAt(Date purchasedAt) {
+	public void setPurchasedAt(String purchasedAt) {
 		this.purchasedAt = purchasedAt;
 	}
 

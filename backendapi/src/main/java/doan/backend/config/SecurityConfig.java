@@ -50,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/api/v1/feedback").hasRole("CUSTOMER")
                 .antMatchers("/api/v1/profile/**").authenticated()
                 .antMatchers("/api/v1/viewbill/**").hasRole("CUSTOMER")
+                .antMatchers("/api/v1/viewallbill/**").hasAnyRole("ADMIN", "STAFF")
                 .antMatchers("/").permitAll()
                 .anyRequest()
                 .authenticated()
