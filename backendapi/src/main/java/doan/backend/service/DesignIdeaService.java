@@ -12,4 +12,6 @@ public interface DesignIdeaService {
 	List<ProductInformationDTO> getDesignIdeaItems(long ideaId);
 	
 	String[] livingroomDescription();
+	
+	String[] bedroomDescription();
 }

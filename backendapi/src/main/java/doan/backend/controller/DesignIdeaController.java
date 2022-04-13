@@ -94,15 +94,18 @@ public class DesignIdeaController {
 		String cateName = category.getCategoryName();
 		DesignIdeaStep3DTO result = new DesignIdeaStep3DTO();
 		result.setCategoryName(cateName);
-		String bedroom[] = categoryService.bedroom();
+		String bedroomsmall[] = categoryService.bedroom();
 		String livingroomsmall[] = categoryService.livingroomsmall();
 		String[][] smallthumbnail = new String[6][9];
 		
+		String bedroombig[] = categoryService.bedroombig();
 		String livingroombig[] = categoryService.livingroombig();
 		String[][] bigthumbnail = new String[6][9];
+		
+		String bedroomDes[] = designIdeaService.bedroomDescription();
 		String livingroomDes[] = designIdeaService.livingroomDescription();
 		for (int i = 0; i < 8; i++) {
-			bigthumbnail[1][i+1] = bedroom[i];
+			bigthumbnail[1][i+1] = bedroombig[i];
 			bigthumbnail[5][i+1] = livingroombig[i];
 			System.out.println(bigthumbnail[1][i+1]);
 			System.out.println(bigthumbnail[5][i+1]);
@@ -113,7 +116,7 @@ public class DesignIdeaController {
 		
 		if ((categoryId == 1) || (categoryId == 5)) {
 			for (int i = 0; i < 8; i++) { 
-				if (categoryId == 1) smallthumbnail[categoryId.intValue()][i+1] = bedroom[i];
+				if (categoryId == 1) smallthumbnail[categoryId.intValue()][i+1] = bedroomsmall[i];
 				else smallthumbnail[categoryId.intValue()][i+1] = livingroomsmall[i];
 			}
 			
@@ -123,7 +126,7 @@ public class DesignIdeaController {
 				thumbnail.setImage(smallthumbnail[categoryId.intValue()][style.getStyleId().intValue()]);
 				thumbnail.setImageBig(bigthumbnail[categoryId.intValue()][style.getStyleId().intValue()]);
 				if (categoryId == 5) thumbnail.setDescription(livingroomDes[style.getStyleId().intValue()-1]);
-				else thumbnail.setDescription(style.getStyleName() + " " + cateName);
+				else thumbnail.setDescription(bedroomDes[style.getStyleId().intValue()-1]);
 				list.add(thumbnail);
 			}
 		} else {
@@ -151,11 +154,11 @@ public class DesignIdeaController {
 		Style style = styleRepository.getById(styleId);
 		String styleName = style.getStyleName();
 		result.setStyleName(styleName);
-		String bedroom[] = categoryService.bedroom();
+		String bedroombig[] = categoryService.bedroombig();
 		String livingroombig[] = categoryService.livingroombig();
 		String[][] bigthumbnail = new String[6][9];
 		for (int i = 0; i < 8; i++) {
-			bigthumbnail[1][i+1] = bedroom[i];
+			bigthumbnail[1][i+1] = bedroombig[i];
 			bigthumbnail[5][i+1] = livingroombig[i];
 			System.out.println(bigthumbnail[1][i+1]);
 			System.out.println(bigthumbnail[5][i+1]);
@@ -168,7 +171,9 @@ public class DesignIdeaController {
 		result.setItemList(itemList);
 		
 		String livingroomDes[] = designIdeaService.livingroomDescription();
+		String bedroomDes[] = designIdeaService.bedroomDescription();
 		if (categoryId == 5) result.setDescription(livingroomDes[styleId.intValue() - 1]);
+		else if (categoryId == 1) result.setDescription(bedroomDes[styleId.intValue() - 1]);
 		else result.setDescription(style.getStyleName() + " " + cateName);
 		
 		return new ResponseEntity<>(result, HttpStatus.OK);
