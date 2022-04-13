@@ -82,8 +82,8 @@ import { getDesignStyleLivingRoom } from '../../lib/designstyle'
 function Living({
   styleName,
   image,
-  imgBackGround,
-  paragraph,
+  imageBig,
+  description,
   handleShowInfo,
   handleTitle,
   handleImgBackGround,
@@ -98,8 +98,8 @@ function Living({
           onClick={() => (
             handleShowInfo(false),
             handleTitle(styleName),
-            handleImgBackGround(imgBackGround),
-            handlePara(paragraph)
+            handleImgBackGround(imageBig),
+            handlePara(description)
           )}
         >
           <div
@@ -116,8 +116,8 @@ function Living({
 }
 export default function LivingRoom({ designStyle }) {
   const [flagShowIdeas, setFlagShowIdeas] = useState(true)
-  const [title, setTitle] = useState('')
-  const [imgBackGround, setImgBackground] = useState('')
+  const [styleName, setTitle] = useState('')
+  const [imageBig, setImgBackground] = useState('')
   const [paragrah, setParagraph] = useState('')
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -139,7 +139,7 @@ export default function LivingRoom({ designStyle }) {
             <section className="roomStyles mb-5">
               <div className="container">
                 <div className={` ${styles.headertitle}`}>
-                  <h4> Living rooms by style</h4>
+                  <h4> Living room by style</h4>
                 </div>
                 <div className="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
                   {/* Card */}
@@ -148,8 +148,8 @@ export default function LivingRoom({ designStyle }) {
                       key={index}
                       styleName={room.styleName}
                       image={room.image}
-                      imgBackGround={room.imgBackGround}
-                      paragraph={room.paragraph}
+                      imageBig={room.imageBig}
+                      description={room.description}
                       handleShowInfo={setFlagShowIdeas}
                       handleTitle={setTitle}
                       handleImgBackGround={setImgBackground}
@@ -176,8 +176,8 @@ export default function LivingRoom({ designStyle }) {
       ) : (
         <div className="livingWrapper">
           <LivingRoomIdeas
-            title={title}
-            imgBackGround={imgBackGround}
+            styleName={styleName}
+            imageBig={imageBig}
             paragrah={paragrah}
             handleShowInfo={setFlagShowIdeas}
           />
