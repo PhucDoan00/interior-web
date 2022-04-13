@@ -9,7 +9,7 @@ import React, { useEffect } from 'react'
 import LivingRoomIdeas from './ideas/livingroomideas'
 import { useState } from 'react'
 import Router from 'next/router'
-import { getDesignStyleLivingRoom } from '../../lib/designstyle'
+import { getDesignStyleByRoom } from '../../lib/designstyle'
 
 // const rooms = [
 //   {
@@ -202,7 +202,7 @@ export default function LivingRoom({ designStyle }) {
 
 //get Data form BE
 export const getStaticProps = async () => {
-  const designStyle = await getDesignStyleLivingRoom()
+  const designStyle = await getDesignStyleByRoom('5')
   return {
     props: {
       designStyle,
