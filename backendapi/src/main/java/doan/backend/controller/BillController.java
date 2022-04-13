@@ -15,7 +15,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import doan.backend.dto.CartItemDTO;
@@ -170,6 +172,78 @@ public class BillController {
 		}
 		
 		return new ResponseEntity<List<ViewBillDTO>> (viewbills, HttpStatus.OK);
+	}
+	
+	@GetMapping("/viewallbills/search")
+	public ResponseEntity<?> viewAllBillSearch(@RequestBody String searchString) throws ParseException {
+		
+		List<ViewBillDTO> viewbills = new ArrayList<ViewBillDTO>();
+		String finalString = "%" + searchString + "%";
+		List<Bill> bills = billRepository.searchBills(finalString, finalString);
+		
+		for (Bill bill : bills) {
+			ViewBillDTO viewbill = new ViewBillDTO();
+			viewbill.setBillId(bill.getBillId());
+			viewbill.setCartId(bill.getCartId());
+			viewbill.setBillStatus(billStatusRepository.getById(bill.getBillStatus()).getStatus());
+
+			List<CartItemDTO> items = cartService.getItemsInCart(bill.getCartId());
+			float result = 0;
+			for (CartItemDTO item : items) {
+				result += item.getPrice() * item.getQuantity();
+			}
+			viewbill.setProductTotal(result);
+			
+			double fee = result * 0.1;
+			viewbill.setShippingFee(Float.parseFloat(dfZero.format(fee)));
+			
+			viewbill.setTotalPrice(bill.getProductTotal() + bill.getShippingFee());
+			viewbill.setCustomerName(bill.getCustomerName());
+			viewbill.setPhone(bill.getPhone());
+			viewbill.setEmail(bill.getEmail());
+			viewbill.setAddress(bill.getAddress());
+			viewbill.setPurchasedAt(formatter.format(bill.getPurchasedAt()));
+			viewbill.setCartItem(items);
+			
+			viewbills.add(viewbill);
+		}
+		
+		return new ResponseEntity<List<ViewBillDTO>> (viewbills, HttpStatus.OK);
+	}
+	
+	@GetMapping("/viewallbills/{id}")
+	public ResponseEntity<?> viewOneBill(@PathVariable(value = "id") Long billId) throws ParseException {
+		Bill bill = billRepository.getById(billId);
+		ViewBillDTO viewbill = new ViewBillDTO();
+		
+		viewbill.setBillId(bill.getBillId());
+		viewbill.setCartId(bill.getCartId());
+		viewbill.setBillStatus(billStatusRepository.getById(bill.getBillStatus()).getStatus());
+		viewbill.setProductTotal(Float.parseFloat(dfZero.format(bill.getProductTotal())));
+		viewbill.setShippingFee(Float.parseFloat(dfZero.format(bill.getShippingFee())));
+		viewbill.setTotalPrice(Float.parseFloat(dfZero.format(bill.getTotalPrice())));
+		viewbill.setCustomerName(bill.getCustomerName());
+		viewbill.setPhone(bill.getPhone());
+		viewbill.setEmail(bill.getEmail());
+		viewbill.setAddress(bill.getAddress());
+		viewbill.setPurchasedAt(formatter.format(bill.getPurchasedAt()));
+		
+		List<CartItemDTO> items = cartService.getItemsInCart(bill.getCartId());
+		viewbill.setCartItem(items);
+		
+		return new ResponseEntity<ViewBillDTO> (viewbill, HttpStatus.OK);
+	}
+	
+	@PutMapping("/viewallbills/{id}")
+	public ResponseEntity<?> updateBillStatus(@PathVariable(value = "id") Long billId, @RequestBody Long statusId) throws ParseException {
+		if (statusId > 4) return new ResponseEntity<> ("This Status is not Available", HttpStatus.BAD_REQUEST);
+		Bill bill = billRepository.getById(billId);
+		long currentStt = bill.getBillStatus();
+		
+		if (currentStt == 2 || currentStt == 4) return new ResponseEntity<> ("This bill cannot be updated!", HttpStatus.BAD_REQUEST);
+		
+		billRepository.updateBillStatus(statusId, billId);
+		return new ResponseEntity<> ("Updated Successful!", HttpStatus.OK);
 	}
 	
 	@GetMapping("/checkout")

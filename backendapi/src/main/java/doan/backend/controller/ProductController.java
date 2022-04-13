@@ -56,7 +56,44 @@ public class ProductController {
 		System.out.println(productRepository.findAll());
 		return new ResponseEntity<List<Product>>(productRepository.findAll(), HttpStatus.OK);
 	}
-
+	/* 
+	@GetMapping("/products")
+	public ResponseEntity<List<ProductInformationDTO>> getAllProducts() {
+		List<Product> list = productRepository.findAll();
+		List<ProductInformationDTO> finalList = new ArrayList<ProductInformationDTO>();
+		
+		for (Product product : list) {
+			ProductInformationDTO info = new ProductInformationDTO();
+			
+			info.setProductId(product.getProductId());
+			info.setProductName(product.getProductName());
+			info.setPrice(product.getPrice());
+			info.setQuantity(product.getQuantity());
+			info.setImage(product.getImage());
+			info.setDescription(product.getDescription());
+			info.setBoughtCount(product.getBoughtCount());
+			info.setMaterial(product.getMaterial());
+			info.setDimension(product.getDimension());
+			List<Color> color = colorRepository.productColor(product.getProductId());
+			List<String> colorString = new ArrayList<String>();
+			for (int i = 0; i < color.size(); i++) {
+				colorString.add(color.get(i).getColorName());
+			}
+			info.setColors(colorString);
+			
+			List<Category> category = categoryRepository.productCategory(product.getProductId());
+			List<String> categoryString = new ArrayList<String>();
+			for (int i = 0; i < category.size(); i++) {
+				categoryString.add(category.get(i).getCategoryName());
+			}
+			info.setCategories(categoryString);
+			
+			finalList.add(info);
+		}
+		
+		return new ResponseEntity<List<ProductInformationDTO>>(finalList, HttpStatus.OK);
+	}
+	*/
 	@GetMapping("/products/{id}")
 	public ResponseEntity<ProductInformationDTO> getProductById(@PathVariable(value = "id") Long productId)
 			throws ResourceNotFoundException {
@@ -201,4 +238,43 @@ public class ProductController {
 		
 		return new ResponseEntity<>("Product successfully deleted", HttpStatus.OK);
 	}
+	
+	@GetMapping("/products/search")
+	public ResponseEntity<?> searchProduct(@RequestBody String searchString) {
+		List<ProductInformationDTO> searchList = new ArrayList<ProductInformationDTO>();
+		String finalString = "%" + searchString + "%";
+		List<Product> products = productRepository.searchProduct(finalString);
+		
+		for (Product product : products) {
+			ProductInformationDTO info = new ProductInformationDTO();
+			
+			info.setProductId(product.getProductId());
+			info.setProductName(product.getProductName());
+			info.setPrice(product.getPrice());
+			info.setQuantity(product.getQuantity());
+			info.setImage(product.getImage());
+			info.setDescription(product.getDescription());
+			info.setBoughtCount(product.getBoughtCount());
+			info.setMaterial(product.getMaterial());
+			info.setDimension(product.getDimension());
+			List<Color> color = colorRepository.productColor(product.getProductId());
+			List<String> colorString = new ArrayList<String>();
+			for (int i = 0; i < color.size(); i++) {
+				colorString.add(color.get(i).getColorName());
+			}
+			info.setColors(colorString);
+			
+			List<Category> category = categoryRepository.productCategory(product.getProductId());
+			List<String> categoryString = new ArrayList<String>();
+			for (int i = 0; i < category.size(); i++) {
+				categoryString.add(category.get(i).getCategoryName());
+			}
+			info.setCategories(categoryString);
+			
+			searchList.add(info);
+		}
+		if (searchList.size() == 0) return new ResponseEntity<>("No products found!", HttpStatus.OK);
+		return new ResponseEntity<>(searchList, HttpStatus.OK);
+	}
+	
 }

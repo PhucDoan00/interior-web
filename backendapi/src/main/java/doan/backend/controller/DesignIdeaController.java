@@ -6,11 +6,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import doan.backend.dto.CreateDesignIdeaDTO;
+import doan.backend.dto.DesignIdeaForStaffDTO;
 import doan.backend.dto.DesignIdeaItemsDTO;
 import doan.backend.dto.DesignIdeaStep3DTO;
 import doan.backend.dto.DesignIdeaStep4DTO;
@@ -19,6 +25,7 @@ import doan.backend.dto.ProductInformationDTO;
 import doan.backend.entity.Category;
 import doan.backend.entity.DesignIdea;
 import doan.backend.entity.Style;
+import doan.backend.exception.ResourceNotFoundException;
 import doan.backend.repository.CategoryRepository;
 import doan.backend.repository.DesignIdeaRepository;
 import doan.backend.repository.StyleRepository;
@@ -181,5 +188,88 @@ public class DesignIdeaController {
 		result.setImage(idea.getImage());
 		result.setItemList(itemList);
 		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+	
+	@PostMapping("/createidea")
+	public ResponseEntity<?> createDesignIdea(@RequestBody CreateDesignIdeaDTO idea) {
+		DesignIdea di = new DesignIdea();
+		di.setIdeaName(idea.getIdeaName());
+		di.setDescription(idea.getDescription());
+		di.setCategory(idea.getCategoryId());
+		di.setStyle(idea.getStyleId());
+		di.setImage(idea.getImage());
+		
+		designIdeaRepository.save(di);
+		
+		long ideaId = designIdeaRepository.getNewestIdea().getIdeaId();
+		List<Long> productIds = idea.getProductIds();
+		
+		for (Long id : productIds) {
+			designIdeaRepository.insertIdeaItem(ideaId, id);
+		}
+		
+		return new ResponseEntity<> ("Create Successful!", HttpStatus.OK);
+	}
+	
+	@GetMapping("/editidea/{id}")
+	public ResponseEntity<?> getDesignIdea(@PathVariable(value = "id") Long ideaId) throws ResourceNotFoundException {
+		DesignIdea di = designIdeaRepository.findById(ideaId)
+		.orElseThrow(() -> new ResourceNotFoundException("Design Idea not found for this id: " + ideaId));
+		
+		DesignIdeaForStaffDTO idea = new DesignIdeaForStaffDTO();
+		
+		idea.setDesignIdeaId(ideaId);
+		idea.setDesignIdeaName(di.getIdeaName());
+		idea.setDesignIdeaDescription(di.getDescription());
+		idea.setCategory(di.getCategory());
+		idea.setStyle(di.getStyle());
+		idea.setImage(di.getImage());
+		
+		List<ProductInformationDTO> productList = designIdeaService.getDesignIdeaItems(ideaId);
+		List<Long> productIds = new ArrayList<Long>();
+		
+		for (ProductInformationDTO info : productList) {
+			productIds.add(info.getProductId());
+		}
+		
+		idea.setProductIds(productIds);
+		return new ResponseEntity<> (idea, HttpStatus.OK);
+	}
+	
+	@PutMapping("/editidea/{id}")
+	public ResponseEntity<?> editDesignIdea(@RequestBody DesignIdeaForStaffDTO idea, @PathVariable(value = "id") Long ideaId) throws ResourceNotFoundException {
+		designIdeaRepository.findById(ideaId)
+		.orElseThrow(() -> new ResourceNotFoundException("Design Idea not found for this id: " + ideaId));
+		
+		designIdeaRepository.updateDesignIdea(idea.getDesignIdeaName(), idea.getDesignIdeaDescription(), idea.getCategory(), idea.getStyle(), idea.getImage(), ideaId);
+		designIdeaRepository.deleteIdeaItem(ideaId);
+		List<Long> productIds = idea.getProductIds();
+		
+		for (Long id : productIds) {
+			designIdeaRepository.insertIdeaItem(ideaId, id);
+		}
+		
+		return new ResponseEntity<> ("Updated Successful!", HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/deleteidea/{id}")
+	public ResponseEntity<?> deleteDesignIdea(@PathVariable(value = "id") Long ideaId) throws ResourceNotFoundException {
+		designIdeaRepository.findById(ideaId)
+		.orElseThrow(() -> new ResourceNotFoundException("Design Idea not found for this id: " + ideaId));
+		
+		designIdeaRepository.deleteIdeaItem(ideaId);
+		designIdeaRepository.deleteById(ideaId);
+		
+		return new ResponseEntity<> ("Deleted Successful!", HttpStatus.OK);
+	}
+	
+	@GetMapping("/category")
+	public ResponseEntity<List<Category>> getAllCategories() {
+		return new ResponseEntity<List<Category>> (categoryRepository.findAll(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/style")
+	public ResponseEntity<List<Style>> getAllStyles() {
+		return new ResponseEntity<List<Style>> (styleRepository.findAll(), HttpStatus.OK);
 	}
 }
