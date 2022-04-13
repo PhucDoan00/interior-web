@@ -56,7 +56,7 @@ public class AccountController {
 		return new ResponseEntity<List<AccountInformationDTO>> (finalList, HttpStatus.OK);
 	}
 	
-	@GetMapping("")
+	@GetMapping("/search")
 	public ResponseEntity<?> getAllAccountsSearch(@RequestBody String searchString, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
 		Account acc = accountRepository.findByEmail(email) 
