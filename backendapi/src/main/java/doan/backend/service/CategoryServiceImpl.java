@@ -17,7 +17,20 @@ public class CategoryServiceImpl implements CategoryService{
 							"https://i.ibb.co/ThsCpkR/Glam-Bedroom-Ideas.webp"};
 		return bedroom;
 	}
-
+		
+	@Override
+	public String[] bedroombig() {
+		String[] bedroombig = {"https://i.ibb.co/8Y4VG5W/Modern-Bedromm.png",
+							   "https://i.ibb.co/X2Bxg28/Mid-Century.png",
+							   "https://i.ibb.co/Wf3Q6wM/Rustic-Bedroom.png",
+							   "https://i.ibb.co/BB8rvdJ/Eclectic-Bedroom.png",
+							   "https://i.ibb.co/xCkJqTd/Coastal-Bedroom.png",
+							   "https://i.ibb.co/M930jgg/Industrial-Bedroom.png",
+							   "https://i.ibb.co/QHnFPZw/Traditional-Bedroom.png",
+							   "https://i.ibb.co/CWmS9Zv/Glam-Bedroom.png"};
+		return bedroombig;
+	}
+	
 	@Override
 	public String[] livingroomsmall() {
 		String[] livingroomsmall = {"https://i.ibb.co/C77WQnB/Modern-Living-Room.png",

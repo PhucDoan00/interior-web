@@ -4,6 +4,8 @@ public interface CategoryService {
 
 	String[] bedroom();
 	
+	String[] bedroombig();
+	
 	String[] livingroomsmall();
 	
 	String[] livingroombig();

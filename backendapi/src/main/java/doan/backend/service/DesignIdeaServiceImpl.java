@@ -115,4 +115,17 @@ public class DesignIdeaServiceImpl implements DesignIdeaService{
 						"A glam living room design is for you if you want your living space to make a show-stopping statement. Glam living rooms tend to be more polished and upscale, and often make a pretty bold statement. They're great for entertaining, with their highly styled and considered approach."};
 		return des;
 	}
+	
+	@Override
+	public String[] bedroomDescription() {
+		String[] des = {"A modern bedroom does not have to be stark and cold. Think of it more as a pared-down, sleek look that is conducive to getting a good night's rest. Creating a polished, modern aesthetic that's also cozy means incorporating luxe bedding, rich materials, and the occasional pop of color.",
+						"Mid-century modern refers to the decorating style that rose to popularity in the 1950s and 1960s. It's characterized by lots of natural wood, simple lines, a mostly muted palette, and a sense of form-meets-function.",
+						"Rustic style means creating a comfortable and peaceful space with nods to old-fashioned decor. Rustic bedrooms often take their inspiration from barns and wilderness cabins. With such interesting details as hanging wildlife skulls and faux fur throws, the design harkens back to the past.",
+						"Eclectic interior design is a style that mixes together different time periods, home decor styles, textures, patterns, and colors—but in a way that feels harmonious, despite the contrasting elements. It's all about creating a cohesive space. It's also a great opportunity to let your personality shine.",
+						"Coastal-style bedrooms can range from modern to rustic, but they all involve rich natural textures, a bright and airy sensibility, and plenty of natural light! They're perfect for those who want a relaxing bedroom where they can start and end their days with the feeling you get while on a beach vacation.",
+						"Industrial style bedrooms feature a minimalistic, clutter free aesthetic that is very trendy and looks especially fabulous in lofts and apartments but can even look great in your house. The design scheme mainly focuses on blending rough and raw materials with clean and streamlined furnishings and decor.",
+						"A traditional-style bedroom is one that feels authentic to the age of your home and is packed with pattern, visual interest, comfort and warmth. By channelling traditional decorating ideas you will give your space an identity, instantly imbuing it with charm and character.",
+						"If you’re a fan of all things pretty, fancy, and just generally extravagant, glam style may be perfect for you. This style starts with a traditional look and adds some pizzazz through lots of ornamental details — creating a stunning, sparkling, all around elegant appearance. If glam style has piqued your interest, here are some tips on how to get it in your home."};
+		return des;
+	}
 }
