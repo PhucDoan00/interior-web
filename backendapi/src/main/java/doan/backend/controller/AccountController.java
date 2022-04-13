@@ -56,6 +56,31 @@ public class AccountController {
 		return new ResponseEntity<List<AccountInformationDTO>> (finalList, HttpStatus.OK);
 	}
 	
+	@GetMapping("")
+	public ResponseEntity<?> getAllAccountsSearch(@RequestBody String searchString, HttpServletRequest request) {
+		String email = request.getUserPrincipal().getName();
+		Account acc = accountRepository.findByEmail(email) 
+				.orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+		List<AccountInformationDTO> finalList = new ArrayList<AccountInformationDTO>();
+		String finalString = "%" + searchString +"%";
+		List<Account> allAccounts = accountRepository.searchAccountsNotAdmin(finalString);
+		
+		for (Account account : allAccounts) {
+			if (account.getAccountId() != 1) {
+				AccountInformationDTO info = new AccountInformationDTO();
+		        info.setAccountId(account.getAccountId());
+		        info.setEmail(account.getEmail());
+		        info.setAddress(account.getAddress());
+		        info.setName(account.getName());
+		        info.setPassword(account.getPassword());
+		        info.setPhone(account.getPhone());
+		        info.setRoles(customUserDetails.loadUserByUsername(account.getEmail()).getAuthorities());
+		        finalList.add(info);
+			}
+		}
+		return new ResponseEntity<List<AccountInformationDTO>> (finalList, HttpStatus.OK);
+	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getOneAccount(HttpServletRequest request, @PathVariable(value = "id") Long accountId) {
 		String email = request.getUserPrincipal().getName();

@@ -52,6 +52,12 @@ public class ProductController {
 	private CartService cartService;
 
 	@GetMapping("/products")
+	public ResponseEntity<List<Product>> getAllProducts() {
+		System.out.println(productRepository.findAll());
+		return new ResponseEntity<List<Product>>(productRepository.findAll(), HttpStatus.OK);
+	}
+	/* 
+	@GetMapping("/products")
 	public ResponseEntity<List<ProductInformationDTO>> getAllProducts() {
 		List<Product> list = productRepository.findAll();
 		List<ProductInformationDTO> finalList = new ArrayList<ProductInformationDTO>();
@@ -87,7 +93,7 @@ public class ProductController {
 		
 		return new ResponseEntity<List<ProductInformationDTO>>(finalList, HttpStatus.OK);
 	}
-
+	*/
 	@GetMapping("/products/{id}")
 	public ResponseEntity<ProductInformationDTO> getProductById(@PathVariable(value = "id") Long productId)
 			throws ResourceNotFoundException {

@@ -82,6 +82,33 @@ public class FeedbackController {
 		return new ResponseEntity<List<FeedbackDTO>>(finalList, HttpStatus.OK);
 	}
 	
+	@GetMapping("/feedback/view/search")
+	public ResponseEntity<?> getAllFeedbackSearch(@RequestBody String searchString, HttpServletRequest request) {
+		String email = request.getUserPrincipal().getName();
+		Account account = accountRepository.findByEmail(email) 
+				.orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+		List<FeedbackDTO> finalList = new ArrayList<FeedbackDTO>();
+		
+		String finalString = "%" + searchString + "%";
+		List<Feedback> list = feedbackRepository.searchFeedbacks(finalString);
+		
+		if (list.size() == 0) return new ResponseEntity<>("No feedbacks available!", HttpStatus.OK);
+		for (Feedback feedback : list) {
+			FeedbackDTO fb = new FeedbackDTO();
+			fb.setFbId(feedback.getFbId());
+			fb.setCustomerId(feedback.getCustomerId());
+			fb.setCustomerName(accountRepository.getById(feedback.getCustomerId()).getName());
+			fb.setFbContent(feedback.getFbContent());
+			fb.setPhone(accountRepository.getById(feedback.getCustomerId()).getPhone());
+			fb.setAddress(accountRepository.getById(feedback.getCustomerId()).getAddress());
+			fb.setEmail(accountRepository.getById(feedback.getCustomerId()).getEmail());
+			fb.setCreatedDate(formatter.format(feedback.getCreatedAt()));
+			finalList.add(fb);
+		}
+
+		return new ResponseEntity<List<FeedbackDTO>>(finalList, HttpStatus.OK);
+	}
+	
 	@GetMapping("/feedback/view/{id}")
 	public ResponseEntity<?> viewOneFeedback(HttpServletRequest request, @PathVariable(value = "id") Long fbId) {
 		String email = request.getUserPrincipal().getName();

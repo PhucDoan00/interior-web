@@ -1,5 +1,6 @@
 package doan.backend.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -10,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import doan.backend.entity.Account;
+import doan.backend.entity.Feedback;
 
 public interface AccountRepository extends JpaRepository<Account, Long>{
 
@@ -40,4 +42,8 @@ public interface AccountRepository extends JpaRepository<Account, Long>{
 			+ "where account_id = :param2", nativeQuery = true)
 	void changePassword(@Param("param1") String param1,
 						@Param("param2") long param2);
+    
+    @Transactional
+	@Query(value = "select * from Account where (name like :param1 or email like :param1 or phone like :param1 or [address] like :param1) and account_id != 1", nativeQuery = true)
+	List<Account> searchAccountsNotAdmin (@Param("param1") String param1);
 }
