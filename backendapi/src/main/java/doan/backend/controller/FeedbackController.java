@@ -39,9 +39,10 @@ public class FeedbackController {
 	@PostMapping("/feedback")
 	public ResponseEntity<?> createFeedback(@RequestBody String fbContent, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
-		Account account = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-		long customerId = account.getAccountId();
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	Account account = accountRepository.findByEmail(email);
+    	long customerId = account.getAccountId();
 		
 		if (fbContent == null || fbContent.equals("")) return new ResponseEntity<>("Feedback cannot be empty!", HttpStatus.BAD_REQUEST);
 		
@@ -60,9 +61,10 @@ public class FeedbackController {
 	@GetMapping("/feedback/view")
 	public ResponseEntity<?> getAllFeedback(HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
-		Account account = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-		List<FeedbackDTO> finalList = new ArrayList<FeedbackDTO>();
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	
+    	List<FeedbackDTO> finalList = new ArrayList<FeedbackDTO>();
 		List<Feedback> list = feedbackRepository.findAll();
 		
 		if (list.size() == 0) return new ResponseEntity<>("No feedbacks available!", HttpStatus.OK);
@@ -85,9 +87,10 @@ public class FeedbackController {
 	@GetMapping("/feedback/view/search")
 	public ResponseEntity<?> getAllFeedbackSearch(@RequestBody String searchString, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
-		Account account = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-		List<FeedbackDTO> finalList = new ArrayList<FeedbackDTO>();
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	
+    	List<FeedbackDTO> finalList = new ArrayList<FeedbackDTO>();
 		
 		String finalString = "%" + searchString + "%";
 		List<Feedback> list = feedbackRepository.searchFeedbacks(finalString);
@@ -112,9 +115,9 @@ public class FeedbackController {
 	@GetMapping("/feedback/view/{id}")
 	public ResponseEntity<?> viewOneFeedback(HttpServletRequest request, @PathVariable(value = "id") Long fbId) {
 		String email = request.getUserPrincipal().getName();
-		Account account = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-		
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	
 		Feedback feedback = feedbackRepository.getById(fbId);
 		
 		if (feedback.getFbContent() == null || feedback.getFbContent().equals("")) return new ResponseEntity<>("Feedback not found with ID: " + fbId, HttpStatus.OK);
@@ -137,9 +140,9 @@ public class FeedbackController {
 	@DeleteMapping("/feedback/view/{id}")
 	public ResponseEntity<?> deleteFeedback(HttpServletRequest request, @PathVariable(value = "id") Long fbId) {
 		String email = request.getUserPrincipal().getName();
-		Account account = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-		
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	
 		feedbackRepository.deleteById(fbId);
 		return new ResponseEntity<>("Feedback Deleted!", HttpStatus.OK);
 	}

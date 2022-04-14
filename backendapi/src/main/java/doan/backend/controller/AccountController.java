@@ -35,8 +35,10 @@ public class AccountController {
 	@GetMapping("")
 	public ResponseEntity<?> getAllAccounts(HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
-		Account acc = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+    	int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	Account acc = accountRepository.findByEmail(email);
+
 		List<AccountInformationDTO> finalList = new ArrayList<AccountInformationDTO>();
 		List<Account> allAccounts = accountRepository.findAll();
 		
@@ -59,8 +61,10 @@ public class AccountController {
 	@GetMapping("/search")
 	public ResponseEntity<?> getAllAccountsSearch(@RequestBody String searchString, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
-		Account acc = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+    	int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	Account acc = accountRepository.findByEmail(email);
+    	
 		List<AccountInformationDTO> finalList = new ArrayList<AccountInformationDTO>();
 		String finalString = "%" + searchString +"%";
 		List<Account> allAccounts = accountRepository.searchAccountsNotAdmin(finalString);
@@ -84,11 +88,11 @@ public class AccountController {
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getOneAccount(HttpServletRequest request, @PathVariable(value = "id") Long accountId) {
 		String email = request.getUserPrincipal().getName();
-		Account acc = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-		
-		Account acc2 = accountRepository.findById(accountId) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with id: " + accountId));
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	
+    	int count2 = accountRepository.countExistID(accountId);
+    	if (count2 == 0) return new ResponseEntity<>("User not found with id: " + accountId, HttpStatus.BAD_REQUEST);
 		
 		Account account = accountRepository.getById(accountId);
 		if (account.getAccountId() == 1) return new ResponseEntity<>("You cannot get an admin account's information here!", HttpStatus.OK);
@@ -108,11 +112,11 @@ public class AccountController {
 	@PostMapping("/{id}")
 	public ResponseEntity<?> updateNotAdminAccount(@RequestBody AccountInformationDTO info, @PathVariable(value = "id") Long accountId, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
-		Account acc = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-		
-		Account acc2 = accountRepository.findById(accountId) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with id: " + accountId));
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	
+    	int count2 = accountRepository.countExistID(accountId);
+    	if (count2 == 0) return new ResponseEntity<>("User not found with id: " + accountId, HttpStatus.BAD_REQUEST);
 		
 		Account account = accountRepository.getById(accountId);
 		if (accountRepository.existsByEmail(account.getEmail())) return new ResponseEntity<>("Email is already taken!", HttpStatus.BAD_REQUEST);
@@ -126,11 +130,11 @@ public class AccountController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteNotAdminAccount(@PathVariable(value = "id") Long accountId, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
-		Account acc = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-		
-		Account acc2 = accountRepository.findById(accountId) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with id: " + accountId));
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	
+    	int count2 = accountRepository.countExistID(accountId);
+    	if (count2 == 0) return new ResponseEntity<>("User not found with id: " + accountId, HttpStatus.BAD_REQUEST);
 		
 		Account account = accountRepository.getById(accountId);
 		if (account.getAccountId() == 1) return new ResponseEntity<>("You cannot delete an admin account!", HttpStatus.OK);

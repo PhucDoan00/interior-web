@@ -60,9 +60,11 @@ public class BillController {
 	@GetMapping("/viewbill")
 	public ResponseEntity<?> viewBillList(HttpServletRequest request) throws ParseException {
 		String email = request.getUserPrincipal().getName();
-		Account acc = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
-		int count = billRepository.countBills(acc.getAccountId());
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	Account acc = accountRepository.findByEmail(email);
+    	
+    	int count = billRepository.countBills(acc.getAccountId());
 		if (count == 0) return new ResponseEntity<>("You have no bills!", HttpStatus.OK);
 		List<ViewBillDTO> viewbills = new ArrayList<ViewBillDTO>();
 		List<Bill> bills = billRepository.findAll();
@@ -100,9 +102,11 @@ public class BillController {
 	@GetMapping("/viewbill/{id}")
 	public ResponseEntity<?> viewBill(HttpServletRequest request, @PathVariable(value = "id") Long billId) {
 		String email = request.getUserPrincipal().getName();
-		Account acc = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
-		Bill bill = billRepository.getById(billId);
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	Account acc = accountRepository.findByEmail(email);
+    	
+    	Bill bill = billRepository.getById(billId);
 		long customerId = cartRepository.getById(bill.getCartId()).getCustomerId();
 		if (acc.getAccountId() != customerId) return new ResponseEntity<>("You cannot view this bill!", HttpStatus.BAD_REQUEST);
 		ViewBillDTO viewbill = new ViewBillDTO();
@@ -128,9 +132,11 @@ public class BillController {
 	@PutMapping("/viewbill/{id}")
 	public ResponseEntity<?> cancelBill(HttpServletRequest request, @PathVariable(value = "id") Long billId) {
 		String email = request.getUserPrincipal().getName();
-		Account acc = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
-		Bill bill = billRepository.getById(billId);
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	Account acc = accountRepository.findByEmail(email);
+    	
+    	Bill bill = billRepository.getById(billId);
 		long customerId = cartRepository.getById(bill.getCartId()).getCustomerId();
 		if (acc.getAccountId() != customerId) return new ResponseEntity<>("You cannot cancel this bill!", HttpStatus.BAD_REQUEST);
 		if (bill.getBillStatus() != 1) return new ResponseEntity<>("You cannot cancel this bill!", HttpStatus.BAD_REQUEST);
@@ -249,9 +255,10 @@ public class BillController {
 	@GetMapping("/checkout")
 	public ResponseEntity<?> checkout(HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
-		Account account = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
-		long customerId = account.getAccountId();
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	Account account = accountRepository.findByEmail(email);
+    	long customerId = account.getAccountId();
 		
 		int count = cartRepository.countAvailableCart(customerId);
 		

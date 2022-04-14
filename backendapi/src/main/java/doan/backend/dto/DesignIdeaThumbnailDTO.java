@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class DesignIdeaThumbnailDTO {
 
+	private long styleId;
 	private String styleName;
 	private String image;
 	private String imageBig;
@@ -12,6 +13,14 @@ public class DesignIdeaThumbnailDTO {
 	
 	public DesignIdeaThumbnailDTO() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public long getStyleId() {
+		return styleId;
+	}
+
+	public void setStyleId(long styleId) {
+		this.styleId = styleId;
 	}
 
 	public String getStyleName() {

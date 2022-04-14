@@ -29,6 +29,10 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	List<Product> searchProduct(@Param("param1") String param1);
 	
 	@Transactional
+	@Query(value = "select count(*) from Product where product_id = :param1", nativeQuery = true)
+	int countExistID (@Param("param1") long param1);
+	
+	@Transactional
 	@Modifying
 	@Query(value = "insert into Product(product_name, price, quantity, bought_count, material, dimension, [image], [description]) "
 			+ "values (:param1, :param2, :param3, 0, :param4, :param5, :param6, :param7)", nativeQuery = true)

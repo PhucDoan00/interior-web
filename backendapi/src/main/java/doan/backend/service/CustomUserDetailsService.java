@@ -13,15 +13,15 @@ import org.springframework.stereotype.Service;
 
 import doan.backend.entity.Account;
 import doan.backend.entity.Role;
-import doan.backend.repository.AccountRepository;
+import doan.backend.repository.AccountRepository2;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService{
 
-	private AccountRepository accountRepository;
+	private AccountRepository2 accountRepository;
 	
 	
-	public CustomUserDetailsService(AccountRepository accountRepository) {
+	public CustomUserDetailsService(AccountRepository2 accountRepository) {
 		this.accountRepository = accountRepository;
 	}
 

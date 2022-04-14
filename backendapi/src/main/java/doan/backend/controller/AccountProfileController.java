@@ -34,11 +34,12 @@ public class AccountProfileController {
 	PasswordEncoder passwordEncoder;
 	
 	@GetMapping("")
-	public ResponseEntity<AccountInformationDTO> profile(HttpServletRequest request) {
+	public ResponseEntity<?> profile(HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
-		Account acc = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
-		
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	Account acc = accountRepository.findByEmail(email);
+    	
 		AccountInformationDTO info = new AccountInformationDTO();
         info.setAccountId(acc.getAccountId());
         info.setEmail(acc.getEmail());
@@ -54,9 +55,11 @@ public class AccountProfileController {
 	@PutMapping("")
 	public ResponseEntity<?> editProfile(HttpServletRequest request, @RequestBody AccountInformationDTO info) {
 		String email = request.getUserPrincipal().getName();
-		Account acc = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
-		if (accountRepository.existsByEmail(email)) return new ResponseEntity<> ("Email is already taken!", HttpStatus.OK);
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	Account acc = accountRepository.findByEmail(email);
+    	
+    	if (accountRepository.existsByEmail(email)) return new ResponseEntity<> ("Email is already taken!", HttpStatus.OK);
 		accountRepository.updateAccountInfo(info.getName(), info.getPhone(), info.getEmail(), info.getAddress(), acc.getAccountId());
 		return new ResponseEntity<> ("Information Updated!", HttpStatus.OK);
 	}
@@ -64,9 +67,10 @@ public class AccountProfileController {
 	@PutMapping("/changepassword")
 	public ResponseEntity<?> changePassword(HttpServletRequest request, @RequestBody ChangePasswordDTO password) {
 		String email = request.getUserPrincipal().getName();
-		Account acc = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
-		
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	Account acc = accountRepository.findByEmail(email);
+    	
 		if (!passwordEncoder.matches(password.getCurrentPassword(), acc.getPassword())) return new ResponseEntity<> ("Current password is wrong", HttpStatus.BAD_REQUEST);
 		if (password.getCurrentPassword().equals(password.getNewPassword())) return new ResponseEntity<> ("New password cannot be the same as current password", HttpStatus.BAD_REQUEST);
 		if (!password.getRetypePassword().equals(password.getNewPassword())) return new ResponseEntity<> ("Re-type password is not the same as new password", HttpStatus.BAD_REQUEST);
