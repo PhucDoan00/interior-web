@@ -15,7 +15,7 @@ import doan.backend.entity.Feedback;
 
 public interface AccountRepository extends JpaRepository<Account, Long>{
 
-	Optional<Account> findByEmail(String email);
+	Account findByEmail(String email);
 	
     Boolean existsByEmail(String email);
 
@@ -46,4 +46,12 @@ public interface AccountRepository extends JpaRepository<Account, Long>{
     @Transactional
 	@Query(value = "select * from Account where (name like :param1 or email like :param1 or phone like :param1 or [address] like :param1) and account_id != 1", nativeQuery = true)
 	List<Account> searchAccountsNotAdmin (@Param("param1") String param1);
+    
+    @Transactional
+	@Query(value = "select count(*) from Account where email = :param1", nativeQuery = true)
+	int countExistEmail (@Param("param1") String param1);
+    
+    @Transactional
+	@Query(value = "select count(*) from Account where account_id = :param1", nativeQuery = true)
+	int countExistID (@Param("param1") long param1);
 }

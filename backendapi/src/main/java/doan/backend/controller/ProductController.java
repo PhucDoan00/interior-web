@@ -95,10 +95,12 @@ public class ProductController {
 	}
 	*/
 	@GetMapping("/products/{id}")
-	public ResponseEntity<ProductInformationDTO> getProductById(@PathVariable(value = "id") Long productId)
-			throws ResourceNotFoundException {
-		Product product = productRepository.findById(productId)
-				.orElseThrow(() -> new ResourceNotFoundException("Product not found for this id: " + productId));
+	public ResponseEntity<?> getProductById(@PathVariable(value = "id") Long productId){
+		int count1 = productRepository.countExistID(productId);
+    	if (count1 == 0) return new ResponseEntity<>("Product not found for this id: " + productId, HttpStatus.BAD_REQUEST);
+		
+		Product product = productRepository.getById(productId);
+				
 		ProductInformationDTO info = new ProductInformationDTO();
 		
 		info.setProductId(productId);
@@ -130,9 +132,10 @@ public class ProductController {
 	@PostMapping("/products/{id}")
 	public ResponseEntity<?> addToCart(@PathVariable(value = "id") Long productId, @RequestBody Integer quantity, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
-		Account account = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
-		
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	Account account = accountRepository.findByEmail(email);
+    	
 		int i = cartService.addProductToCart(account.getAccountId(), productId, quantity);
 		if (i == 0) return new ResponseEntity<>("Product added to cart!", HttpStatus.OK);
 		else return new ResponseEntity<>("Product's quantity exceeded!", HttpStatus.BAD_REQUEST);
@@ -171,10 +174,11 @@ public class ProductController {
 	}
 	
 	@GetMapping("/editproduct/{id}")
-	public ResponseEntity<CreateProductDTO> getEditProduct(@PathVariable(value = "id") Long productId)
-			throws ResourceNotFoundException {
-		Product product = productRepository.findById(productId)
-				.orElseThrow(() -> new ResourceNotFoundException("Product not found for this id: " + productId));
+	public ResponseEntity<?> getEditProduct(@PathVariable(value = "id") Long productId){
+		int count1 = productRepository.countExistID(productId);
+    	if (count1 == 0) return new ResponseEntity<>("Product not found for this id: " + productId, HttpStatus.BAD_REQUEST);
+		
+		Product product = productRepository.getById(productId);
 		CreateProductDTO info = new CreateProductDTO();
 		
 		info.setProductName(product.getProductName());
@@ -226,10 +230,9 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/deleteproduct/{id}")
-	public ResponseEntity<?> deleteProduct(@PathVariable(value = "id") Long productId)
-			throws ResourceNotFoundException {
-		productRepository.findById(productId)
-				.orElseThrow(() -> new ResourceNotFoundException("Product not found for this id: " + productId));
+	public ResponseEntity<?> deleteProduct(@PathVariable(value = "id") Long productId) {
+		int count1 = productRepository.countExistID(productId);
+    	if (count1 == 0) return new ResponseEntity<>("Product not found for this id: " + productId, HttpStatus.BAD_REQUEST);
 		
 		productRepository.deleteProductColor(productId);
 		productRepository.deleteProductCategory(productId);

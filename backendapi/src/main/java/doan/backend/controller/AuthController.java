@@ -10,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ import doan.backend.service.CustomUserDetailsService;
 
 @RestController
 @RequestMapping("/api/auth")
+//@CrossOrigin(origins = "*")
 public class AuthController {
 	/*
 	@Autowired
@@ -48,12 +50,18 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@RequestBody LoginDTO loginDto)
-    		throws ResourceNotFoundException {
-    	Account acc = accountRepository.findByEmail(loginDto.getEmail())
-  	          .orElseThrow(() -> new ResourceNotFoundException("Wrong email or password"));
+    public ResponseEntity<?> authenticateUser(@RequestBody LoginDTO loginDto){
+    	int finalCount = 0;
+    	int count1 = accountRepository.countExistEmail(loginDto.getEmail());
+    	if (count1 == 0) finalCount++;
+    	else {
+    		Account acc = accountRepository.findByEmail(loginDto.getEmail());
+    		if (!passwordEncoder.matches(loginDto.getPassword(), acc.getPassword())) finalCount++;
+    	}
     	
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+    	if (finalCount != 0) return new ResponseEntity<>("Wrong email or password", HttpStatus.BAD_REQUEST);
+    	Account acc = accountRepository.findByEmail(loginDto.getEmail());
+    	Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getEmail(), loginDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);

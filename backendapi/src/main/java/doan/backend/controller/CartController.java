@@ -45,9 +45,10 @@ public class CartController {
 	@GetMapping("")
 	public ResponseEntity<?> getCartById(HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
-		Account account = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
-		long customerId = account.getAccountId();
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	Account account = accountRepository.findByEmail(email);
+    	long customerId = account.getAccountId();
 		
 		int count = cartRepository.countAvailableCart(customerId);
 		
@@ -78,9 +79,10 @@ public class CartController {
 	@PostMapping("")
 	public ResponseEntity<?> deleteItemFromCart(@RequestBody Long productId, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
-		Account account = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
-		long customerId = account.getAccountId();
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	Account account = accountRepository.findByEmail(email);
+    	long customerId = account.getAccountId();
 		Cart cart = cartRepository.findActiveCartByCustomerId(customerId);
 		
 		if (cartRepository.findAvailableItem(cart.getCartId(), productId) == 0) return new ResponseEntity<>("Product not found", HttpStatus.OK);
@@ -97,9 +99,10 @@ public class CartController {
 	@PostMapping("/plus")
 	public ResponseEntity<?> addQuantity(@RequestBody Long productId, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
-		Account account = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
-		long customerId = account.getAccountId();
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	Account account = accountRepository.findByEmail(email);
+    	long customerId = account.getAccountId();
 		
 		Cart cart = cartRepository.findActiveCartByCustomerId(customerId);
 		if (cartRepository.findAvailableItem(cart.getCartId(), productId) == 0) return new ResponseEntity<>("Product not found", HttpStatus.OK);
@@ -124,9 +127,11 @@ public class CartController {
 	@PostMapping("/minus")
 	public ResponseEntity<?> minusQuantity(@RequestBody Long productId, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
-		Account account = accountRepository.findByEmail(email) 
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with email:" + email));
-		long customerId = account.getAccountId();
+		int count1 = accountRepository.countExistEmail(email);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	Account account = accountRepository.findByEmail(email);
+    	
+    	long customerId = account.getAccountId();
 		
 		Cart cart = cartRepository.findActiveCartByCustomerId(customerId);
 		if (cartRepository.findAvailableItem(cart.getCartId(), productId) == 0) return new ResponseEntity<>("Product not found", HttpStatus.OK);
