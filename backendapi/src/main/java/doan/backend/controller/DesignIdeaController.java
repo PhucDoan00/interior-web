@@ -99,14 +99,29 @@ public class DesignIdeaController {
 		}
 		List<Category> categories = categoryRepository.findAll();
 		
+		CategoriesInfoDTO livingroom = new CategoriesInfoDTO();
+		Category lr = categories.get(categories.size() - 1);
+		livingroom.setCategoryId(lr.getCategoryId());
+		livingroom.setCategoryName(lr.getCategoryName());
+		livingroom.setImage(rooms[lr.getCategoryId().intValue() - 1]);
+		result.add(livingroom);
+		
 		for (Category category : categories) {
-			CategoriesInfoDTO info = new CategoriesInfoDTO();
-			info.setCategoryId(category.getCategoryId());
-			info.setCategoryName(category.getCategoryName());
-			info.setImage(rooms[category.getCategoryId().intValue() - 1]);
+			if (category.getCategoryId() != lr.getCategoryId()) {
+				CategoriesInfoDTO info = new CategoriesInfoDTO();
+				info.setCategoryId(category.getCategoryId());
+				info.setCategoryName(category.getCategoryName());
+				info.setImage(rooms[category.getCategoryId().intValue() - 1]);
 			
-			result.add(info);
+				result.add(info);
+			}
 		}
+		
+		CategoriesInfoDTO nursey = new CategoriesInfoDTO();
+		nursey.setCategoryId(0);
+		nursey.setCategoryName("Nursey");
+		nursey.setImage("https://i.ibb.co/nD6PyN2/nursey.jpg");
+		result.add(nursey);
 		
 		return new ResponseEntity<List<CategoriesInfoDTO>>(result, HttpStatus.OK);
 	}
