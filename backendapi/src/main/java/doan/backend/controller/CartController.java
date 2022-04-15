@@ -42,6 +42,7 @@ public class CartController {
 	@Autowired
 	private CartRepository cartRepository;
 	
+	//CUSTOMER - Get Details of Current Cart
 	@GetMapping("")
 	public ResponseEntity<?> getCartById(HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
@@ -76,6 +77,7 @@ public class CartController {
 		}
 	}
 
+	//CUSTOMER - Delete Item From Current Cart
 	@PostMapping("")
 	public ResponseEntity<?> deleteItemFromCart(@RequestBody Long productId, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
@@ -96,6 +98,7 @@ public class CartController {
 		return new ResponseEntity<>("Item removed!", HttpStatus.OK);
 	}
 	
+	//CUSTOMER - Plus 1 Quantity for An Item in Current Cart (+) 
 	@PostMapping("/plus")
 	public ResponseEntity<?> addQuantity(@RequestBody Long productId, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
@@ -124,6 +127,7 @@ public class CartController {
 		return new ResponseEntity<>("Item quantity added!", HttpStatus.OK);
 	}
 	
+	//CUSTOMER - Minus 1 Quantity for An Item in Current Cart (-) 
 	@PostMapping("/minus")
 	public ResponseEntity<?> minusQuantity(@RequestBody Long productId, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();

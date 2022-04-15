@@ -88,6 +88,7 @@ public class DesignIdeaController {
 		for(int i = 0; i < livingroombig.length; i++) bigthumbnail[5][i+1] = livingroombig[i];
 	}*/
 	
+	//View a Room's Styles in Design Idea
 	@GetMapping("/{id1}")
 	public ResponseEntity<DesignIdeaStep3DTO> getSmallThumbnail(@PathVariable(value = "id1") Long categoryId) {
 		Category category = categoryRepository.getById(categoryId);
@@ -146,6 +147,7 @@ public class DesignIdeaController {
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
+	//View a List of Design Ideas from Room + Style
 	@GetMapping("/{id1}/{id2}")
 	public ResponseEntity<DesignIdeaStep4DTO> getDesignIdeas(@PathVariable(value = "id1") Long categoryId, @PathVariable(value = "id2") Long styleId) {
 		Category category = categoryRepository.getById(categoryId);
@@ -180,6 +182,7 @@ public class DesignIdeaController {
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
+	//View a Design Idea's Details
 	@GetMapping("/idea/{id}")
 	public ResponseEntity<DesignIdeaItemsDTO> getDesignIdeaItems(@PathVariable(value = "id") Long ideaId) {
 		DesignIdeaItemsDTO result = new DesignIdeaItemsDTO();
@@ -196,6 +199,7 @@ public class DesignIdeaController {
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
+	//STAFF - Create a Design Idea
 	@PostMapping("/createidea")
 	public ResponseEntity<?> createDesignIdea(@RequestBody CreateDesignIdeaDTO idea) {
 		DesignIdea di = new DesignIdea();
@@ -217,6 +221,7 @@ public class DesignIdeaController {
 		return new ResponseEntity<> ("Create Successful!", HttpStatus.OK);
 	}
 	
+	//STAFF - Get a Design Idea's Details (Before Edit It)
 	@GetMapping("/editidea/{id}")
 	public ResponseEntity<?> getDesignIdea(@PathVariable(value = "id") Long ideaId) throws ResourceNotFoundException {
 		DesignIdea di = designIdeaRepository.findById(ideaId)
@@ -242,6 +247,7 @@ public class DesignIdeaController {
 		return new ResponseEntity<> (idea, HttpStatus.OK);
 	}
 	
+	//STAFF - Edit a Design Idea
 	@PutMapping("/editidea/{id}")
 	public ResponseEntity<?> editDesignIdea(@RequestBody DesignIdeaForStaffDTO idea, @PathVariable(value = "id") Long ideaId) throws ResourceNotFoundException {
 		designIdeaRepository.findById(ideaId)
@@ -258,6 +264,7 @@ public class DesignIdeaController {
 		return new ResponseEntity<> ("Updated Successful!", HttpStatus.OK);
 	}
 	
+	//STAFF - Delete a Design Idea
 	@DeleteMapping("/deleteidea/{id}")
 	public ResponseEntity<?> deleteDesignIdea(@PathVariable(value = "id") Long ideaId) throws ResourceNotFoundException {
 		designIdeaRepository.findById(ideaId)
@@ -269,11 +276,13 @@ public class DesignIdeaController {
 		return new ResponseEntity<> ("Deleted Successful!", HttpStatus.OK);
 	}
 	
+	//STAFF - Get a List of All Rooms in the System (In the Edit Step)
 	@GetMapping("/category")
 	public ResponseEntity<List<Category>> getAllCategories() {
 		return new ResponseEntity<List<Category>> (categoryRepository.findAll(), HttpStatus.OK);
 	}
 	
+	//STAFF - Get a List of All Styles in the System (In the Edit Step)
 	@GetMapping("/style")
 	public ResponseEntity<List<Style>> getAllStyles() {
 		return new ResponseEntity<List<Style>> (styleRepository.findAll(), HttpStatus.OK);

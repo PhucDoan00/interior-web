@@ -19,6 +19,7 @@ public class MainController {
 	@Autowired
 	ProductRepository productRepository;
 	
+	//Get 5 Most Sales Products in the Main Page
 	@GetMapping("/")
 	public ResponseEntity<List<Product>> index() {
         return new ResponseEntity<List<Product>>(productRepository.getTop5(), HttpStatus.OK);

@@ -57,6 +57,7 @@ public class ProductController {
 		return new ResponseEntity<List<Product>>(productRepository.findAll(), HttpStatus.OK);
 	}
 	*/ 
+	//Get a List of All Products
 	@GetMapping("/products")
 	public ResponseEntity<List<ProductInformationDTO>> getAllProducts() {
 		List<Product> list = productRepository.findAll();
@@ -94,6 +95,7 @@ public class ProductController {
 		return new ResponseEntity<List<ProductInformationDTO>>(finalList, HttpStatus.OK);
 	}
 	
+	//View a Product's Details
 	@GetMapping("/products/{id}")
 	public ResponseEntity<?> getProductById(@PathVariable(value = "id") Long productId){
 		int count1 = productRepository.countExistID(productId);
@@ -129,6 +131,7 @@ public class ProductController {
 		return ResponseEntity.ok().body(info);
 	}
 	
+	//CUSTOMER - Add a Product to Cart
 	@PostMapping("/products/{id}")
 	public ResponseEntity<?> addToCart(@PathVariable(value = "id") Long productId, @RequestBody Integer quantity, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
@@ -141,6 +144,7 @@ public class ProductController {
 		else return new ResponseEntity<>("Product's quantity exceeded!", HttpStatus.BAD_REQUEST);
 	}
 
+	//STAFF - Get 2 Lists of Colors and Categories in the System (In Create Product Step)
 	@GetMapping("/createproduct")
 	public ResponseEntity<ColorsAndCategoriesDTO> getAllColorsAndCategories() {
 		ColorsAndCategoriesDTO list = new ColorsAndCategoriesDTO();
@@ -149,7 +153,7 @@ public class ProductController {
 		return new ResponseEntity<ColorsAndCategoriesDTO>(list, HttpStatus.OK);
 	}
 	
-	
+	//STAFF - Create a Product
 	@PostMapping("/createproduct")
 	public ResponseEntity<?> createProduct(@RequestBody CreateProductDTO product){
 		
@@ -173,6 +177,7 @@ public class ProductController {
 		return new ResponseEntity<>("Product successfully created", HttpStatus.OK);
 	}
 	
+	//STAFF - Get a Product's Details (Before Edit Product Step)
 	@GetMapping("/editproduct/{id}")
 	public ResponseEntity<?> getEditProduct(@PathVariable(value = "id") Long productId){
 		int count1 = productRepository.countExistID(productId);
@@ -209,6 +214,7 @@ public class ProductController {
 		return new ResponseEntity<CreateProductDTO>(info, HttpStatus.OK);
 	}
 	
+	//STAFF - Edit a Product
 	@PostMapping("/editproduct/{id}")
 	public ResponseEntity<?> editProduct(@PathVariable(value = "id") Long productId, @RequestBody CreateProductDTO product){
 		productRepository.editProductInfo(product.getProductName(), product.getPrice(), product.getQuantity(), product.getImage(), product.getDescription(), product.getMaterial(), product.getDimension(), productId);
@@ -229,6 +235,7 @@ public class ProductController {
 		return new ResponseEntity<>("Edit Product Successful", HttpStatus.OK);
 	}
 	
+	//STAFF - Delete a Product
 	@RequestMapping("/deleteproduct/{id}")
 	public ResponseEntity<?> deleteProduct(@PathVariable(value = "id") Long productId) {
 		int count1 = productRepository.countExistID(productId);
@@ -242,6 +249,7 @@ public class ProductController {
 		return new ResponseEntity<>("Product successfully deleted", HttpStatus.OK);
 	}
 	
+	//Search Bar in Shop
 	@GetMapping("/products/search")
 	public ResponseEntity<?> searchProduct(@RequestBody String searchString) {
 		List<ProductInformationDTO> searchList = new ArrayList<ProductInformationDTO>();

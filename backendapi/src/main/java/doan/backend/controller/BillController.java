@@ -57,6 +57,7 @@ public class BillController {
 	@Autowired
 	private ProductRepository productRepository;
 	
+	//CUSTOMER - View All Personal Bills
 	@GetMapping("/viewbill")
 	public ResponseEntity<?> viewBillList(HttpServletRequest request) throws ParseException {
 		String email = request.getUserPrincipal().getName();
@@ -99,6 +100,7 @@ public class BillController {
 		return new ResponseEntity<List<ViewBillDTO>> (viewbills, HttpStatus.OK);
 	}
 	
+	//CUSTOMER - View 1 Bill's Details
 	@GetMapping("/viewbill/{id}")
 	public ResponseEntity<?> viewBill(HttpServletRequest request, @PathVariable(value = "id") Long billId) {
 		String email = request.getUserPrincipal().getName();
@@ -129,6 +131,7 @@ public class BillController {
 		return new ResponseEntity<ViewBillDTO> (viewbill, HttpStatus.OK);
 	}
 	
+	//CUSTOMER - Cancel Bill (Only Be Able to Cancel Bills Are NOT SHIPPING YET)
 	@PutMapping("/viewbill/{id}")
 	public ResponseEntity<?> cancelBill(HttpServletRequest request, @PathVariable(value = "id") Long billId) {
 		String email = request.getUserPrincipal().getName();
@@ -144,6 +147,7 @@ public class BillController {
 		return new ResponseEntity<>("Cancel Successfully!", HttpStatus.OK);
 	}
 	
+	//ADMIN + STAFF - View All Customers' Bills
 	@GetMapping("/viewallbills")
 	public ResponseEntity<?> viewAllBill() throws ParseException {
 		
@@ -180,6 +184,7 @@ public class BillController {
 		return new ResponseEntity<List<ViewBillDTO>> (viewbills, HttpStatus.OK);
 	}
 	
+	//ADMIN + STAFF - Search Bar In Manage Bill Page
 	@GetMapping("/viewallbills/search")
 	public ResponseEntity<?> viewAllBillSearch(@RequestBody String searchString) throws ParseException {
 		
@@ -217,6 +222,7 @@ public class BillController {
 		return new ResponseEntity<List<ViewBillDTO>> (viewbills, HttpStatus.OK);
 	}
 	
+	//ADMIN + STAFF - Get 1 Bill's Details
 	@GetMapping("/viewallbills/{id}")
 	public ResponseEntity<?> viewOneBill(@PathVariable(value = "id") Long billId) throws ParseException {
 		Bill bill = billRepository.getById(billId);
@@ -240,6 +246,7 @@ public class BillController {
 		return new ResponseEntity<ViewBillDTO> (viewbill, HttpStatus.OK);
 	}
 	
+	//ADMIN + STAFF - Edit Bills' Status (Only Be Able To Update Bills Are NOT CANCEL)
 	@PutMapping("/viewallbills/{id}")
 	public ResponseEntity<?> updateBillStatus(@PathVariable(value = "id") Long billId, @RequestBody Long statusId) throws ParseException {
 		if (statusId > 4) return new ResponseEntity<> ("This Status is not Available", HttpStatus.BAD_REQUEST);
@@ -252,6 +259,7 @@ public class BillController {
 		return new ResponseEntity<> ("Updated Successful!", HttpStatus.OK);
 	}
 	
+	//CUSTOMER - Checkout the Items In Current Cart + Create Bill
 	@GetMapping("/checkout")
 	public ResponseEntity<?> checkout(HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();

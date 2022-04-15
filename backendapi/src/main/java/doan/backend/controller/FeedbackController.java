@@ -36,6 +36,7 @@ public class FeedbackController {
 	
 	SimpleDateFormat formatter = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss z");
 	
+	//CUSTOMER - Create a Feedback
 	@PostMapping("/feedback")
 	public ResponseEntity<?> createFeedback(@RequestBody String fbContent, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
@@ -58,6 +59,7 @@ public class FeedbackController {
 		return new ResponseEntity<>("Feedback added!", HttpStatus.OK);
 	}
 	
+	//ADMIN - View All Feedbacks
 	@GetMapping("/feedback/view")
 	public ResponseEntity<?> getAllFeedback(HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
@@ -84,6 +86,7 @@ public class FeedbackController {
 		return new ResponseEntity<List<FeedbackDTO>>(finalList, HttpStatus.OK);
 	}
 	
+	//ADMIN - Search Bar in Manage Feedback
 	@GetMapping("/feedback/view/search")
 	public ResponseEntity<?> getAllFeedbackSearch(@RequestBody String searchString, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
@@ -112,6 +115,7 @@ public class FeedbackController {
 		return new ResponseEntity<List<FeedbackDTO>>(finalList, HttpStatus.OK);
 	}
 	
+	//ADMIN - View a Feedback's Details
 	@GetMapping("/feedback/view/{id}")
 	public ResponseEntity<?> viewOneFeedback(HttpServletRequest request, @PathVariable(value = "id") Long fbId) {
 		String email = request.getUserPrincipal().getName();
@@ -137,6 +141,7 @@ public class FeedbackController {
 		return new ResponseEntity<FeedbackDTO>(fb, HttpStatus.OK);
 	}
 	
+	//ADMIN - Delete a Feedback
 	@DeleteMapping("/feedback/view/{id}")
 	public ResponseEntity<?> deleteFeedback(HttpServletRequest request, @PathVariable(value = "id") Long fbId) {
 		String email = request.getUserPrincipal().getName();
