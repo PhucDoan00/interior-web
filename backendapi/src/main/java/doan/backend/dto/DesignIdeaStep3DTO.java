@@ -8,6 +8,7 @@ import lombok.Data;
 public class DesignIdeaStep3DTO {
 
 	private String categoryName;
+	private String bigImg;
 	private List<DesignIdeaThumbnailDTO> thumbnailList;
 	
 	public DesignIdeaStep3DTO() {
@@ -29,6 +30,13 @@ public class DesignIdeaStep3DTO {
 	public void setThumbnailList(List<DesignIdeaThumbnailDTO> thumbnailList) {
 		this.thumbnailList = thumbnailList;
 	}
-	
+
+	public String getBigImg() {
+		return bigImg;
+	}
+
+	public void setBigImg(String bigImg) {
+		this.bigImg = bigImg;
+	}
 	
 }

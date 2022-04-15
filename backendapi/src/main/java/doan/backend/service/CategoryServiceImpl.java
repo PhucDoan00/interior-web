@@ -56,6 +56,21 @@ public class CategoryServiceImpl implements CategoryService{
 				  				  "https://i.ibb.co/ykxVhcP/glam.png"};
 		return livingroombig;
 	}
-
 	
+	@Override
+	public String[] categories() {
+		String[] categories = {"https://i.ibb.co/qmLy4nB/bed.jpg",
+							   "https://i.ibb.co/ccNd0Sz/dining.jpg",
+							   "https://i.ibb.co/VQ8hbt4/office.jpg",
+							   "https://i.ibb.co/VD6Bw2v/kids.jpg",
+							   "https://i.ibb.co/4WCyZd3/living.jpg"};
+		return categories;
+	}
+	
+	@Override
+	public String[] categoriesbigbrlr() {
+		String[] c = {"https://i.ibb.co/SnzWSb3/main-Img-BR.png",
+					  "https://i.ibb.co/fCMDWBF/mainImg.png"};
+		return c;
+	}
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import doan.backend.dto.CategoriesInfoDTO;
 import doan.backend.dto.CreateDesignIdeaDTO;
 import doan.backend.dto.DesignIdeaForStaffDTO;
 import doan.backend.dto.DesignIdeaItemsDTO;
@@ -88,13 +89,35 @@ public class DesignIdeaController {
 		for(int i = 0; i < livingroombig.length; i++) bigthumbnail[5][i+1] = livingroombig[i];
 	}*/
 	
+	//Get All Rooms in Design Idea
+	@GetMapping("")
+	public ResponseEntity<List<CategoriesInfoDTO>> getRooms() {
+		List<CategoriesInfoDTO> result = new ArrayList<CategoriesInfoDTO>();
+		String rooms[] = categoryService.categories();
+		for (int i = 0; i < rooms.length; i++) {
+			System.out.println(rooms[i]);
+		}
+		List<Category> categories = categoryRepository.findAll();
+		
+		for (Category category : categories) {
+			CategoriesInfoDTO info = new CategoriesInfoDTO();
+			info.setCategoryId(category.getCategoryId());
+			info.setCategoryName(category.getCategoryName());
+			info.setImage(rooms[category.getCategoryId().intValue() - 1]);
+			
+			result.add(info);
+		}
+		
+		return new ResponseEntity<List<CategoriesInfoDTO>>(result, HttpStatus.OK);
+	}
+	
 	//View a Room's Styles in Design Idea
 	@GetMapping("/{id1}")
 	public ResponseEntity<DesignIdeaStep3DTO> getSmallThumbnail(@PathVariable(value = "id1") Long categoryId) {
 		Category category = categoryRepository.getById(categoryId);
 		String cateName = category.getCategoryName();
 		DesignIdeaStep3DTO result = new DesignIdeaStep3DTO();
-		result.setCategoryName(cateName);
+		result.setCategoryName(cateName + " Design Ideas");
 		String bedroomsmall[] = categoryService.bedroom();
 		String livingroomsmall[] = categoryService.livingroomsmall();
 		String[][] smallthumbnail = new String[6][9];
@@ -111,6 +134,11 @@ public class DesignIdeaController {
 			System.out.println(bigthumbnail[1][i+1]);
 			System.out.println(bigthumbnail[5][i+1]);
 		}
+		
+		String categoriesbig[] = categoryService.categoriesbigbrlr();
+		if (categoryId == 1) result.setBigImg(categoriesbig[0]);
+		else if (categoryId == 5) result.setBigImg(categoriesbig[1]);
+		else result.setBigImg(defaultImageB);
 		
 		List<DesignIdeaThumbnailDTO> list = new ArrayList<DesignIdeaThumbnailDTO>();
 		List<Style> styles = styleRepository.findAll();
