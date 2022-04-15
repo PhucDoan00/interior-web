@@ -50,13 +50,13 @@ public class ProductController {
 	
 	@Autowired
 	private CartService cartService;
-
+	/*
 	@GetMapping("/products")
 	public ResponseEntity<List<Product>> getAllProducts() {
 		System.out.println(productRepository.findAll());
 		return new ResponseEntity<List<Product>>(productRepository.findAll(), HttpStatus.OK);
 	}
-	/* 
+	*/ 
 	@GetMapping("/products")
 	public ResponseEntity<List<ProductInformationDTO>> getAllProducts() {
 		List<Product> list = productRepository.findAll();
@@ -93,7 +93,7 @@ public class ProductController {
 		
 		return new ResponseEntity<List<ProductInformationDTO>>(finalList, HttpStatus.OK);
 	}
-	*/
+	
 	@GetMapping("/products/{id}")
 	public ResponseEntity<?> getProductById(@PathVariable(value = "id") Long productId){
 		int count1 = productRepository.countExistID(productId);

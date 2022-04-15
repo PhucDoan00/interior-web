@@ -59,7 +59,7 @@ public class AuthController {
     		if (!passwordEncoder.matches(loginDto.getPassword(), acc.getPassword())) finalCount++;
     	}
     	
-    	if (finalCount != 0) return new ResponseEntity<>("Wrong email or password", HttpStatus.BAD_REQUEST);
+    	if (finalCount != 0) return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
     	Account acc = accountRepository.findByEmail(loginDto.getEmail());
     	Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getEmail(), loginDto.getPassword()));
