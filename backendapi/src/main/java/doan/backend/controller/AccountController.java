@@ -32,6 +32,7 @@ public class AccountController {
 	@Autowired
 	private CustomUserDetailsService customUserDetails;
 	
+	//ADMIN - View All Accounts
 	@GetMapping("")
 	public ResponseEntity<?> getAllAccounts(HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
@@ -58,6 +59,7 @@ public class AccountController {
 		return new ResponseEntity<List<AccountInformationDTO>> (finalList, HttpStatus.OK);
 	}
 	
+	//ADMIN - Search Bar in View All Accounts
 	@GetMapping("/search")
 	public ResponseEntity<?> getAllAccountsSearch(@RequestBody String searchString, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
@@ -85,6 +87,7 @@ public class AccountController {
 		return new ResponseEntity<List<AccountInformationDTO>> (finalList, HttpStatus.OK);
 	}
 	
+	//ADMIN - Get 1 Account's Details
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getOneAccount(HttpServletRequest request, @PathVariable(value = "id") Long accountId) {
 		String email = request.getUserPrincipal().getName();
@@ -108,6 +111,7 @@ public class AccountController {
 		return new ResponseEntity<AccountInformationDTO> (info, HttpStatus.OK);
 	}
 	
+	//ADMIN - Update 1 Account's Details
 	//REQUEST BODY ONLY NEED NAME, PHONE, EMAIL AND ADDRESS
 	@PostMapping("/{id}")
 	public ResponseEntity<?> updateNotAdminAccount(@RequestBody AccountInformationDTO info, @PathVariable(value = "id") Long accountId, HttpServletRequest request) {
@@ -127,6 +131,7 @@ public class AccountController {
 		return new ResponseEntity<> ("Updated Successful!", HttpStatus.OK);
 	}
 	
+	//ADMIN - Delete 1 Account
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteNotAdminAccount(@PathVariable(value = "id") Long accountId, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();

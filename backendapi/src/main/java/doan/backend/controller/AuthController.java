@@ -49,6 +49,7 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    //GUEST - Log in
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginDTO loginDto){
     	int finalCount = 0;
@@ -89,6 +90,7 @@ public class AuthController {
 				userDetails.getUsername(), userDetails.getEmail(), userDetails.getPhone(), roles));*/
     }
 
+    //GUEST - Sign Up Customer Account
     @PostMapping("/signup")
     public ResponseEntity<?> registerCustomer(@RequestBody SignupDTO signUpDto){
 
@@ -113,6 +115,7 @@ public class AuthController {
         return new ResponseEntity<>("Customer registered successfully", HttpStatus.OK);
     }
     
+    //ADMIN - Create 1 Staff Account
     @PostMapping("/signupstaff")
     public ResponseEntity<?> registerStaff(@RequestBody SignupDTO signUpDto){
 

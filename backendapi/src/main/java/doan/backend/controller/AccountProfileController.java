@@ -33,6 +33,7 @@ public class AccountProfileController {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
+	//ADMIN + STAFF + CUSTOMER - View Personal Information 
 	@GetMapping("")
 	public ResponseEntity<?> profile(HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
@@ -51,6 +52,7 @@ public class AccountProfileController {
 		return new ResponseEntity<AccountInformationDTO> (info, HttpStatus.OK);
 	}
 	
+	//ADMIN + STAFF + CUSTOMER - Edit Personal Information (Not Change Password)
 	//REQUEST BODY DOES NOT NEED PASSWORD AND ROLE
 	@PutMapping("")
 	public ResponseEntity<?> editProfile(HttpServletRequest request, @RequestBody AccountInformationDTO info) {
@@ -64,6 +66,7 @@ public class AccountProfileController {
 		return new ResponseEntity<> ("Information Updated!", HttpStatus.OK);
 	}
 	
+	//ADMIN + STAFF + CUSTOMER - Change Password
 	@PutMapping("/changepassword")
 	public ResponseEntity<?> changePassword(HttpServletRequest request, @RequestBody ChangePasswordDTO password) {
 		String email = request.getUserPrincipal().getName();
