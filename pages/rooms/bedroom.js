@@ -60,7 +60,7 @@ export default function BedRoom({ designStyle }) {
         <>
           <div className="bedroomWrapper">
             <section className={styles.imgSection}>
-              <img src="/designIdeas/bedroom/mainImgBR.png" alt="Bedroom" />
+              <img src="/designIdeas/bedroom/mainImgBR.png" alt="Bedroom" className={styles.img} />
               <p className={styles.title}>Bed Room Design Ideas</p>
             </section>
             <section className="roomStyles mb-5">
