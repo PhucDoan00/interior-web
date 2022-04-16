@@ -15,7 +15,7 @@ export default function StyleQuiz() {
         className="d-lg-flex py-0 full-half-width-block three-up-content "
         id="block_60022a56a11a8"
       >
-        <div className={`row align-items-center ${styles.rowCustome}`}>
+        <div className={`row align-items-center ${styles.rowCustome}`} >
           <div className={'col-12 col-sm-6 text-center text-center color'}>
             <div className="row">
               <div className={`content ${styles.contentCustome}`}>

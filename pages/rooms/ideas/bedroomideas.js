@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/link-passhref */
 /* eslint-disable @next/next/no-img-element */
-import ButtonBack from '../../../components/buttonback'
 import Footer from '../../../components/footer'
 import Layout from '../../../components/layout'
 import Topbar from '../../../components/topbar'
@@ -46,7 +45,7 @@ const lvRoomStyles = [
   },
 ]
 
-function LvRoomStyle({ styleName, img }) {
+function BedRoomStyle({ styleName, img }) {
   return (
     <div className={`col-4 ${styles.column}`}>
       <div className={`p-0 me-5`}>
@@ -68,7 +67,7 @@ function LvRoomStyle({ styleName, img }) {
     </div>
   )
 }
-export default function LivingRoomIdeas({ styleName, imageBig, paragrah }) {
+export default function BedRoomIdeas({ styleName, imageBig, paragrah }) {
   return (
     <>
       <section className={styles.imgSection} style={{ backgroundImage: `url(${imageBig})` }}>
@@ -83,7 +82,7 @@ export default function LivingRoomIdeas({ styleName, imageBig, paragrah }) {
         <div className="container">
           <div className="row row-cols-3  g-2 g-lg-3 d-flex justify-content-center">
             {lvRoomStyles.map((styles, index) => (
-              <LvRoomStyle key={index} styleName={styles.styleName} img={styles.img} />
+              <BedRoomStyle key={index} styleName={styles.styleName} img={styles.img} />
             ))}
           </div>
         </div>
@@ -91,7 +90,7 @@ export default function LivingRoomIdeas({ styleName, imageBig, paragrah }) {
     </>
   )
 }
-LivingRoomIdeas.getLayout = function getLayout(page) {
+BedRoomIdeas.getLayout = function getLayout(page) {
   return (
     <Layout>
       <Topbar />
