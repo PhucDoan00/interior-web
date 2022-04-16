@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@iconify/react": "^3.2.1",
     "@popperjs/core": "^2.11.2",
     "axios": "^0.26.1",
     "bootstrap": "^5.1.3",

@@ -5,7 +5,9 @@ import Image from "next/image"
 export default function Designstyle() {
   return (
     <div className="container">
-  <div className="row justify-content-center">
+  <div className="row justify-content-center" style={{
+    margin:'80px 0'
+  }}>
     <div className="col-4">
          <Image src={'/15.png'} width='539' height='600'  />
     </div>

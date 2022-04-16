@@ -1,0 +1,109 @@
+.mt_400 {
+  margin-top: 80px;
+  background-color: #e5e5e5;
+}
+.create-title {
+  font-size: 32px;
+  text-align: center;
+  padding: 39px 0;
+}
+.manage-title {
+  text-align: start;
+}
+.square {
+  width: 450px;
+  height: 400px;
+  background: #e5e5e5;
+  border: 1px solid #0000004d;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.picture {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 222;
+}
+.label {
+  line-height: 48px;
+}
+.square::after {
+  position: absolute;
+  content: '';
+  width: 600px;
+  height: 1px;
+  top: 0;
+  left: 0;
+  transform: rotate(41.5deg);
+  background-color: #0000004d;
+  transform-origin: 0;
+}
+.square::before {
+  position: absolute;
+  content: '';
+  width: 600px;
+  height: 1px;
+  top: 0;
+  right: 0;
+  transform: rotate(318.5deg);
+  background-color: #0000004d;
+  transform-origin: 100% 100%;
+}
+.button {
+  padding: 7px 15px;
+  border-radius: 6px;
+  border: 1px solid #bdbdbd;
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+  margin: 0 auto;
+  background-color: white;
+  margin-right: 10px;
+  position: relative;
+}
+.file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.button-create {
+  background: #924b54;
+  border: 1px solid #924b54;
+  color: white;
+}
+.button-cancel {
+  background: white;
+  border: 1px solid #924b54;
+  color: #924b54;
+}
+.all {
+  padding: 100px 0;
+}
+.button-group {
+  text-align: end;
+}
+.input-color {
+  background: #c1c1c182;
+  border: none;
+  width: 371px;
+  height: 40px;
+  padding-left: 20px;
+}
+.search {
+  background-color: white;
+  width: 107px;
+  height: 40px;
+  margin-left: 50px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+.search-form {
+  text-align: center;
+}
