@@ -10,12 +10,17 @@ import Link from 'next/link'
 
 export default function StyleQuiz() {
   return (
-    <div className="styleQuizWrapper">
+    <div
+      className="styleQuizWrapper"
+      style={{
+        marginTop: '50px',
+      }}
+    >
       <section
         className="d-lg-flex py-0 full-half-width-block three-up-content "
         id="block_60022a56a11a8"
       >
-        <div className={`row align-items-center ${styles.rowCustome}`} >
+        <div className={`row align-items-center ${styles.rowCustome}`}>
           <div className={'col-12 col-sm-6 text-center text-center color'}>
             <div className="row">
               <div className={`content ${styles.contentCustome}`}>
@@ -34,7 +39,7 @@ export default function StyleQuiz() {
                       interior design style, all in a few minutes or less.
                     </p>
                     <p>
-                      <Link href="/stylequizresult">
+                      <Link href="/quiz">
                         <button
                           type="button"
                           className={`btn ${styles.btnCustom} `}
