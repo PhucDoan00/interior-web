@@ -16,17 +16,17 @@ const QuizOption = () => {
       setMainPicture(op)
       let check = QuizImg.find((e) => e.id == op.id)
       if (check) {
-        setListImgItem(check.child)
+        setListImgItem(check.child3)
       }
     }
   }, [])
 
   const handleBack = () => {
-    router.push('/quiz')
+    router.push('/quiz/option2')
   }
 
   const handleResult = () => {
-    router.push('/quiz/option2')
+    router.push('/quiz/result')
   }
 
   const handleActiveImg = (id) => {

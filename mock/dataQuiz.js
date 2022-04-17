@@ -8,6 +8,20 @@ export const QuizImg = [
     child: [
       {
         id: 1,
+        img: '/quiz/item2.png',
+      },
+      {
+        id: 2,
+        img: '/quiz/item2.1.png',
+      },
+      {
+        id: 3,
+        img: '/quiz/item2.3.png',
+      },
+    ],
+    child2: [
+      {
+        id: 1,
         img: '/quiz/item1.png',
       },
       {
@@ -17,6 +31,20 @@ export const QuizImg = [
       {
         id: 3,
         img: '/quiz/item1.3.png',
+      },
+    ],
+    child3: [
+      {
+        id: 1,
+        img: '/quiz/item3.png',
+      },
+      {
+        id: 2,
+        img: '/quiz/item3.1.png',
+      },
+      {
+        id: 3,
+        img: '/quiz/item3.2.png',
       },
     ],
   },
@@ -39,13 +67,21 @@ export const QuizImg = [
         img: '/quiz/item2.3.png',
       },
     ],
-  },
-  {
-    id: 3,
-    img: '/quiz/pic3.png',
-    title: 'Mid-Century Chic 3',
-    description: 'Test data 3',
-    child: [
+    child2: [
+      {
+        id: 1,
+        img: '/quiz/item1.png',
+      },
+      {
+        id: 2,
+        img: '/quiz/item1.2.png',
+      },
+      {
+        id: 3,
+        img: '/quiz/item1.3.png',
+      },
+    ],
+    child3: [
       {
         id: 1,
         img: '/quiz/item3.png',
@@ -56,7 +92,55 @@ export const QuizImg = [
       },
       {
         id: 3,
-        img: '/quiz/item3.3.png',
+        img: '/quiz/item3.2.png',
+      },
+    ],
+  },
+  {
+    id: 3,
+    img: '/quiz/pic3.png',
+    title: 'Mid-Century Chic 3',
+    description: 'Test data 3',
+    child: [
+      {
+        id: 1,
+        img: '/quiz/item2.png',
+      },
+      {
+        id: 2,
+        img: '/quiz/item2.1.png',
+      },
+      {
+        id: 3,
+        img: '/quiz/item2.3.png',
+      },
+    ],
+    child2: [
+      {
+        id: 1,
+        img: '/quiz/item1.png',
+      },
+      {
+        id: 2,
+        img: '/quiz/item1.2.png',
+      },
+      {
+        id: 3,
+        img: '/quiz/item1.3.png',
+      },
+    ],
+    child3: [
+      {
+        id: 1,
+        img: '/quiz/item3.png',
+      },
+      {
+        id: 2,
+        img: '/quiz/item3.1.png',
+      },
+      {
+        id: 3,
+        img: '/quiz/item3.2.png',
       },
     ],
   },
@@ -79,6 +163,34 @@ export const QuizImg = [
         img: '/quiz/item2.3.png',
       },
     ],
+    child2: [
+      {
+        id: 1,
+        img: '/quiz/item1.png',
+      },
+      {
+        id: 2,
+        img: '/quiz/item1.2.png',
+      },
+      {
+        id: 3,
+        img: '/quiz/item1.3.png',
+      },
+    ],
+    child3: [
+      {
+        id: 1,
+        img: '/quiz/item3.png',
+      },
+      {
+        id: 2,
+        img: '/quiz/item3.1.png',
+      },
+      {
+        id: 3,
+        img: '/quiz/item3.2.png',
+      },
+    ],
   },
   {
     id: 5,
@@ -99,6 +211,34 @@ export const QuizImg = [
         img: '/quiz/item2.3.png',
       },
     ],
+    child2: [
+      {
+        id: 1,
+        img: '/quiz/item1.png',
+      },
+      {
+        id: 2,
+        img: '/quiz/item1.2.png',
+      },
+      {
+        id: 3,
+        img: '/quiz/item1.3.png',
+      },
+    ],
+    child3: [
+      {
+        id: 1,
+        img: '/quiz/item3.png',
+      },
+      {
+        id: 2,
+        img: '/quiz/item3.1.png',
+      },
+      {
+        id: 3,
+        img: '/quiz/item3.2.png',
+      },
+    ],
   },
   {
     id: 6,
@@ -117,6 +257,34 @@ export const QuizImg = [
       {
         id: 3,
         img: '/quiz/item2.3.png',
+      },
+    ],
+    child2: [
+      {
+        id: 1,
+        img: '/quiz/item1.png',
+      },
+      {
+        id: 2,
+        img: '/quiz/item1.2.png',
+      },
+      {
+        id: 3,
+        img: '/quiz/item1.3.png',
+      },
+    ],
+    child3: [
+      {
+        id: 1,
+        img: '/quiz/item3.png',
+      },
+      {
+        id: 2,
+        img: '/quiz/item3.1.png',
+      },
+      {
+        id: 3,
+        img: '/quiz/item3.2.png',
       },
     ],
   },
