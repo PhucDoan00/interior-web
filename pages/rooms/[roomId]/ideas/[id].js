@@ -2,12 +2,12 @@
 // import React from 'react'
 import Router from 'next/router'
 import { useRouter } from 'next/router'
-import Layout from '../../components/layout'
-import Topbar from '../../components/topbar'
-import Footer from '../../components/footer'
+import Layout from '/components/layout'
+import Topbar from '/components/topbar'
+import Footer from '/components/footer'
 import React, { useEffect, useState } from 'react'
-import { getDesignId, getLvRoomIdeasById } from '../../lib/designstyle'
-import styles from '../../styles/rooms/ideas/livingroomideas.module.css'
+import { getDesignId, getLvRoomIdeasById } from '/lib/designstyle'
+import styles from '/styles/rooms/ideas/livingroomideas.module.css'
 
 export default function TestIdea() {
   const router = useRouter()

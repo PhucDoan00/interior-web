@@ -2,23 +2,45 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
 import Router from 'next/router'
-import Footer from '../../components/footer'
-import Layout from '../../components/layout'
-import Topbar from '../../components/topbar'
-import CardSlider from '../../components/cardSlider'
-import styles from '../../styles/rooms/livingrooms.module.css'
-import { getDesignStyleByRoom } from '../../lib/designstyle'
-export default function LivingRoom({ designStyle }) {
+import { useRouter } from 'next/router'
+import Footer from '/components/footer'
+import Layout from '/components/layout'
+import Topbar from '/components/topbar'
+import React, { useEffect, useState } from 'react'
+import CardSlider from '/components/cardSlider'
+import styles from '/styles/rooms/livingrooms.module.css'
+import { getRoomsStyleById, getRoomId } from '/lib/designstyle'
+
+export default function LivingRoom({ roomList }) {
+  const router = useRouter()
+  const { roomId } = router.query
+  const [roomStyle, setRoomStyle] = useState([])
+  const [bigImg, setBigImg] = useState('')
+  const [title, setTitle] = useState('')
+
+  useEffect(() => {
+    async function fetchMyAPI() {
+      const response = await getRoomsStyleById(roomId)
+      setRoomStyle(response.thumbnailList)
+      setBigImg(response.bigImg)
+      setTitle(response.categoryName)
+      // setStyleName(response.styleName)
+      // setImage(response.bigThumbnail)
+      // setCategory(response.categoryName)
+    }
+    fetchMyAPI()
+  }, [roomId])
   return (
     <>
       <div className="livingWrapper">
         <section className={styles.imgSection}>
           <img
             className={styles.img}
-            src="../../designIdeas/livingroom/mainImg.png"
+            // src="../../designIdeas/livingroom/mainImg.png"
+            src={bigImg}
             alt="Main Img"
           />
-          <p className={styles.title}>Living Room Design Ideas</p>
+          <p className={styles.title}>{title}</p>
         </section>
         <section className="roomStyles mb-5">
           <div className="container">
@@ -27,10 +49,10 @@ export default function LivingRoom({ designStyle }) {
             </div>
             <div className="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
               {/* Card */}
-              {designStyle.thumbnailList.map((room, styleId) => (
-                <div key={styleId} className="col">
+              {roomStyle.map((room, id) => (
+                <div key={id} className="col">
                   <div className="p-0">
-                    <Link href={`/rooms/${room.styleId}`}>
+                    <Link href={`${room.styleId}/ideas/${room.styleId}`}>
                       <button className={styles.btnCard}>
                         <div
                           className={`card ${styles.cardHover}`}
@@ -51,7 +73,7 @@ export default function LivingRoom({ designStyle }) {
               <button
                 type="button"
                 className={`btn ${styles.btnCustom} `}
-                onClick={() => Router.push('/designIdeas')}
+                onClick={() => Router.push('/rooms')}
               >
                 Back
               </button>
@@ -64,13 +86,22 @@ export default function LivingRoom({ designStyle }) {
   )
 }
 
+export const getStaticPaths = async () => {
+  const paths = await getRoomId()
+  // console.log(paths)
+  return {
+    paths,
+    fallback: false, // path nào ko return lại đc getStaticPaths thì trả về trang 404
+  }
+}
+
 //get Data form BE
-export const getStaticProps = async () => {
-  const designStyle = await getDesignStyleByRoom('5')
+export const getStaticProps = async ({ params }) => {
+  const roomList = await getRoomsStyleById(params.roomId)
   // console.log(designStyle)
   return {
     props: {
-      designStyle,
+      roomList,
     },
   }
 }
