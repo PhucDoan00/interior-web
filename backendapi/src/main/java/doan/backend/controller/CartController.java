@@ -47,7 +47,7 @@ public class CartController {
 	public ResponseEntity<?> getCartById(HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
 		int count1 = accountRepository.countExistEmail(email);
-    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.OK);
     	Account account = accountRepository.findByEmail(email);
     	long customerId = account.getAccountId();
 		
@@ -82,7 +82,7 @@ public class CartController {
 	public ResponseEntity<?> deleteItemFromCart(@RequestBody Long productId, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
 		int count1 = accountRepository.countExistEmail(email);
-    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.OK);
     	Account account = accountRepository.findByEmail(email);
     	long customerId = account.getAccountId();
 		Cart cart = cartRepository.findActiveCartByCustomerId(customerId);
@@ -103,7 +103,7 @@ public class CartController {
 	public ResponseEntity<?> addQuantity(@RequestBody Long productId, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
 		int count1 = accountRepository.countExistEmail(email);
-    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.OK);
     	Account account = accountRepository.findByEmail(email);
     	long customerId = account.getAccountId();
 		
@@ -132,7 +132,7 @@ public class CartController {
 	public ResponseEntity<?> minusQuantity(@RequestBody Long productId, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
 		int count1 = accountRepository.countExistEmail(email);
-    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.OK);
     	Account account = accountRepository.findByEmail(email);
     	
     	long customerId = account.getAccountId();
