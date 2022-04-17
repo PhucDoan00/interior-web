@@ -1,26 +1,30 @@
 .containerCustome {
-  height: calc(100vh - 64px);
+  padding: 0;
 }
 
 .inputWrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 200px;
 }
 
 .title {
   position: relative;
-  top: -120px;
+  top: -100px;
 }
 
 .input {
   position: relative;
   top: -80px;
 }
-
+.imgCol {
+  padding: 0;
+}
 .img {
   position: relative;
-  right: -150px;
+  height: 100%;
+  margin-top: 33px;
 }
 
 .btnCustom {
