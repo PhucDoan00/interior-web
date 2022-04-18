@@ -7,8 +7,18 @@ import styles from '../../styles/designIdeas.module.css'
 import Link from 'next/link'
 import CardSlider from '../../components/cardSlider'
 import { getAllRooms } from '../../lib/designstyle'
+import Cookies from 'js-cookie'
 
 export default function DesignIdeas({ rooms }) {
+  function setCookies(value) {
+    // console.log(value)
+    // setCookie('categoryId', value, 86400)
+    Cookies.set('categoryId', value)
+  }
+  function setLocalStorage(value) {
+    localStorage.setItem('categoryId', value)(value)
+  }
+
   return (
     <div className={styles.designWrapper}>
       <section className={styles.imageSection}>
@@ -30,6 +40,10 @@ export default function DesignIdeas({ rooms }) {
               <div
                 className={`card ${styles.cardHover}`}
                 style={{ width: 13 + 'rem', height: 13 + 'rem' }}
+                onClick={
+                  () => setCookies(room.categoryId)
+                  // onClick={() => setLocalStorage(room.categoryId)
+                }
               >
                 <img src={room.image} className="card-img-top" alt={room.categoryName} />
                 <h5 className={`card-title ${styles.cardTitle}`}>{room.categoryName}</h5>

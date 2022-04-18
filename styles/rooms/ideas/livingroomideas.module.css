@@ -44,7 +44,7 @@
 
 .cardTitle {
   color: #fff;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 400;
   margin: 10px 10px;
 }
@@ -72,7 +72,23 @@
   background-color: #fff;
   margin-bottom: 40px;
 }
+.btnCustom {
+  color: #924b54 !important;
+  border-color: #924b54 !important;
+  width: 100px;
+  transition: 0.5s;
+  margin-top: 2rem;
+}
 
+.btnCustom:hover {
+  background-color: #924b54 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+.btnPos {
+  margin-left: 127px;
+}
 .column {
   width: fit-content;
   display: flex;

@@ -120,7 +120,7 @@ public class FeedbackController {
 	public ResponseEntity<?> viewOneFeedback(HttpServletRequest request, @PathVariable(value = "id") Long fbId) {
 		String email = request.getUserPrincipal().getName();
 		int count1 = accountRepository.countExistEmail(email);
-    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.OK);
     	
 		Feedback feedback = feedbackRepository.getById(fbId);
 		
@@ -146,7 +146,7 @@ public class FeedbackController {
 	public ResponseEntity<?> deleteFeedback(HttpServletRequest request, @PathVariable(value = "id") Long fbId) {
 		String email = request.getUserPrincipal().getName();
 		int count1 = accountRepository.countExistEmail(email);
-    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.OK);
     	
 		feedbackRepository.deleteById(fbId);
 		return new ResponseEntity<>("Feedback Deleted!", HttpStatus.OK);
