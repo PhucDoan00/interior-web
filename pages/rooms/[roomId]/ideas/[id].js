@@ -24,16 +24,22 @@ export default function TestIdea({}) {
     return id
   })()
   useEffect(() => {
+    //Flag cleanUp to prevent memory leak
+    let cleanUp = true
     async function fetchMyAPI() {
       const response = await getIdeasByStyleId(categoryId, id)
-      console.log('🚀 ~ file: [id].js ~ line 37 ~ categoryId ~ categoryId', categoryId)
-      setIdeas(response.itemList)
-      setDes(response.description)
-      setStyleName(response.styleName)
-      setImage(response.bigThumbnail)
-      setCategory(response.categoryName)
+      if (cleanUp && response) {
+        setIdeas(response.itemList)
+        setDes(response.description)
+        setStyleName(response.styleName)
+        setImage(response.bigThumbnail)
+        setCategory(response.categoryName)
+      }
     }
     fetchMyAPI()
+    return () => {
+      cleanUp = false
+    }
   })
 
   return (

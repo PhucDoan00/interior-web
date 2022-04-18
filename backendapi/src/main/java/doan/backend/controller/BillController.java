@@ -62,7 +62,7 @@ public class BillController {
 	public ResponseEntity<?> viewBillList(HttpServletRequest request) throws ParseException {
 		String email = request.getUserPrincipal().getName();
 		int count1 = accountRepository.countExistEmail(email);
-    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.OK);
     	Account acc = accountRepository.findByEmail(email);
     	
     	int count = billRepository.countBills(acc.getAccountId());
@@ -105,12 +105,12 @@ public class BillController {
 	public ResponseEntity<?> viewBill(HttpServletRequest request, @PathVariable(value = "id") Long billId) {
 		String email = request.getUserPrincipal().getName();
 		int count1 = accountRepository.countExistEmail(email);
-    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.OK);
     	Account acc = accountRepository.findByEmail(email);
     	
     	Bill bill = billRepository.getById(billId);
 		long customerId = cartRepository.getById(bill.getCartId()).getCustomerId();
-		if (acc.getAccountId() != customerId) return new ResponseEntity<>("You cannot view this bill!", HttpStatus.BAD_REQUEST);
+		if (acc.getAccountId() != customerId) return new ResponseEntity<>("You cannot view this bill!", HttpStatus.OK);
 		ViewBillDTO viewbill = new ViewBillDTO();
 		
 		viewbill.setBillId(bill.getBillId());
@@ -136,13 +136,13 @@ public class BillController {
 	public ResponseEntity<?> cancelBill(HttpServletRequest request, @PathVariable(value = "id") Long billId) {
 		String email = request.getUserPrincipal().getName();
 		int count1 = accountRepository.countExistEmail(email);
-    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.OK);
     	Account acc = accountRepository.findByEmail(email);
     	
     	Bill bill = billRepository.getById(billId);
 		long customerId = cartRepository.getById(bill.getCartId()).getCustomerId();
-		if (acc.getAccountId() != customerId) return new ResponseEntity<>("You cannot cancel this bill!", HttpStatus.BAD_REQUEST);
-		if (bill.getBillStatus() != 1) return new ResponseEntity<>("You cannot cancel this bill!", HttpStatus.BAD_REQUEST);
+		if (acc.getAccountId() != customerId) return new ResponseEntity<>("You cannot cancel this bill!", HttpStatus.OK);
+		if (bill.getBillStatus() != 1) return new ResponseEntity<>("You cannot cancel this bill!", HttpStatus.OK);
 		billRepository.updateBillStatus(2, billId);
 		return new ResponseEntity<>("Cancel Successfully!", HttpStatus.OK);
 	}
@@ -249,11 +249,11 @@ public class BillController {
 	//ADMIN + STAFF - Edit Bills' Status (Only Be Able To Update Bills Are NOT CANCEL)
 	@PutMapping("/viewallbills/{id}")
 	public ResponseEntity<?> updateBillStatus(@PathVariable(value = "id") Long billId, @RequestBody Long statusId) throws ParseException {
-		if (statusId > 4) return new ResponseEntity<> ("This Status is not Available", HttpStatus.BAD_REQUEST);
+		if (statusId > 4) return new ResponseEntity<> ("This Status is not Available", HttpStatus.OK);
 		Bill bill = billRepository.getById(billId);
 		long currentStt = bill.getBillStatus();
 		
-		if (currentStt == 2 || currentStt == 4) return new ResponseEntity<> ("This bill cannot be updated!", HttpStatus.BAD_REQUEST);
+		if (currentStt == 2 || currentStt == 4) return new ResponseEntity<> ("This bill cannot be updated!", HttpStatus.OK);
 		
 		billRepository.updateBillStatus(statusId, billId);
 		return new ResponseEntity<> ("Updated Successful!", HttpStatus.OK);
@@ -264,13 +264,13 @@ public class BillController {
 	public ResponseEntity<?> checkout(HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
 		int count1 = accountRepository.countExistEmail(email);
-    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.OK);
     	Account account = accountRepository.findByEmail(email);
     	long customerId = account.getAccountId();
 		
 		int count = cartRepository.countAvailableCart(customerId);
 		
-		if (count == 0) return new ResponseEntity<>("You need at least 1 item to checkout!", HttpStatus.BAD_REQUEST);
+		if (count == 0) return new ResponseEntity<>("You need at least 1 item to checkout!", HttpStatus.OK);
 		else {
 			Cart cart = cartRepository.findActiveCartByCustomerId(customerId);
 			List<CartItemDTO> items = cartService.getItemsInCart(cart.getCartId());
@@ -280,7 +280,7 @@ public class BillController {
 				long itemId = item.getProductId();
 				if (item.getQuantity() > productRepository.getById(itemId).getQuantity()) invalidItem++;
 			}
-			if (invalidItem > 0) return new ResponseEntity<>("There are item(s) in your cart that we don't have enough quantity", HttpStatus.BAD_REQUEST);
+			if (invalidItem > 0) return new ResponseEntity<>("There are item(s) in your cart that we don't have enough quantity", HttpStatus.OK);
 			
 			Bill bill = new Bill();
 			

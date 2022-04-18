@@ -1,21 +1,28 @@
-import axios from 'axios';
 import { useState ,useEffect} from 'react'
 import styles from '../../styles/Home.module.css'
 import ProductSmall from '../productSmall'
-import { getListProduct } from '../../lib/productStyle';
+import { getListProduct, searchProduct } from '../../lib/productStyle';
+import { useRouter } from 'next/router'
 
 
 
 export default function ShopCustomer() {
   const [ listProduct , setListProduct] = useState([]);
+  const [search , setSearch] = useState('');
 
   useEffect(async()=>{
 const data  = await getListProduct();
-
-console.log(data);
+setListProduct(data)
   },[])
 
-  console.log(listProduct);
+  const handleSearch = (e)=>{
+    setSearch(e.target.value)
+  }
+
+  const onHandleSearch = async()=>{
+    const data = await searchProduct(search)
+    setListProduct(data)
+  }
 
   return (
     <div className={styles.mt_400}>
@@ -32,8 +39,8 @@ console.log(data);
           <div className="col-sm-1"></div>
           <div className="col-sm-10">
             <div className={styles.shop}>
-              <input type="text" className={styles.input} />
-              <button className={styles.button}>Search</button>
+              <input type="text" className={styles.input} value={search} onChange={(e)=>handleSearch(e)}/>
+              <button className={styles.button} onClick={onHandleSearch}>Search</button>
             </div>
           </div>
           <div className="col-sm-1"></div>
@@ -93,15 +100,12 @@ console.log(data);
           <div className="col-sm-1"></div>
           <div className="col-sm-10">
             <div className="row d-flex">
-              <ProductSmall imgPath="/1.png" name={'test'} price={'123'} />
-              <ProductSmall imgPath="/2.png" name={'test'} price={'123'} />
-              <ProductSmall imgPath="/3.png" name={'test'} price={'123'} />
-              <ProductSmall imgPath="/4.png" name={'test'} price={'123'} />
-              <ProductSmall imgPath="/5.png" name={'test'} price={'123'} />
-              <ProductSmall imgPath="/6.png" name={'test'} price={'123'} />
-              <ProductSmall imgPath="/7.png" name={'test'} price={'123'} />
-              <ProductSmall imgPath="/8.png" name={'test'} price={'123'} />
-             
+              {
+                listProduct?.map((e)=>(
+                  <ProductSmall imgPath={e.image} name={e.productName} price={e.price} id={e.productId} />
+                ))
+              }
+              
             </div>
           </div>
           <div className="col-sm-1"></div>
