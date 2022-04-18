@@ -40,7 +40,7 @@ export default function TestIdea({}) {
     return () => {
       cleanUp = false
     }
-  })
+  }, [categoryId, id])
 
   return (
     <div>
