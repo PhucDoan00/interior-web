@@ -6,22 +6,27 @@ import Layout from '/components/layout'
 import Topbar from '/components/topbar'
 import Footer from '/components/footer'
 import React, { useEffect, useState } from 'react'
-import { getDesignId, getLvRoomIdeasById } from '/lib/designstyle'
+import { getIdeasByStyleId } from '/lib/designstyle'
 import styles from '/styles/rooms/ideas/livingroomideas.module.css'
+import Cookies from 'js-cookie'
 
-export default function TestIdea() {
+export default function TestIdea({}) {
   const router = useRouter()
   const { id } = router.query
-  // console.log(id)
   const [ideas, setIdeas] = useState([])
   const [des, setDes] = useState('')
   const [styleName, setStyleName] = useState('')
   const [image, setImage] = useState('')
   const [category, setCategory] = useState('')
 
+  const categoryId = (() => {
+    const id = Cookies.get('categoryId')
+    return id
+  })()
   useEffect(() => {
     async function fetchMyAPI() {
-      const response = await getLvRoomIdeasById(id)
+      const response = await getIdeasByStyleId(categoryId, id)
+      console.log('🚀 ~ file: [id].js ~ line 37 ~ categoryId ~ categoryId', categoryId)
       setIdeas(response.itemList)
       setDes(response.description)
       setStyleName(response.styleName)
@@ -29,7 +34,7 @@ export default function TestIdea() {
       setCategory(response.categoryName)
     }
     fetchMyAPI()
-  }, [id])
+  })
 
   return (
     <div>
@@ -69,11 +74,11 @@ export default function TestIdea() {
           </div>
         </div>
         <div className="container">
-          <div className="btnWrapper">
+          <div className={`btnWrapper ${styles.btnPos}`}>
             <button
               type="button"
               className={`btn ${styles.btnCustom} `}
-              onClick={() => Router.push('/rooms/livingroom')}
+              onClick={() => Router.push(`/rooms/${categoryId}`)}
             >
               Back
             </button>
@@ -84,24 +89,6 @@ export default function TestIdea() {
   )
 }
 
-export const getStaticPaths = async () => {
-  const paths = await getDesignId()
-  // console.log(paths)
-  return {
-    paths,
-    fallback: false, // path nào ko return lại đc getStaticPaths thì trả về trang 404
-  }
-}
-
-export const getStaticProps = async ({ params }) => {
-  const ideaLists = await getLvRoomIdeasById(params.id)
-  // console.log(ideaLists)
-  return {
-    props: ideaLists,
-  }
-}
-
-// export default TestIdea
 TestIdea.getLayout = function getLayout(page) {
   return (
     <Layout>
