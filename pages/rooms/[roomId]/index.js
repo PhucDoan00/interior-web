@@ -11,22 +11,24 @@ import CardSlider from '/components/cardSlider'
 import styles from '/styles/rooms/livingrooms.module.css'
 import { getRoomsStyleById, getRoomId } from '/lib/designstyle'
 
+import Cookies from 'js-cookie'
+
 export default function LivingRoom({ roomList }) {
   const router = useRouter()
   const { roomId } = router.query
   const [roomStyle, setRoomStyle] = useState([])
   const [bigImg, setBigImg] = useState('')
   const [title, setTitle] = useState('')
-
+  const categoryId = (() => {
+    const id = Cookies.get('categoryId')
+    return id
+  })()
   useEffect(() => {
     async function fetchMyAPI() {
       const response = await getRoomsStyleById(roomId)
-      setRoomStyle(response.thumbnailList)
+      await setRoomStyle(response.thumbnailList)
       setBigImg(response.bigImg)
       setTitle(response.categoryName)
-      // setStyleName(response.styleName)
-      // setImage(response.bigThumbnail)
-      // setCategory(response.categoryName)
     }
     fetchMyAPI()
   }, [roomId])
@@ -34,12 +36,7 @@ export default function LivingRoom({ roomList }) {
     <>
       <div className="livingWrapper">
         <section className={styles.imgSection}>
-          <img
-            className={styles.img}
-            // src="../../designIdeas/livingroom/mainImg.png"
-            src={bigImg}
-            alt="Main Img"
-          />
+          <img className={styles.img} src={bigImg} alt="Main Img" />
           <p className={styles.title}>{title}</p>
         </section>
         <section className="roomStyles mb-5">
@@ -52,13 +49,17 @@ export default function LivingRoom({ roomList }) {
               {roomStyle.map((room, id) => (
                 <div key={id} className="col">
                   <div className="p-0">
-                    <Link href={`${room.styleId}/ideas/${room.styleId}`}>
+                    <Link href={`/rooms/${categoryId}/ideas/${room.styleId}`}>
                       <button className={styles.btnCard}>
                         <div
                           className={`card ${styles.cardHover}`}
                           style={{ width: 18 + 'rem', height: 16 + 'rem' }}
                         >
-                          <img src={room.image} className="card-img-top" alt={room.styleName} />
+                          <img
+                            src={room.image}
+                            className={`card-img-top ${styles.cardImg}`}
+                            alt={room.styleName}
+                          />
                           <h5 className={`card-title ${styles.cardTitle}`}>{room.styleName}</h5>
                         </div>
                       </button>

@@ -30,7 +30,10 @@
   font-size: 18px;
   font-weight: 400;
 }
-
+.cardImg {
+  width: 288px;
+  height: 178px;
+}
 .cardHover {
   transition: box-shadow 0.3s;
   border: none;
