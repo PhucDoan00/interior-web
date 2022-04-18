@@ -24,13 +24,20 @@ export default function LivingRoom({ roomList }) {
     return id
   })()
   useEffect(() => {
+    //Flag cleanUp to prevent memory leak
+    let cleanUp = true
     async function fetchMyAPI() {
       const response = await getRoomsStyleById(roomId)
-      await setRoomStyle(response.thumbnailList)
-      setBigImg(response.bigImg)
-      setTitle(response.categoryName)
+      if (cleanUp && response) {
+        setRoomStyle(response.thumbnailList)
+        setBigImg(response.bigImg)
+        setTitle(response.categoryName)
+      }
     }
     fetchMyAPI()
+    return () => {
+      cleanUp = false
+    }
   }, [roomId])
   return (
     <>

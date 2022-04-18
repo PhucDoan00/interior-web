@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +35,7 @@ import doan.backend.service.CartService;
 
 @RestController
 @RequestMapping("/api/v1")
+@CrossOrigin(origins = "*") 
 public class ProductController {
 
 	@Autowired
@@ -99,7 +101,7 @@ public class ProductController {
 	@GetMapping("/products/{id}")
 	public ResponseEntity<?> getProductById(@PathVariable(value = "id") Long productId){
 		int count1 = productRepository.countExistID(productId);
-    	if (count1 == 0) return new ResponseEntity<>("Product not found for this id: " + productId, HttpStatus.BAD_REQUEST);
+    	if (count1 == 0) return new ResponseEntity<>("Product not found for this id: " + productId, HttpStatus.OK);
 		
 		Product product = productRepository.getById(productId);
 				
@@ -136,12 +138,12 @@ public class ProductController {
 	public ResponseEntity<?> addToCart(@PathVariable(value = "id") Long productId, @RequestBody Integer quantity, HttpServletRequest request) {
 		String email = request.getUserPrincipal().getName();
 		int count1 = accountRepository.countExistEmail(email);
-    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.BAD_REQUEST);
+    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.OK);
     	Account account = accountRepository.findByEmail(email);
     	
 		int i = cartService.addProductToCart(account.getAccountId(), productId, quantity);
 		if (i == 0) return new ResponseEntity<>("Product added to cart!", HttpStatus.OK);
-		else return new ResponseEntity<>("Product's quantity exceeded!", HttpStatus.BAD_REQUEST);
+		else return new ResponseEntity<>("Product's quantity exceeded!", HttpStatus.OK);
 	}
 
 	//STAFF - Get 2 Lists of Colors and Categories in the System (In Create Product Step)
@@ -181,7 +183,7 @@ public class ProductController {
 	@GetMapping("/editproduct/{id}")
 	public ResponseEntity<?> getEditProduct(@PathVariable(value = "id") Long productId){
 		int count1 = productRepository.countExistID(productId);
-    	if (count1 == 0) return new ResponseEntity<>("Product not found for this id: " + productId, HttpStatus.BAD_REQUEST);
+    	if (count1 == 0) return new ResponseEntity<>("Product not found for this id: " + productId, HttpStatus.OK);
 		
 		Product product = productRepository.getById(productId);
 		CreateProductDTO info = new CreateProductDTO();
@@ -239,7 +241,7 @@ public class ProductController {
 	@RequestMapping("/deleteproduct/{id}")
 	public ResponseEntity<?> deleteProduct(@PathVariable(value = "id") Long productId) {
 		int count1 = productRepository.countExistID(productId);
-    	if (count1 == 0) return new ResponseEntity<>("Product not found for this id: " + productId, HttpStatus.BAD_REQUEST);
+    	if (count1 == 0) return new ResponseEntity<>("Product not found for this id: " + productId, HttpStatus.OK);
 		
 		productRepository.deleteProductColor(productId);
 		productRepository.deleteProductCategory(productId);

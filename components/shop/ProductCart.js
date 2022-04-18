@@ -1,7 +1,45 @@
 import styles from '../../styles/Home.module.css'
 import { Icon } from '@iconify/react'
+import { useRouter } from 'next/router'
+import { useEffect ,useState} from 'react'
 
 const ProductCart = () => {
+  const [cart , setCart] = useState([]);
+  const [total, setTotal] = useState('');
+  const [isRender , setIsRender] = useState(false)
+  const router = useRouter()
+
+  useEffect(()=>{
+    let data = JSON.parse(localStorage.getItem('cart'))
+    let totals = 0;
+       if(data){
+           data.map((e)=>{
+            totals+=e.product.price
+          })
+    setTotal(totals);
+    setCart(data);
+       }
+       
+  },[isRender])
+
+  const handleRemoveItem = (item)=>{
+    let data = JSON.parse(localStorage.getItem('cart'))
+    let datas = data.filter(person => person.product.productId != item)
+    // remove localstorage
+    localStorage.removeItem('cart')
+    localStorage.setItem('cart',JSON.stringify(datas))
+    setCart(datas)
+    setIsRender(true)
+  }
+
+  const handleRedirectPage = ()=>{
+  router.push('/shop')
+  }
+
+  const handleCheckOut = ()=>{
+     router.push('/success')
+  }
+
   return (
     <div className={`${styles.mt_100}`}>
       <div className="container">
@@ -14,7 +52,7 @@ const ProductCart = () => {
           </h5>
         </div>
         <div className="remove">
-          <Icon icon="clarity:remove-line" style={{ float: 'right' }} />
+          <Icon icon="clarity:remove-line" style={{ float: 'right' }} onClick={handleRedirectPage} />
         </div>
         <div className="row pt-4 d-flex " style={{ justifyContent: 'space-around' }}>
           <div
@@ -31,11 +69,13 @@ const ProductCart = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
+             {
+               cart?.map((e)=>(
+                    <tr key={e.product.productId}>
                   <th scope="row">
                     <div className="item d-flex">
                       <img
-                        src="/1.png"
+                        src={e.product.image}
                         width="50px"
                         height="50px"
                         alt=""
@@ -43,26 +83,28 @@ const ProductCart = () => {
                       />
                       <div className="title_check m-2">
                         <h6 style={{ fontWeight: 'bold', fontSize: '12px' }}>
-                          Office Elegant Nero Noce Leather Chair
+                         {e.product.productName}
                         </h6>
                         <p style={{ fontWeight: 'lighter', fontSize: '10px' }}>
-                          Size 25.6 x 38.98 inches
+                          {e.product.dimension}
                         </p>
                       </div>
                     </div>
                   </th>
                   <td className={styles.light}>
-                    <select className={`${styles.choose_select}`} value={1}>
+                    <select className={`${styles.choose_select}`} value={e.select}>
                       <option selected>1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
                     </select>
-                    <a href="" style={{ display: 'block', color: 'red', margin: '0 10px' }}>
+                    <a href="#" style={{ display: 'block', color: 'red', margin: '0 10px' }} onClick={()=>handleRemoveItem(e.product.productId)}>
                       Delete
                     </a>
                   </td>
-                  <td className={styles.light}>500</td>
+                  <td className={styles.light}>{e.product.price}</td>
                 </tr>
+               ))
+             }
                 <tr>
                   <td>
                     <h5 style={{ fontWeight: 'lighter', fontSize: '15px' }}>
@@ -74,9 +116,9 @@ const ProductCart = () => {
                   <td></td>
                   <td>
                     <h5 style={{ fontWeight: 'lighter', fontSize: '15px' }}>
-                      400
+                      {total}
                       <br />
-                      500
+                      100
                     </h5>
                   </td>
                 </tr>
@@ -85,7 +127,10 @@ const ProductCart = () => {
                     <h6 style={{ fontWeight: 'bold', fontSize: '15px' }}>Estimated Total</h6>
                   </td>
                   <td></td>
-                  <td>500</td>
+                  <td>{
+                    total+100
+                    }
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -141,7 +186,7 @@ const ProductCart = () => {
                 Shipping Address
               </h5>
               <div style={{ textAlign: 'center', marginTop: '10px' }}>
-                <button className={`${styles.button} ${styles.bg_yellow}`}>Checkout</button>
+                <button className={`${styles.button} ${styles.bg_yellow}`} onClick={handleCheckOut}>Checkout</button>
               </div>
             </div>
           </div>
