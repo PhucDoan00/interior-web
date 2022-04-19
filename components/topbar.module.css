@@ -5,29 +5,27 @@
   padding: 9px;
   border-right: 1px solid #eaeaea;
   position: fixed;
-  margin-bottom: 200px;
   top: 0;
   width: 100%;
   z-index: 2;
-  
 }
 .topbar > a {
   margin: 8px 0;
-  text-decoration: none;
-  /* background: white; */
-  /* border-radius: 4px; */
   font-size: 14px;
   padding: 12px 16px;
-  text-transform: uppercase;
-  font-weight: 600;
   letter-spacing: 0.025em;
   color: #333;
-  /* border: 1px solid #eaeaea; */
+  font-weight: bolder;
+  text-decoration: none;
+  font-family: 'Montserrat';
+  text-transform: uppercase;
   transition: all 0.125s ease;
 }
 
 .title {
   font-size: 30px;
+  font-family: 'Montserrat';
+  font-weight: bold;
 }
 
 .nav > a:hover {

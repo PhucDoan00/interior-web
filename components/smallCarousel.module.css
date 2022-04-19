@@ -1,9 +1,11 @@
-.smallCarousel{
-    position: relative;
-    right: -110px;
+.smallCarousel {
+  position: relative;
+  right: -110px;
 }
-.title{
-    font-size: 30px;
-    /* font-weight: 200; */
-   
+.title {
+  font-family: 'Montserrat';
+}
+.title > h1 {
+  font-weight: 600;
+  font-size: 30px;
 }

@@ -11,12 +11,7 @@ import Cookies from 'js-cookie'
 
 export default function DesignIdeas({ rooms }) {
   function setCookies(value) {
-    // console.log(value)
-    // setCookie('categoryId', value, 86400)
-    Cookies.set('categoryId', value)
-  }
-  function setLocalStorage(value) {
-    localStorage.setItem('categoryId', value)(value)
+    Cookies.set('categoryId', value, 86400)
   }
 
   return (
@@ -31,8 +26,8 @@ export default function DesignIdeas({ rooms }) {
       </section>
 
       <section className={styles.rooms}>
-        <div className="title my-5">
-          <h3>Select Room Category</h3>
+        <div className="my-5">
+          <h3 className={styles.title}>Select Room Category</h3>
         </div>
         <div className={` mb-5 justify-content-evenly ${styles.category}`}>
           {rooms.map((room, id) => (
@@ -40,10 +35,7 @@ export default function DesignIdeas({ rooms }) {
               <div
                 className={`card ${styles.cardHover}`}
                 style={{ width: 13 + 'rem', height: 13 + 'rem' }}
-                onClick={
-                  () => setCookies(room.categoryId)
-                  // onClick={() => setLocalStorage(room.categoryId)
-                }
+                onClick={() => setCookies(room.categoryId)}
               >
                 <img src={room.image} className="card-img-top" alt={room.categoryName} />
                 <h5 className={`card-title ${styles.cardTitle}`}>{room.categoryName}</h5>
