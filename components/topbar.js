@@ -1,24 +1,23 @@
 /* eslint-disable @next/next/link-passhref */
-import axios from 'axios';
+import axios from 'axios'
 import Link from 'next/link'
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState } from 'react'
+import { useEffect } from 'react'
 import styles from './topbar.module.css'
 
 export default function Topbar() {
-
-  const [user, setUser] = useState();
+  const [user, setUser] = useState()
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
+    const loggedInUser = localStorage.getItem('user')
     if (loggedInUser) {
-      setUser(loggedInUser);
+      setUser(loggedInUser)
     }
-  });
+  }, [])
 
   const handleSignOut = () => {
-    setUser('');
-    localStorage.setItem('user', '');
+    setUser('')
+    localStorage.setItem('user', '')
   }
 
   return (
@@ -71,6 +70,6 @@ export default function Topbar() {
           )}
         </div>
       </div>
-    </nav >
+    </nav>
   )
 }

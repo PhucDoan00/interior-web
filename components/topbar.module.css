@@ -1,14 +1,16 @@
 .nav {
-  display: flex;
-  flex-direction: row;
-  background-color: #fafafa;
-  padding: 9px;
-  border-right: 1px solid #eaeaea;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 2;
+  padding: 9px;
+  display: flex;
+  flex-direction: row;
+  font-family: 'Montserrat';
+  background-color: #fafafa;
+  border-right: 1px solid #eaeaea;
 }
+
 .topbar > a {
   margin: 8px 0;
   font-size: 14px;
@@ -17,7 +19,6 @@
   color: #333;
   font-weight: bolder;
   text-decoration: none;
-  font-family: 'Montserrat';
   text-transform: uppercase;
   transition: all 0.125s ease;
 }
