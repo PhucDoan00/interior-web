@@ -32,8 +32,15 @@ export default function LogIn() {
       //   response,
       // });
       // dispatch(getSession());
-      router.push('/');
-      console.log("success")
+      if (response == 'Failed') {
+        setPassword('');
+        console.log("failed")
+      }
+      else {
+        localStorage.setItem('user', JSON.stringify(response))
+        router.push('/');
+        console.log(response)
+      }
     })
       .catch(function (err) {
         console.log(err);

@@ -1,43 +1,43 @@
 import styles from '../../styles/Home.module.css'
 import { Icon } from '@iconify/react'
 import { useRouter } from 'next/router'
-import { useEffect ,useState} from 'react'
+import { useEffect, useState } from 'react'
 
 const ProductCart = () => {
-  const [cart , setCart] = useState([]);
+  const [cart, setCart] = useState([]);
   const [total, setTotal] = useState('');
-  const [isRender , setIsRender] = useState(false)
+  const [isRender, setIsRender] = useState(false)
   const router = useRouter()
 
-  useEffect(()=>{
+  useEffect(() => {
     let data = JSON.parse(localStorage.getItem('cart'))
     let totals = 0;
-       if(data){
-           data.map((e)=>{
-            totals+=e.product.price
-          })
-    setTotal(totals);
-    setCart(data);
-       }
-       
-  },[isRender])
+    if (data) {
+      data.map((e) => {
+        totals += e.product.price
+      })
+      setTotal(totals);
+      setCart(data);
+    }
 
-  const handleRemoveItem = (item)=>{
+  }, [isRender])
+
+  const handleRemoveItem = (item) => {
     let data = JSON.parse(localStorage.getItem('cart'))
     let datas = data.filter(person => person.product.productId != item)
     // remove localstorage
     localStorage.removeItem('cart')
-    localStorage.setItem('cart',JSON.stringify(datas))
+    localStorage.setItem('cart', JSON.stringify(datas))
     setCart(datas)
     setIsRender(true)
   }
 
-  const handleRedirectPage = ()=>{
-  router.push('/shop')
+  const handleRedirectPage = () => {
+    router.push('/shop')
   }
 
-  const handleCheckOut = ()=>{
-     router.push('/success')
+  const handleCheckOut = () => {
+    router.push('/success')
   }
 
   return (
@@ -69,42 +69,42 @@ const ProductCart = () => {
                 </tr>
               </thead>
               <tbody>
-             {
-               cart?.map((e)=>(
+                {
+                  cart?.map((e) => (
                     <tr key={e.product.productId}>
-                  <th scope="row">
-                    <div className="item d-flex">
-                      <img
-                        src={e.product.image}
-                        width="50px"
-                        height="50px"
-                        alt=""
-                        style={{ objectFit: 'cover' }}
-                      />
-                      <div className="title_check m-2">
-                        <h6 style={{ fontWeight: 'bold', fontSize: '12px' }}>
-                         {e.product.productName}
-                        </h6>
-                        <p style={{ fontWeight: 'lighter', fontSize: '10px' }}>
-                          {e.product.dimension}
-                        </p>
-                      </div>
-                    </div>
-                  </th>
-                  <td className={styles.light}>
-                    <select className={`${styles.choose_select}`} value={e.select}>
-                      <option selected>1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                    </select>
-                    <a href="#" style={{ display: 'block', color: 'red', margin: '0 10px' }} onClick={()=>handleRemoveItem(e.product.productId)}>
-                      Delete
-                    </a>
-                  </td>
-                  <td className={styles.light}>{e.product.price}</td>
-                </tr>
-               ))
-             }
+                      <th scope="row">
+                        <div className="item d-flex">
+                          <img
+                            src={e.product.image}
+                            width="50px"
+                            height="50px"
+                            alt=""
+                            style={{ objectFit: 'cover' }}
+                          />
+                          <div className="title_check m-2">
+                            <h6 style={{ fontWeight: 'bold', fontSize: '12px' }}>
+                              {e.product.productName}
+                            </h6>
+                            <p style={{ fontWeight: 'lighter', fontSize: '10px' }}>
+                              {e.product.dimension}
+                            </p>
+                          </div>
+                        </div>
+                      </th>
+                      <td className={styles.light}>
+                        <select className={`${styles.choose_select}`} value={e.select}>
+                          <option selected>1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                        </select>
+                        <a href="#" style={{ display: 'block', color: 'red', margin: '0 10px' }} onClick={() => handleRemoveItem(e.product.productId)}>
+                          Delete
+                        </a>
+                      </td>
+                      <td className={styles.light}>{e.product.price}</td>
+                    </tr>
+                  ))
+                }
                 <tr>
                   <td>
                     <h5 style={{ fontWeight: 'lighter', fontSize: '15px' }}>
@@ -128,8 +128,8 @@ const ProductCart = () => {
                   </td>
                   <td></td>
                   <td>{
-                    total+100
-                    }
+                    total + 100
+                  }
                   </td>
                 </tr>
               </tbody>
