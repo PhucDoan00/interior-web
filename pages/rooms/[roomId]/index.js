@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/link-passhref */
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
 import Router from 'next/router'
@@ -13,12 +12,15 @@ import { getRoomsStyleById, getRoomId } from '/lib/designstyle'
 
 import Cookies from 'js-cookie'
 
-export default function LivingRoom({ roomList }) {
+export default function LivingRoom() {
   const router = useRouter()
   const { roomId } = router.query
   const [roomStyle, setRoomStyle] = useState([])
   const [bigImg, setBigImg] = useState('')
   const [title, setTitle] = useState('')
+  function setCookies(value) {
+    Cookies.set('styleId', value, 86400)
+  }
   const categoryId = (() => {
     const id = Cookies.get('categoryId')
     return id
@@ -41,14 +43,14 @@ export default function LivingRoom({ roomList }) {
   }, [roomId])
   return (
     <>
-      <div className="livingWrapper">
+      <div className={styles.livingWrapper}>
         <section className={styles.imgSection}>
           <img className={styles.img} src={bigImg} alt="Main Img" />
           <p className={styles.title}>{title}</p>
         </section>
         <section className="roomStyles mb-5">
           <div className="container">
-            <div className={` ${styles.headertitle}`}>
+            <div className={styles.headertitle}>
               <h4> Living room by style</h4>
             </div>
             <div className="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
@@ -56,8 +58,8 @@ export default function LivingRoom({ roomList }) {
               {roomStyle.map((room, id) => (
                 <div key={id} className="col">
                   <div className="p-0">
-                    <Link href={`/rooms/${categoryId}/ideas/${room.styleId}`}>
-                      <button className={styles.btnCard}>
+                    <Link href={`/rooms/${categoryId}/ideas/${room.styleId}`} passHref>
+                      <button className={styles.btnCard} onClick={() => setCookies(room.styleId)}>
                         <div
                           className={`card ${styles.cardHover}`}
                           style={{ width: 18 + 'rem', height: 16 + 'rem' }}

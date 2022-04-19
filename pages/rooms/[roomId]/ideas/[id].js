@@ -1,5 +1,5 @@
+/* eslint-disable @next/next/link-passhref */
 /* eslint-disable @next/next/no-img-element */
-// import React from 'react'
 import Router from 'next/router'
 import { useRouter } from 'next/router'
 import Layout from '/components/layout'
@@ -7,10 +7,10 @@ import Topbar from '/components/topbar'
 import Footer from '/components/footer'
 import React, { useEffect, useState } from 'react'
 import { getIdeasByStyleId } from '/lib/designstyle'
-import styles from '/styles/rooms/ideas/livingroomideas.module.css'
+import styles from '/styles/rooms/ideas/ideas.module.css'
 import Cookies from 'js-cookie'
-
-export default function TestIdea({}) {
+import Link from 'next/link'
+export default function StyleIdeas() {
   const router = useRouter()
   const { id } = router.query
   const [ideas, setIdeas] = useState([])
@@ -21,6 +21,10 @@ export default function TestIdea({}) {
 
   const categoryId = (() => {
     const id = Cookies.get('categoryId')
+    return id
+  })()
+  const styleId = (() => {
+    const id = Cookies.get('styleId')
     return id
   })()
   useEffect(() => {
@@ -43,7 +47,7 @@ export default function TestIdea({}) {
   }, [categoryId, id])
 
   return (
-    <div>
+    <div className={styles.ideaWrapper}>
       <section className={styles.imgSection} style={{ backgroundImage: `url(${image})` }}>
         <div className={styles.content}>
           <h2 className={styles.title}>
@@ -58,22 +62,24 @@ export default function TestIdea({}) {
             {ideas.map((idea, id) => (
               <div className={`col-4 ${styles.column}`} key={id}>
                 <div className={`p-0 me-5`}>
-                  <button className={styles.btnCard}>
-                    <div className={`card ${styles.cardHover}`}>
-                      <img
-                        src={idea.image}
-                        className={`card-img ${styles.cardImg}`}
-                        alt={idea.designIdeaName}
-                      />
-                      <div className={`card-img-overlay ${styles.imgOverlay} `}>
-                        <div className={`${styles.titlePos}`}>
-                          <h5 className={`card-title ${styles.cardTitle}`}>
-                            {idea.designIdeaName}
-                          </h5>
+                  <Link href={`/rooms/${categoryId}/ideas/${styleId}/detailId`}>
+                    <button className={styles.btnCard}>
+                      <div className={`card ${styles.cardHover}`}>
+                        <img
+                          src={idea.image}
+                          className={`card-img ${styles.cardImg}`}
+                          alt={idea.designIdeaName}
+                        />
+                        <div className={`card-img-overlay ${styles.imgOverlay} `}>
+                          <div className={`${styles.titlePos}`}>
+                            <h5 className={`card-title ${styles.cardTitle}`}>
+                              {idea.designIdeaName}
+                            </h5>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </button>
+                    </button>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -95,7 +101,7 @@ export default function TestIdea({}) {
   )
 }
 
-TestIdea.getLayout = function getLayout(page) {
+StyleIdeas.getLayout = function getLayout(page) {
   return (
     <Layout>
       <Topbar />

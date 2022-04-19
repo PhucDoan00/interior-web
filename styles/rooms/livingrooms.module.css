@@ -1,3 +1,6 @@
+.livingWrapper {
+  font-family: 'Montserrat';
+}
 .imgSection {
   height: fit-content;
 }
@@ -20,6 +23,7 @@
   color: #fff;
   font-size: 1.5rem;
   letter-spacing: 5px;
+  font-weight: 600;
 }
 
 .cardTitle {
@@ -46,6 +50,10 @@
 .headertitle {
   display: inline-block;
   margin: 0;
+  font-weight: bolder;
+}
+.headertitle > h4 {
+  font-weight: 600;
 }
 
 .btnCard {

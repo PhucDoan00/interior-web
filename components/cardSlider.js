@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @next/next/no-img-element */
-import React, { Component } from 'react'
+import React from 'react'
 import styles from './cardSlider.module.css'
 
 export default function CardSlider() {
@@ -34,7 +34,7 @@ export default function CardSlider() {
                 </div>
               </div>
 
-              <div className="card-body">
+              <div className={`card-body ${styles.title}`}>
                 <h5 className="card-title d-flex justify-content-center">Card title</h5>
                 <p className="card-text d-flex justify-content-center mt-3">
                   Some quick example text to build on the card title and make up the bulk of the
