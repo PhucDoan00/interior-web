@@ -1,8 +1,26 @@
 /* eslint-disable @next/next/link-passhref */
+import axios from 'axios';
 import Link from 'next/link'
+import { useState } from 'react';
+import { useEffect } from 'react';
 import styles from './topbar.module.css'
 
 export default function Topbar() {
+
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      setUser(loggedInUser);
+    }
+  });
+
+  const handleSignOut = () => {
+    setUser('');
+    localStorage.setItem('user', '');
+  }
+
   return (
     <nav className={styles.nav}>
       {/* <input className={styles.input} placeholder="Search..." /> */}
@@ -21,22 +39,38 @@ export default function Topbar() {
             <a>Shop</a>
           </Link>
         </div>
-        <div className="button">
-          <Link href="/signup">
-            <button
-              type="button"
-              className={`btn mx-2 btn-outline ${styles.btnCustomOutlinePrimary}`}
-            >
-              Sign up
-            </button>
-          </Link>
-          <Link href="/login">
-            <button type="button" className={`btn  ${styles.btnCustomPrimary}`}>
-              Log in
-            </button>
-          </Link>
+        <div>
+          {user ? (
+            <div className="button">
+              <Link href="/">
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  className={`btn mx-2 btn-outline ${styles.btnCustomOutlinePrimary}`}
+                >
+                  Sign out
+                </button>
+              </Link>
+            </div>
+          ) : (
+            <div className="button">
+              <Link href="/signup">
+                <button
+                  type="button"
+                  className={`btn mx-2 btn-outline ${styles.btnCustomOutlinePrimary}`}
+                >
+                  Sign up
+                </button>
+              </Link>
+              <Link href="/login">
+                <button type="button" className={`btn  ${styles.btnCustomPrimary}`}>
+                  Log in
+                </button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
-    </nav>
+    </nav >
   )
 }
