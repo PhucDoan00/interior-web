@@ -62,7 +62,7 @@ export default function StyleIdeas() {
             {ideas.map((idea, id) => (
               <div className={`col-4 ${styles.column}`} key={id}>
                 <div className={`p-0 me-5`}>
-                  <Link href={`/rooms/${categoryId}/ideas/${styleId}/detailId`}>
+                  <Link href={`/idea/${idea.designIdeaId}`}>
                     <button className={styles.btnCard}>
                       <div className={`card ${styles.cardHover}`}>
                         <img
