@@ -1,5 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @next/next/link-passhref */
-import axios from 'axios'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -7,6 +7,7 @@ import styles from './topbar.module.css'
 
 export default function Topbar() {
   const [user, setUser] = useState()
+  const [navbar, setNavBar] = useState(false)
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('user')
@@ -19,14 +20,23 @@ export default function Topbar() {
     setUser('')
     localStorage.setItem('user', '')
   }
+  useEffect(() => {
+    const opacityNavBar = () => {
+      if (window.scrollY >= 80) {
+        setNavBar(true)
+      } else {
+        setNavBar(false)
+      }
+    }
+    window.addEventListener('scroll', opacityNavBar)
+  }, [])
 
   return (
-    <nav className={styles.nav}>
-      {/* <input className={styles.input} placeholder="Search..." /> */}
+    <nav className={navbar ? styles.navactive : styles.nav}>
       <div className="container d-flex justify-content-between align-items-center ">
         <div className={`d-flex justify-content-between align-items-center ${styles.topbar}`}>
           <Link href="/">
-            <h2 className={styles.title}>Sparkles</h2>
+            <img src="/logo/logo.png" alt="logo" style={{ height: 70 + 'px', width: 110 + 'px' }} />
           </Link>
           <Link href="/stylequiz">
             <a>Style Quiz</a>

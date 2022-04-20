@@ -11,6 +11,20 @@
   border-right: 1px solid #eaeaea;
 }
 
+.navactive {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+  padding: 9px;
+  display: flex;
+  flex-direction: row;
+  font-family: 'Montserrat';
+  background-color: #fafafa;
+  border-right: 1px solid #eaeaea;
+  opacity: 0.8;
+}
+
 .topbar > a {
   margin: 8px 0;
   font-size: 14px;

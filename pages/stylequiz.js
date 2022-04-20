@@ -10,12 +10,7 @@ import Link from 'next/link'
 
 export default function StyleQuiz() {
   return (
-    <div
-      className="styleQuizWrapper"
-      style={{
-        marginTop: '50px',
-      }}
-    >
+    <div className={styles.styleQuizWrapper}>
       <section
         className="d-lg-flex py-0 full-half-width-block three-up-content "
         id="block_60022a56a11a8"

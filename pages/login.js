@@ -1,50 +1,51 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from 'react/cjs/react.development';
+import { useState } from 'react/cjs/react.development'
 import Layout from '../components/layout'
 import Topbar from '../components/topbar'
 import styles from '../styles/Login.module.css'
 import axios from 'axios'
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 // import { setUserSession } from './Utils/Common'
 
 export default function LogIn() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [error, setError] = useState(null);
-  const router = useRouter();
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+  const [error, setError] = useState(null)
+  const router = useRouter()
   const handleSignin = () => {
     const authenticationDetails = {
-      "email": email,
-      "password": password,
-    };
-    axios.post('http://localhost:8080/api/auth/signin', authenticationDetails).then(function (result) {
-      const response = result.data;
-      // Storage.local.set(AUTH_TOKEN_KEY, response.accessToken);
-      // Storage.local.set(AUTH_ACCESS_TOKEN_KEY, response.sessionToken);
-      // Storage.local.set(AUTH_REFRESH_TOKEN_KEY, response.refreshToken);
-      // if (rememberMe) {
-      //   Storage.local.set('userpassword', password);
-      //   Storage.local.set('username', username);
-      // }
-      // Storage.local.set('rememberMe', rememberMe);
-      // dispatch({
-      //   type: ACTION_TYPES.LOGIN_SUCCESS,
-      //   response,
-      // });
-      // dispatch(getSession());
-      if (response == 'Failed') {
-        setPassword('');
-        console.log("failed")
-      }
-      else {
-        localStorage.setItem('user', JSON.stringify(response))
-        router.push('/');
-        console.log(response)
-      }
-    })
+      email: email,
+      password: password,
+    }
+    axios
+      .post('http://localhost:8080/api/auth/signin', authenticationDetails)
+      .then(function (result) {
+        const response = result.data
+        // Storage.local.set(AUTH_TOKEN_KEY, response.accessToken);
+        // Storage.local.set(AUTH_ACCESS_TOKEN_KEY, response.sessionToken);
+        // Storage.local.set(AUTH_REFRESH_TOKEN_KEY, response.refreshToken);
+        // if (rememberMe) {
+        //   Storage.local.set('userpassword', password);
+        //   Storage.local.set('username', username);
+        // }
+        // Storage.local.set('rememberMe', rememberMe);
+        // dispatch({
+        //   type: ACTION_TYPES.LOGIN_SUCCESS,
+        //   response,
+        // });
+        // dispatch(getSession());
+        if (response == 'Failed') {
+          setPassword('')
+          console.log('failed')
+        } else {
+          localStorage.setItem('user', JSON.stringify(response))
+          router.push('/')
+          console.log(response)
+        }
+      })
       .catch(function (err) {
-        console.log(err);
-        setPassword('');
+        console.log(err)
+        setPassword('')
         // clearAuthToken();
         // if (err.message === !'' || JSON.stringify(err) !== '') {
         //   addErrorAlert('会員ID、もしくはパスワードが正しくありません。');
@@ -53,7 +54,7 @@ export default function LogIn() {
         //   type: ACTION_TYPES.LOGIN_FAIL,
         // });
         // return;
-      });
+      })
   }
 
   return (
@@ -76,7 +77,7 @@ export default function LogIn() {
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="name@example.com"
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </div>
@@ -90,7 +91,7 @@ export default function LogIn() {
               className="form-control"
               id="exampleFormControlInput2"
               placeholder="****"
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="d-flex justify-content-center">
@@ -100,7 +101,7 @@ export default function LogIn() {
           </div>
         </div>
         <div className={`col d-flex justify-content-end ${styles.imgCol}`}>
-          <img src="/login.png" className={`img-fluid ${styles.img}`} alt="Login Image" />
+          <img src="/login/login.png" className={`img-fluid ${styles.img}`} alt="Login Image" />
         </div>
       </div>
     </div>

@@ -43,10 +43,12 @@ export default function LivingRoom() {
   }, [roomId])
   return (
     <>
-      <div className={styles.livingWrapper}>
+      <div className={styles.stylesWrapper}>
         <section className={styles.imgSection}>
+          <div className={styles.titlePos}>
+            <p className={styles.title}> {title}</p>
+          </div>
           <img className={styles.img} src={bigImg} alt="Main Img" />
-          <p className={styles.title}>{title}</p>
         </section>
         <section className="roomStyles mb-5">
           <div className="container">

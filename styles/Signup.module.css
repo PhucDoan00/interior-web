@@ -1,6 +1,9 @@
+.containerCustome {
+  margin-top: 90px;
+  padding: 0;
+}
 .inputWrapper {
   display: flex;
-  padding: 0;
   flex-direction: column;
   justify-content: center;
 }

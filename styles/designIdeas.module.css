@@ -1,5 +1,6 @@
 .designWrapper {
   font-family: 'Montserrat';
+  margin-top: 90px;
 }
 .imageSection {
   background-image: url(/designIdeas/mainImg.png);
@@ -64,12 +65,9 @@
 }
 .cardHover {
   transition: box-shadow 0.3s;
-  /* border-radius: 10px; */
-  /* border: 1px solid #ccc; */
   border: none;
 }
 
 .cardHover:hover {
   box-shadow: 0 0 20px rgba(33, 33, 33, 0.2);
-  /* background-color: aqua; */
 }
