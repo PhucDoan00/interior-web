@@ -1,25 +1,23 @@
-import { useState ,useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import styles from '../../styles/Home.module.css'
 import ProductSmall from '../productSmall'
-import { getListProduct, searchProduct } from '../../lib/productStyle';
+import { getListProduct, searchProduct } from '../../lib/productStyle'
 import { useRouter } from 'next/router'
 
-
-
 export default function ShopCustomer() {
-  const [ listProduct , setListProduct] = useState([]);
-  const [search , setSearch] = useState('');
+  const [listProduct, setListProduct] = useState([])
+  const [search, setSearch] = useState('')
 
-  useEffect(async()=>{
-const data  = await getListProduct();
-setListProduct(data)
-  },[])
+  useEffect(async () => {
+    const data = await getListProduct()
+    setListProduct(data)
+  }, [])
 
-  const handleSearch = (e)=>{
+  const handleSearch = (e) => {
     setSearch(e.target.value)
   }
 
-  const onHandleSearch = async()=>{
+  const onHandleSearch = async () => {
     const data = await searchProduct(search)
     setListProduct(data)
   }
@@ -39,8 +37,15 @@ setListProduct(data)
           <div className="col-sm-1"></div>
           <div className="col-sm-10">
             <div className={styles.shop}>
-              <input type="text" className={styles.input} value={search} onChange={(e)=>handleSearch(e)}/>
-              <button className={styles.button} onClick={onHandleSearch}>Search</button>
+              <input
+                type="text"
+                className={styles.input}
+                value={search}
+                onChange={(e) => handleSearch(e)}
+              />
+              <button className={styles.button} onClick={onHandleSearch}>
+                Search
+              </button>
             </div>
           </div>
           <div className="col-sm-1"></div>
@@ -74,10 +79,13 @@ setListProduct(data)
         </div>
         <div className="row mt-4 d-flex justify-content-center">
           <div className="col-sm-1"></div>
-          <div className="col-sm-10 d-flex" style={{
-            marginTop:'40px'
-          }}>
-            <div >
+          <div
+            className="col-sm-10 d-flex"
+            style={{
+              marginTop: '40px',
+            }}
+          >
+            <div>
               <select className={`${styles.width_selector}`}>
                 <option selected>Color...</option>
                 <option value="1">One</option>
@@ -100,12 +108,15 @@ setListProduct(data)
           <div className="col-sm-1"></div>
           <div className="col-sm-10">
             <div className="row d-flex">
-              {
-                listProduct?.map((e)=>(
-                  <ProductSmall imgPath={e.image} name={e.productName} price={e.price} id={e.productId} />
-                ))
-              }
-              
+              {listProduct?.map((e, index) => (
+                <ProductSmall
+                  key={index}
+                  imgPath={e.image}
+                  name={e.productName}
+                  price={e.price}
+                  id={e.productId}
+                />
+              ))}
             </div>
           </div>
           <div className="col-sm-1"></div>
@@ -113,4 +124,4 @@ setListProduct(data)
       </div>
     </div>
   )
-            }
+}

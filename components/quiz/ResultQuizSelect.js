@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import styles from '../../styles/Product.module.css'
 import Carousel from 'react-bootstrap/Carousel'
 import { useState, useEffect } from 'react'
@@ -49,8 +50,8 @@ const ResultQuizSelect = () => {
           </div>
           <div className="col-3">
             <div className={`${styles['right-img']}`}>
-              {twoItem?.map((e) => (
-                <img src={e.img} alt="" />
+              {twoItem?.map((e, id) => (
+                <img key={id} src={e.img} alt="" />
               ))}
             </div>
           </div>

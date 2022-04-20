@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import styles from '../../styles/Home.module.css'
 import { Icon } from '@iconify/react'
 import { QuizImg } from '../../mock/dataQuiz'
@@ -39,8 +40,14 @@ const QuizSelect = () => {
 
   const handleNextPage = () => {
     localStorage.removeItem('picture')
+    localStorage.removeItem('picture1')
+    localStorage.removeItem('picture2')
     let op = QuizImg.find((e) => e.id === listActive[0])
+    let op1 = QuizImg.find((e) => e.id === listActive[1])
+    let op2 = QuizImg.find((e) => e.id === listActive[2])
     localStorage.setItem('picture', JSON.stringify(op))
+    localStorage.setItem('picture1', JSON.stringify(op1))
+    localStorage.setItem('picture2', JSON.stringify(op2))
     router.push('/quiz/option')
   }
 
