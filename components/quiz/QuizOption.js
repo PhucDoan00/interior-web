@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import styles from '../../styles/Home.module.css'
 import { useRouter } from 'next/router'
 import { QuizImg } from '../../mock/dataQuiz'
@@ -74,6 +75,7 @@ const QuizOption = () => {
 
           <div className={`col-sm-6 ${styles.rightQuiz}`}>
             <div className={`row pt-2 pb-3`}>
+              {/*  */}
               <div className={`col-sm-12 p-2 ${styles.cursor}`}>
                 <img className={`${styles.picRightQuiz}`} src={mainPicture?.img} alt="" />
               </div>

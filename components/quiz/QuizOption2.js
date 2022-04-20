@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import styles from '../../styles/Home.module.css'
 import { useRouter } from 'next/router'
 import { QuizImg } from '../../mock/dataQuiz'
@@ -11,7 +12,7 @@ const QuizOption = () => {
   const [mainPicture, setMainPicture] = useState({})
   const [check, setCheck] = useState(0)
   useEffect(() => {
-    const op = JSON.parse(localStorage.getItem('picture'))
+    const op = JSON.parse(localStorage.getItem('picture1'))
     if (op) {
       setMainPicture(op)
       let check = QuizImg.find((e) => e.id == op.id)
