@@ -40,11 +40,11 @@
 }
 
 .prevIcon {
-  background-image: url('../public/back.png') !important;
+  background-image: url('../public/arrowBtn/back.png') !important;
 }
 
 .nextIcon {
-  background-image: url('../public/next.png') !important;
+  background-image: url('../public/arrowBtn/next.png') !important;
 }
 
 .btnCustomOutlinePrimary {

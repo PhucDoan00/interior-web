@@ -1,14 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import styles from "./carousel.module.css";
-import Image from "next/image";
+import styles from './carousel.module.css'
 
 export default function Carousel() {
   return (
-    <div
-      id="carouselExampleIndicators"
-      className="carousel slide"
-      data-bs-ride="carousel"
-    >
+    <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
       <div className={`carousel-indicators ${styles.carouselDotIndicators}`}>
         <button
           type="button"
@@ -43,22 +38,21 @@ export default function Carousel() {
           aria-label="Slide 5"
         ></button>
       </div>
-      {/* <div className="carousel-inner" > */}
       <div className={`carousel-inner ${styles.carouselWrapper}`}>
         <div className="carousel-item active" data-bs-interval="2000">
-          <img src="/1.png" className="d-block w-100" alt="img 1" />
+          <img src="/bigCarousel/1.png" className="d-block w-100" alt="img 1" />
         </div>
         <div className="carousel-item" data-bs-interval="2000">
-          <img src="/2.png" className="d-block w-100" alt="img 2" />
+          <img src="/bigCarousel/2.png" className="d-block w-100" alt="img 2" />
         </div>
         <div className="carousel-item" data-bs-interval="2000">
-          <img src="/3.png" className="d-block w-100" alt="img 3" />
+          <img src="/bigCarousel/3.png" className="d-block w-100" alt="img 3" />
         </div>
         <div className="carousel-item" data-bs-interval="2000">
-          <img src="/4.png" className="d-block w-100" alt="img 4" />
+          <img src="/bigCarousel/4.png" className="d-block w-100" alt="img 4" />
         </div>
         <div className="carousel-item" data-bs-interval="2000">
-          <img src="/5.png" className="d-block w-100" alt="img 5" />
+          <img src="/bigCarousel/5.png" className="d-block w-100" alt="img 5" />
         </div>
       </div>
       <button
@@ -80,5 +74,5 @@ export default function Carousel() {
         <span className="visually-hidden">Next</span>
       </button>
     </div>
-  );
+  )
 }

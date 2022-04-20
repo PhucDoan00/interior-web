@@ -1,8 +1,11 @@
-.livingWrapper {
+.stylesWrapper {
   font-family: 'Montserrat';
+  margin-top: 90px;
 }
 .imgSection {
   height: fit-content;
+  position: relative;
+  margin-bottom: 50px;
 }
 
 .img {
@@ -10,19 +13,21 @@
   width: 100%;
   height: auto;
 }
+.titlePos {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
 
 .title {
   margin: 0;
-  height: 100px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  bottom: 248px;
   color: #fff;
-  font-size: 1.5rem;
-  letter-spacing: 5px;
+  font-size: 1.8rem;
+  letter-spacing: 10px;
   font-weight: 600;
 }
 

@@ -45,7 +45,7 @@ export default function CardSlider() {
           </div>
           <div className="carousel-item">
             <div className="card" style={{ width: 55 + 'rem', height: 25 + 'em' }}>
-              <img src="/slider2.png" alt="img1" className=" mt-0 card-img-top" />
+              <img src="/cardSlider/slider2.png" alt="img1" className=" mt-0 card-img-top" />
               <div className="card-body">
                 <h5 className="card-title d-flex justify-content-center">Card title</h5>
                 <p className="card-text d-flex justify-content-center mt-3">
@@ -57,7 +57,7 @@ export default function CardSlider() {
           </div>
           <div className="carousel-item">
             <div className="card" style={{ width: 55 + 'rem', height: 25 + 'em' }}>
-              <img src="/slider3.png" alt="img1" className=" mt-0 card-img-top" />
+              <img src="/cardSlider/slider3.png" alt="img1" className=" mt-0 card-img-top" />
               <div className="card-body">
                 <h5 className="card-title d-flex justify-content-center">Card title</h5>
                 <p className="card-text d-flex justify-content-center mt-3">

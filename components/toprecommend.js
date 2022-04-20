@@ -25,20 +25,20 @@ export default function Toprecommend() {
 
             <div className="col-4">
               <div>
-                <Image src={'/6.png'} width={208.62} height={230.47} />
+                <Image src={'/topRecommend/6.png'} width={208.62} height={230.47} alt="img" />
               </div>
 
               <div>
-                <Image src={'/8.png'} width={208.62} height={267.47} />
+                <Image src={'/topRecommend/8.png'} width={208.62} height={267.47} alt="img" />
               </div>
               <div className="col-2"></div>
             </div>
             <div className="col-4">
               <div>
-                <Image src={'/7.png'} width={208.62} height={315.96} />
+                <Image src={'/topRecommend/7.png'} width={208.62} height={315.96} alt="img" />
               </div>
               <div>
-                <Image src={'/9.png'} width={208.62} height={182.92} />
+                <Image src={'/topRecommend/9.png'} width={208.62} height={182.92} alt="img" />
               </div>
             </div>
           </div>
@@ -50,7 +50,7 @@ export default function Toprecommend() {
               <div>
                 <div className="row">
                   <div className="col-7">
-                    <Image src={'/10.png'} width={134} height={134} />
+                    <Image src={'/topRecommend/10.png'} width={134} height={134} alt="img" />
                   </div>
                   <div className="col-5">
                     <div className={styles.e}>
@@ -67,7 +67,7 @@ export default function Toprecommend() {
               <div>
                 <div className="row">
                   <div className="col-7">
-                    <Image src={'/11.png'} width={134} height={134} />
+                    <Image src={'/topRecommend/11.png'} width={134} height={134} alt="img" />
                   </div>
                   <div className="col-5">
                     <div className={styles.e}>
@@ -85,7 +85,7 @@ export default function Toprecommend() {
               <div>
                 <div className="row">
                   <div className="col-7">
-                    <Image src={'/12.png'} width={134} height={134} />
+                    <Image src={'/topRecommend/12.png'} width={134} height={134} alt="img" />
                   </div>
                   <div className="col-5">
                     <div className={styles.e}>
@@ -102,7 +102,7 @@ export default function Toprecommend() {
               <div>
                 <div className="row">
                   <div className="col-7">
-                    <Image src={'/13.png'} width={134} height={134} />
+                    <Image src={'/topRecommend/13.png'} width={134} height={134} alt="img" />
                   </div>
                   <div className="col-5">
                     <div className={styles.e}>

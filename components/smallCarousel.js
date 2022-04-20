@@ -46,16 +46,16 @@ export default function SmallCarousel() {
             </div>
             <div className="carousel-inner">
               <div className="carousel-item active" data-bs-interval="2000">
-                <img src="/small1.png" className="d-block w-100" alt="sm1" />
+                <img src="/smallCarousel/small1.png" className="d-block w-100" alt="sm1" />
               </div>
               <div className="carousel-item" data-bs-interval="2000">
-                <img src="/small2.png" className="d-block w-100" alt="sm2" />
+                <img src="/smallCarousel/small2.png" className="d-block w-100" alt="sm2" />
               </div>
               <div className="carousel-item" data-bs-interval="2000">
-                <img src="/small3.png" className="d-block w-100" alt="sm3" />
+                <img src="/smallCarousel/small3.png" className="d-block w-100" alt="sm3" />
               </div>
               <div className="carousel-item" data-bs-interval="2000">
-                <img src="/small4.png" className="d-block w-100" alt="sm4" />
+                <img src="/smallCarousel/small4.png" className="d-block w-100" alt="sm4" />
               </div>
             </div>
           </div>
