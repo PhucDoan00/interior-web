@@ -24,17 +24,24 @@ export default function Toprecommend() {
             <div className="col-2"></div>
 
             <div className="col-4">
-              <div>
+              <div
+                style={{
+                  marginBottom: '20px',
+                }}
+              >
                 <Image src={'/topRecommend/6.png'} width={208.62} height={230.47} alt="img" />
               </div>
 
               <div>
                 <Image src={'/topRecommend/8.png'} width={208.62} height={267.47} alt="img" />
               </div>
-              <div className="col-2"></div>
             </div>
             <div className="col-4">
-              <div>
+              <div
+                style={{
+                  marginBottom: '20px',
+                }}
+              >
                 <Image src={'/topRecommend/7.png'} width={208.62} height={315.96} alt="img" />
               </div>
               <div>
@@ -89,7 +96,7 @@ export default function Toprecommend() {
                   </div>
                   <div className="col-5">
                     <div className={styles.e}>
-                      <div className={styles.f}>
+                      <div className={styles.f} style={{ width: '200px' }}>
                         <p> Mordern Chair </p>
                       </div>
                       <div className={styles.d}>
@@ -115,7 +122,7 @@ export default function Toprecommend() {
                     </div>
                   </div>
                 </div>
-                <div className={styles.icon}>
+                <div className={styles.icon} style={{ transform: 'translateX(65px)' }}>
                   <Icon icon="akar-icons:arrow-down" />
                 </div>
               </div>

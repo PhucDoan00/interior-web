@@ -77,7 +77,15 @@ const QuizOption = () => {
             <div className={`row pt-2 pb-3`}>
               {/*  */}
               <div className={`col-sm-12 p-2 ${styles.cursor}`}>
-                <img className={`${styles.picRightQuiz}`} src={mainPicture?.img} alt="" />
+                <img
+                  className={`${styles.picRightQuiz}`}
+                  src={mainPicture?.img}
+                  style={{
+                    height: '300px',
+                    objectFit: 'cover',
+                  }}
+                  alt=""
+                />
               </div>
               {/* main */}
               {listImgItem?.map((e) => (
@@ -86,7 +94,15 @@ const QuizOption = () => {
                   className={`col-sm-4 p-2 ${styles.cursor}`}
                   onClick={() => handleActiveImg(e.id)}
                 >
-                  <img className={`${styles.picRightQuiz}`} src={e.img} alt="" />
+                  <img
+                    className={`${styles.picRightQuiz}`}
+                    src={e.img}
+                    style={{
+                      height: '150px',
+                      objectFit: 'cover',
+                    }}
+                    alt=""
+                  />
                   <div className={checkActive(e.id)}>
                     <Icon
                       icon="akar-icons:circle-check-fill"
