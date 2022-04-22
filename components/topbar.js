@@ -1,13 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @next/next/link-passhref */
-import Link from 'next/link'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import styles from './topbar.module.css'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import styles from './topbar.module.css';
 
 export default function Topbar() {
   const [user, setUser] = useState()
   const [navbar, setNavBar] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     async function getUser() {
@@ -19,10 +22,29 @@ export default function Topbar() {
     getUser()
   })
 
+  function signOut() {
+    confirmAlert({
+      title: 'Logging out',
+      message: 'Are you sure to log out?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => handleSignOut()
+        },
+        {
+          label: 'No',
+          onClick: () => { }
+        }
+      ]
+    });
+  }
+
   const handleSignOut = () => {
     setUser('')
     localStorage.setItem('user', '')
+    router.push('/')
   }
+
   useEffect(() => {
     const opacityNavBar = () => {
       if (window.scrollY >= 80) {
@@ -87,13 +109,11 @@ export default function Topbar() {
                       Ordered History
                     </a>
                   </li>
-                  <Link href="/">
-                    <li>
-                      <a className="dropdown-item" onClick={handleSignOut}>
-                        Log out
-                      </a>
-                    </li>
-                  </Link>
+                  <li>
+                    <a className="dropdown-item" onClick={signOut}>
+                      Log out
+                    </a>
+                  </li>
                 </ul>
               </li>
             </div>
