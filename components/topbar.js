@@ -17,7 +17,7 @@ export default function Topbar() {
       }
     }
     getUser()
-  }, [])
+  })
 
   const handleSignOut = () => {
     setUser('')
