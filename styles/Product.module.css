@@ -218,7 +218,8 @@
   background-color: white;
 }
 .title-is {
-  font-size: 16px;
+  margin-top: 30px;
+  font-size: 20px;
   font-weight: 300;
   line-height: 19.5px;
 }
@@ -231,7 +232,7 @@
 .content-title {
   font-weight: 300;
   line-height: 29px;
-  font-size: 16px;
+  font-size: 20px;
 }
 .right-img {
   display: flex;
@@ -273,7 +274,7 @@
   background-color: transparent;
   padding: 8px 5px;
   border: 1.5px solid #924b54;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   color: #924b54;
 }
 
