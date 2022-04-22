@@ -1,21 +1,21 @@
 .text {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 26px;
-    letter-spacing: -0.015em;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  margin-left: 10px;
+  line-height: 26px;
+  letter-spacing: -0.015em;
 
-    color: #000000;
-
+  color: #000000;
 }
 
 .divBig {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .divBorder {
-    border: 0.8px solid rgba(0, 0, 0, 0.48);
-    box-sizing: border-box;
-    padding: 20px;
+  border: 0.8px solid rgba(0, 0, 0, 0.48);
+  box-sizing: border-box;
+  padding: 20px;
 }

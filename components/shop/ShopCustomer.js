@@ -26,8 +26,15 @@ export default function ShopCustomer() {
     <div className={styles.mt_400}>
       <div className="container">
         <div className="row">
-          <div className="col-sm-1">
-            <div className="shop">
+          <div className="col-sm-1"></div>
+          <div className="col-sm-4">
+            <div
+              className="shop"
+              style={{
+                marginTop: '30px',
+                marginLeft: '10px',
+              }}
+            >
               <h4>Shop</h4>
               <p>xxx items</p>
             </div>
@@ -51,7 +58,8 @@ export default function ShopCustomer() {
           <div className="col-sm-1"></div>
         </div>
         <div className="row mt-4 d-flex justify-content-between">
-          <div className="col-sm-1">
+          <div className="col-sm-1"></div>
+          <div className="col-sm-3">
             <button className={styles.button}>All</button>
           </div>
           <div className="col-sm-8 "> </div>
