@@ -6,6 +6,8 @@ import styles from '../styles/Login.module.css'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 // import { setUserSession } from './Utils/Common'
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 
 export default function LogIn() {
   const [email, setEmail] = useState()
@@ -21,21 +23,9 @@ export default function LogIn() {
       .post('http://localhost:8080/api/auth/signin', authenticationDetails)
       .then(function (result) {
         const response = result.data
-        // Storage.local.set(AUTH_TOKEN_KEY, response.accessToken);
-        // Storage.local.set(AUTH_ACCESS_TOKEN_KEY, response.sessionToken);
-        // Storage.local.set(AUTH_REFRESH_TOKEN_KEY, response.refreshToken);
-        // if (rememberMe) {
-        //   Storage.local.set('userpassword', password);
-        //   Storage.local.set('username', username);
-        // }
-        // Storage.local.set('rememberMe', rememberMe);
-        // dispatch({
-        //   type: ACTION_TYPES.LOGIN_SUCCESS,
-        //   response,
-        // });
-        // dispatch(getSession());
         if (response == 'Failed') {
           setPassword('')
+          NotificationManager.error('Wrong email or password!', 'Failed');
           console.log('failed')
         } else {
           localStorage.setItem('user', JSON.stringify(response))
@@ -46,14 +36,6 @@ export default function LogIn() {
       .catch(function (err) {
         console.log(err)
         setPassword('')
-        // clearAuthToken();
-        // if (err.message === !'' || JSON.stringify(err) !== '') {
-        //   addErrorAlert('会員ID、もしくはパスワードが正しくありません。');
-        // }
-        // dispatch({
-        //   type: ACTION_TYPES.LOGIN_FAIL,
-        // });
-        // return;
       })
   }
 
@@ -103,6 +85,7 @@ export default function LogIn() {
         <div className={`col d-flex justify-content-end ${styles.imgCol}`}>
           <img src="/login/login.png" className={`img-fluid ${styles.img}`} alt="Login Image" />
         </div>
+        <NotificationContainer />
       </div>
     </div>
   )
