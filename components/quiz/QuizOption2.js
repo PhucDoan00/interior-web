@@ -76,7 +76,15 @@ const QuizOption = () => {
           <div className={`col-sm-6 ${styles.rightQuiz}`}>
             <div className={`row pt-2 pb-3`}>
               <div className={`col-sm-12 p-2 ${styles.cursor}`}>
-                <img className={`${styles.picRightQuiz}`} src={mainPicture?.img} alt="" />
+                <img
+                  className={`${styles.picRightQuiz}`}
+                  src={mainPicture?.img}
+                  style={{
+                    height: '300px',
+                    objectFit: 'cover',
+                  }}
+                  alt=""
+                />
               </div>
               {/* main */}
               {listImgItem?.map((e) => (

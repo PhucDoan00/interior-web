@@ -20,6 +20,10 @@ const ResultQuizSelect = () => {
     }
   }, [])
 
+  const handleRedirectPage = () => {
+    router.push('/rooms')
+  }
+
   const handleRedirectMainQuiz = () => {
     router.push('/quiz')
   }
@@ -37,21 +41,31 @@ const ResultQuizSelect = () => {
           <div className={`${styles['content-title']} col-12`}>{mainPicture?.description}</div>
         </div>
         <div className="row mt-5">
-          <div className="col-9">
+          <div className="col-8">
             <img
               src={mainPicture.img}
               alt=""
               style={{
                 width: '100%',
-                height: '100%',
+                height: '500px',
                 objectFit: 'cover',
               }}
             />
           </div>
-          <div className="col-3">
-            <div className={`${styles['right-img']}`}>
+          <div className="col-4">
+            <div className={`${styles['right-img']}`} style={{ marginLeft: '80px' }}>
               {twoItem?.map((e, id) => (
-                <img key={id} src={e.img} alt="" />
+                <img
+                  key={id}
+                  src={e.img}
+                  alt=""
+                  style={{
+                    height: '250px',
+                    width: '250px',
+
+                    objectFit: 'cover',
+                  }}
+                />
               ))}
             </div>
           </div>
@@ -75,21 +89,45 @@ const ResultQuizSelect = () => {
           <div className="row">
             <div className="col-10 m-auto">
               <Carousel>
-                {mainPicture.child?.map((e) => (
-                  <Carousel.Item key={e.id}>
-                    <img
-                      className="d-block w-100"
-                      src={e.img}
-                      alt="First slide"
-                      style={{ height: '400px', objectFit: 'cover' }}
-                    />
-                  </Carousel.Item>
-                ))}
+                <Carousel.Item>
+                  <img
+                    className="d-block w-100"
+                    src="/quiz/pics1.jpg"
+                    alt="First slide"
+                    style={{ height: '400px', width: '100%', objectFit: 'container' }}
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    className="d-block w-100"
+                    src="/quiz/pics2.jpg"
+                    alt="First slide"
+                    style={{ height: '400px', width: '100%', objectFit: 'container' }}
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    className="d-block w-100"
+                    src="/quiz/pics3.jpg"
+                    alt="First slide"
+                    style={{ height: '400px', width: '100%', objectFit: 'container' }}
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    className="d-block w-100"
+                    src="/quiz/pics4.jpg"
+                    alt="First slide"
+                    style={{ height: '400px', width: '100%', objectFit: 'container' }}
+                  />
+                </Carousel.Item>
               </Carousel>
             </div>
           </div>
           <div className="row mt-4">
-            <button className={`${styles['button-browse']}`}>Browse All Ideas</button>
+            <button className={`${styles['button-browse']}`} onClick={handleRedirectPage}>
+              Browse All Ideas
+            </button>
           </div>
         </div>
       </div>

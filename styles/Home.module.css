@@ -143,6 +143,10 @@
   padding: 5px 20px;
   border-radius: 5px;
 }
+
+.btn_search {
+  margin-bottom: 0px;
+}
 .input {
   outline: none;
   border: 1px solid #c1c1c133;
@@ -207,6 +211,9 @@
   background: #924b54;
 
   font-size: 14px;
+}
+.width_150 {
+  width: 150px;
 }
 .ml_2 {
   margin-left: 10px;
@@ -307,4 +314,7 @@
 .cursor {
   cursor: pointer;
   position: relative;
+}
+.margin_0 {
+  margin: 0;
 }
