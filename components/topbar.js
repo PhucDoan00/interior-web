@@ -10,10 +10,13 @@ export default function Topbar() {
   const [navbar, setNavBar] = useState(false)
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem('user')
-    if (loggedInUser) {
-      setUser(loggedInUser)
+    async function getUser() {
+      const loggedInUser = localStorage.getItem('user')
+      if (loggedInUser) {
+        setUser(loggedInUser)
+      }
     }
+    getUser()
   }, [])
 
   const handleSignOut = () => {
@@ -39,7 +42,7 @@ export default function Topbar() {
             <img src="/logo/logo.png" alt="logo" style={{ height: 70 + 'px', width: 110 + 'px' }} />
           </Link>
           <Link href="/stylequiz">
-            <a>Style Quiz</a>
+            <a>Style Select</a>
           </Link>
           <Link href="/rooms">
             <a>Design Ideas</a>
@@ -50,8 +53,8 @@ export default function Topbar() {
         </div>
         <div>
           {user ? (
-            <div className="button">
-              <Link href="/">
+            <div className="button d-flex justify-content-between align-items-center">
+              {/* <Link href="/">
                 <button
                   type="button"
                   onClick={handleSignOut}
@@ -59,7 +62,40 @@ export default function Topbar() {
                 >
                   Sign out
                 </button>
-              </Link>
+                  </Link> */}
+              {/* Set Avatar Here */}
+              <li className={`nav-item dropdown ${styles.item}`}>
+                <a
+                  className={`nav-link dropdown-toggle ${styles.itemDropdown}`}
+                  href="#"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {/* Set Name of Role or Person Name here */}
+                  Customer
+                </a>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Profile
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Ordered History
+                    </a>
+                  </li>
+                  <Link href="/">
+                    <li>
+                      <a className="dropdown-item" onClick={handleSignOut}>
+                        Log out
+                      </a>
+                    </li>
+                  </Link>
+                </ul>
+              </li>
             </div>
           ) : (
             <div className="button">
