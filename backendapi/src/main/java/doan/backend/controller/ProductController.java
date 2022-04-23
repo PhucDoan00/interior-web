@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import doan.backend.dto.ColorsAndCategoriesDTO;
@@ -35,7 +35,6 @@ import doan.backend.service.CartService;
 
 @RestController
 @RequestMapping("/api/v1")
-@CrossOrigin(origins = "*") 
 public class ProductController {
 
 	@Autowired
@@ -62,7 +61,8 @@ public class ProductController {
 	//Get a List of All Products
 	@GetMapping("/products")
 	public ResponseEntity<List<ProductInformationDTO>> getAllProducts() {
-		List<Product> list = productRepository.findAll();
+		/*List<Product> list = productRepository.findAll();*/
+		List<Product> list = productRepository.getAll();
 		List<ProductInformationDTO> finalList = new ArrayList<ProductInformationDTO>();
 		
 		for (Product product : list) {
@@ -76,7 +76,7 @@ public class ProductController {
 			info.setDescription(product.getDescription());
 			info.setBoughtCount(product.getBoughtCount());
 			info.setMaterial(product.getMaterial());
-			info.setDimension(product.getDimension());
+			info.setDimension(product.getDimension());/*
 			List<Color> color = colorRepository.productColor(product.getProductId());
 			List<String> colorString = new ArrayList<String>();
 			for (int i = 0; i < color.size(); i++) {
@@ -89,7 +89,7 @@ public class ProductController {
 			for (int i = 0; i < category.size(); i++) {
 				categoryString.add(category.get(i).getCategoryName());
 			}
-			info.setCategories(categoryString);
+			info.setCategories(categoryString);*/
 			
 			finalList.add(info);
 		}
@@ -290,4 +290,143 @@ public class ProductController {
 		return new ResponseEntity<>(searchList, HttpStatus.OK);
 	}
 	
+	
+	
+	
+	///////////////////////////////////////////////////////SORT & FILTER//////////////////////////////////////////////////
+	//Filter Products by Room: 1. Bedroom, 2. Dining Room, 3. Home Office, 4. Kid's Bedroom, 5. Living Room
+	@GetMapping("/products/category/{id}")
+	public ResponseEntity<?> getProductByCategoryId(@PathVariable(value = "id") Long categoryId){
+		if (categoryId < 1 || categoryId > 5) return new ResponseEntity<> ("CATEGORY_NOT_FOUND", HttpStatus.OK);
+		List<Product> products = productRepository.getProductByCategory(categoryId);
+		List<ProductInformationDTO> result = new ArrayList<ProductInformationDTO>();
+		
+		for (Product product : products) {
+			ProductInformationDTO info = new ProductInformationDTO();
+			
+			info.setProductId(product.getProductId());
+			info.setProductName(product.getProductName());
+			info.setPrice(product.getPrice());
+			info.setQuantity(product.getQuantity());
+			info.setImage(product.getImage());
+			info.setDescription(product.getDescription());
+			info.setBoughtCount(product.getBoughtCount());
+			info.setMaterial(product.getMaterial());
+			info.setDimension(product.getDimension());
+			List<Color> color = colorRepository.productColor(product.getProductId());
+			List<String> colorString = new ArrayList<String>();
+			for (int i = 0; i < color.size(); i++) {
+				colorString.add(color.get(i).getColorName());
+			}
+			info.setColors(colorString);
+			
+			List<Category> category = categoryRepository.productCategory(product.getProductId());
+			List<String> categoryString = new ArrayList<String>();
+			for (int i = 0; i < category.size(); i++) {
+				categoryString.add(category.get(i).getCategoryName());
+			}
+			info.setCategories(categoryString);
+			
+			result.add(info);
+		}
+
+		return ResponseEntity.ok().body(result);
+	}
+	
+	//Filter Products by Room + Sort By SortID: 1. Price Ascending, 2. Price Descending, 3. Best Sales
+	@PostMapping("/products/category/{id}")
+	public ResponseEntity<?> getProductByCategoryIdAndSort(@PathVariable(value = "id") Long categoryId, @RequestBody int sortId){
+		if (categoryId < 1 || categoryId > 5) return new ResponseEntity<> ("CATEGORY_NOT_FOUND", HttpStatus.OK);
+		if (sortId < 1 || sortId > 3) return new ResponseEntity<> ("SORT_NOT_FOUND", HttpStatus.OK);
+		
+		List<Product> products = new ArrayList<Product>();
+		if (sortId == 1) products = productRepository.sortByPriceAsc(categoryId);
+		else if (sortId == 2) products = productRepository.sortByPriceDesc(categoryId);
+		else products = productRepository.sortByBestSales(categoryId);
+		
+		List<ProductInformationDTO> result = new ArrayList<ProductInformationDTO>();
+			
+		for (Product product : products) {
+			ProductInformationDTO info = new ProductInformationDTO();
+			
+			info.setProductId(product.getProductId());
+			info.setProductName(product.getProductName());
+			info.setPrice(product.getPrice());
+			info.setQuantity(product.getQuantity());
+			info.setImage(product.getImage());
+			info.setDescription(product.getDescription());
+			info.setBoughtCount(product.getBoughtCount());
+			info.setMaterial(product.getMaterial());
+			info.setDimension(product.getDimension());
+			List<Color> color = colorRepository.productColor(product.getProductId());
+			List<String> colorString = new ArrayList<String>();
+			for (int i = 0; i < color.size(); i++) {
+				colorString.add(color.get(i).getColorName());
+			}
+			info.setColors(colorString);
+			
+			List<Category> category = categoryRepository.productCategory(product.getProductId());
+			List<String> categoryString = new ArrayList<String>();
+			for (int i = 0; i < category.size(); i++) {
+				categoryString.add(category.get(i).getCategoryName());
+			}
+			info.setCategories(categoryString);
+			
+			result.add(info);
+		}
+			return ResponseEntity.ok().body(result);
+	}
+	
+	//Filter Products By Color ONLY IN ALL PRODUCTS PAGE: 1. Black, 2. Pink, 3. Yellow / Orange, 4. Blue, 5. Green, 6. Grey, 7. White, 8. Brown, 
+	//9. Natural, 10. Metallic
+	@PostMapping("/products")
+	public ResponseEntity<?> filterProductsByColor(@RequestBody int filterId) {
+		if (filterId < 1 || filterId > 10) return new ResponseEntity<> ("FILTER_NOT_FOUND", HttpStatus.OK);
+		
+		List<Product> products = new ArrayList<Product>();
+		if (filterId == 1) products = productRepository.filterBlack();
+		else if (filterId == 2) products = productRepository.filterPink();
+		else if (filterId == 3) products = productRepository.filterYellowOrange();
+		else if (filterId == 4) products = productRepository.filterBlue();
+		else if (filterId == 5) products = productRepository.filterGreen();
+		else if (filterId == 6) products = productRepository.filterGrey();
+		else if (filterId == 7) products = productRepository.filterWhite();
+		else if (filterId == 8) products = productRepository.filterBrown();
+		else if (filterId == 9) products = productRepository.filterNatural();
+		else products = productRepository.filterMetallic();
+		
+		List<ProductInformationDTO> finalList = new ArrayList<ProductInformationDTO>();
+			
+		for (Product product : products) {
+			ProductInformationDTO info = new ProductInformationDTO();
+				
+			info.setProductId(product.getProductId());
+			info.setProductName(product.getProductName());
+			info.setPrice(product.getPrice());
+			info.setQuantity(product.getQuantity());
+			info.setImage(product.getImage());
+			info.setDescription(product.getDescription());
+			info.setBoughtCount(product.getBoughtCount());
+			info.setMaterial(product.getMaterial());
+			info.setDimension(product.getDimension());
+			List<Color> color = colorRepository.productColor(product.getProductId());
+			List<String> colorString = new ArrayList<String>();
+			for (int i = 0; i < color.size(); i++) {
+				colorString.add(color.get(i).getColorName());
+			}
+			info.setColors(colorString);
+			
+			List<Category> category = categoryRepository.productCategory(product.getProductId());
+			List<String> categoryString = new ArrayList<String>();
+			for (int i = 0; i < category.size(); i++) {
+				categoryString.add(category.get(i).getCategoryName());
+			}
+			info.setCategories(categoryString);
+			
+			finalList.add(info);			
+		}
+			
+		return new ResponseEntity<List<ProductInformationDTO>>(finalList, HttpStatus.OK);
+	}
+
 }
