@@ -12,7 +12,7 @@ const ProductDetail = () => {
   useEffect(async () => {
     const data = await getDetailProduct(id)
     await setProduct(data)
-  })
+  }, [])
 
   const hanleChangeSelector = (e) => {
     setSelect(e.target.value)

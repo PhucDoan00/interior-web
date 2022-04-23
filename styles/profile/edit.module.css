@@ -1,0 +1,52 @@
+.profileWrapper {
+  display: flex;
+  justify-content: center;
+  font-family: 'Montserrat';
+}
+.profile {
+  /* background-color: aqua; */
+  /* width: calc(100vw -64px); */
+  /* margin: 100px 200px 0px 200px; */
+  margin-top: 150px;
+  display: block;
+  width: 800px;
+  height: fit-content;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+.title > h1 {
+  font-size: 2.1rem;
+  font-weight: 600;
+}
+.input {
+  display: inline-block;
+}
+.labelTitle {
+  padding: 6px 12px;
+}
+.btnEdit {
+  display: flex;
+  justify-content: center;
+}
+.btnCustom {
+  color: #fff !important;
+  background-color: #924b54 !important;
+  width: 100px;
+  transition: 0.3s;
+  margin-top: 2rem;
+}
+
+.btnCustom:hover {
+  background-color: #793841 !important;
+}
+
+.passwordSection {
+  margin-top: 100px;
+}
+.rowBtn {
+  display: flex;
+  flex-direction: row-reverse;
+}

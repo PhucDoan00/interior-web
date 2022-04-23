@@ -6,14 +6,15 @@ import styles from '../styles/Login.module.css'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 // import { setUserSession } from './Utils/Common'
-import { NotificationContainer, NotificationManager } from 'react-notifications';
-import 'react-notifications/lib/notifications.css';
+import { NotificationContainer, NotificationManager } from 'react-notifications'
+import 'react-notifications/lib/notifications.css'
 
 export default function LogIn() {
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
   const [error, setError] = useState(null)
   const router = useRouter()
+
   const handleSignin = () => {
     const authenticationDetails = {
       email: email,
@@ -25,7 +26,7 @@ export default function LogIn() {
         const response = result.data
         if (response == 'Failed') {
           setPassword('')
-          NotificationManager.error('Wrong email or password!', 'Failed');
+          NotificationManager.error('Wrong email or password!', 'Failed')
           console.log('failed')
         } else {
           localStorage.setItem('user', JSON.stringify(response))

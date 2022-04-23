@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @next/next/link-passhref */
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
-import styles from './topbar.module.css';
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { confirmAlert } from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
+import styles from './topbar.module.css'
 
 export default function Topbar() {
   const [user, setUser] = useState()
@@ -29,19 +29,20 @@ export default function Topbar() {
       buttons: [
         {
           label: 'Yes',
-          onClick: () => handleSignOut()
+          onClick: () => handleSignOut(),
         },
         {
           label: 'No',
-          onClick: () => { }
-        }
-      ]
-    });
+          onClick: () => {},
+        },
+      ],
+    })
   }
 
   const handleSignOut = () => {
     setUser('')
-    localStorage.setItem('user', '')
+    // localStorage.setItem('user', '')
+    localStorage.removeItem('user')
     router.push('/')
   }
 
@@ -99,21 +100,25 @@ export default function Topbar() {
                   Customer
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Profile
-                    </a>
-                  </li>
+                  <Link href="/profile">
+                    <li className={styles.logOutLink}>
+                      <a className="dropdown-item" href="">
+                        Profile
+                      </a>
+                    </li>
+                  </Link>
                   <li>
                     <a className="dropdown-item" href="#">
                       Ordered History
                     </a>
                   </li>
-                  <li>
-                    <a className="dropdown-item" onClick={signOut}>
-                      Log out
-                    </a>
-                  </li>
+                  <Link href="/">
+                    <li className={styles.logOutLink}>
+                      <a className="dropdown-item" onClick={signOut}>
+                        Log out
+                      </a>
+                    </li>
+                  </Link>
                 </ul>
               </li>
             </div>
