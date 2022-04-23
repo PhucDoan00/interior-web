@@ -10,13 +10,17 @@ import styles from './topbar.module.css';
 export default function Topbar() {
   const [user, setUser] = useState()
   const [navbar, setNavBar] = useState(false)
+  const [role, setRole] = useState('');
   const router = useRouter()
 
   useEffect(() => {
     async function getUser() {
       const loggedInUser = localStorage.getItem('user')
+
       if (loggedInUser) {
         setUser(loggedInUser)
+        const role = JSON.parse(loggedInUser).roles[0].authority
+        setRole(role.substr(5))
       }
     }
     getUser()
@@ -96,7 +100,7 @@ export default function Topbar() {
                   aria-expanded="false"
                 >
                   {/* Set Name of Role or Person Name here */}
-                  Customer
+                  {role}
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <li>
