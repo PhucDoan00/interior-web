@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import doan.backend.service.CustomUserDetailsService;
 
 @RestController
 @RequestMapping("/api/v1/profile")
+@CrossOrigin(origins = "*")
 public class AccountProfileController {
 
 	@Autowired
@@ -59,7 +61,7 @@ public class AccountProfileController {
     	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.OK);
     	Account acc = accountRepository.findByEmail(email);
     	
-    	if (accountRepository.existsByEmail(email)) return new ResponseEntity<> ("Email is already taken!", HttpStatus.OK);
+    	if (!info.getEmail().equals(email) && accountRepository.existsByEmail(info.getEmail())) return new ResponseEntity<> ("Email is already taken!", HttpStatus.OK);
 		accountRepository.updateAccountInfo(info.getName(), info.getPhone(), info.getEmail(), info.getAddress(), acc.getAccountId());
 		return new ResponseEntity<> ("Information Updated!", HttpStatus.OK);
 	}
