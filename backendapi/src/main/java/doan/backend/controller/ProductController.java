@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +36,7 @@ import doan.backend.service.CartService;
 
 @RestController
 @RequestMapping("/api/v1")
+@CrossOrigin(origins = "*")
 public class ProductController {
 
 	@Autowired
@@ -312,7 +314,7 @@ public class ProductController {
 			info.setDescription(product.getDescription());
 			info.setBoughtCount(product.getBoughtCount());
 			info.setMaterial(product.getMaterial());
-			info.setDimension(product.getDimension());
+			info.setDimension(product.getDimension());/*
 			List<Color> color = colorRepository.productColor(product.getProductId());
 			List<String> colorString = new ArrayList<String>();
 			for (int i = 0; i < color.size(); i++) {
@@ -325,7 +327,7 @@ public class ProductController {
 			for (int i = 0; i < category.size(); i++) {
 				categoryString.add(category.get(i).getCategoryName());
 			}
-			info.setCategories(categoryString);
+			info.setCategories(categoryString);*/
 			
 			result.add(info);
 		}
@@ -357,7 +359,7 @@ public class ProductController {
 			info.setDescription(product.getDescription());
 			info.setBoughtCount(product.getBoughtCount());
 			info.setMaterial(product.getMaterial());
-			info.setDimension(product.getDimension());
+			info.setDimension(product.getDimension());/*
 			List<Color> color = colorRepository.productColor(product.getProductId());
 			List<String> colorString = new ArrayList<String>();
 			for (int i = 0; i < color.size(); i++) {
@@ -371,7 +373,7 @@ public class ProductController {
 				categoryString.add(category.get(i).getCategoryName());
 			}
 			info.setCategories(categoryString);
-			
+			*/
 			result.add(info);
 		}
 			return ResponseEntity.ok().body(result);
@@ -408,7 +410,7 @@ public class ProductController {
 			info.setDescription(product.getDescription());
 			info.setBoughtCount(product.getBoughtCount());
 			info.setMaterial(product.getMaterial());
-			info.setDimension(product.getDimension());
+			info.setDimension(product.getDimension());/*
 			List<Color> color = colorRepository.productColor(product.getProductId());
 			List<String> colorString = new ArrayList<String>();
 			for (int i = 0; i < color.size(); i++) {
@@ -421,7 +423,7 @@ public class ProductController {
 			for (int i = 0; i < category.size(); i++) {
 				categoryString.add(category.get(i).getCategoryName());
 			}
-			info.setCategories(categoryString);
+			info.setCategories(categoryString);*/
 			
 			finalList.add(info);			
 		}
