@@ -16,6 +16,10 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	@Query(value = "select top 5* from Product order by bought_count desc", nativeQuery = true)
 	List<Product> getTop5();
 	
+	@Transactional
+	@Query(value = "select * from Product", nativeQuery = true)
+	List<Product> getAll();
+	
 	List<Product> findAll();
 	
 	Product getOne(long id);
@@ -125,7 +129,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	@Transactional
 	@Query(value = "select Product.product_id, Product.product_name, Product.price, Product.quantity, Product.[image], Product.[description], Product.bought_count, Product.material, Product.dimension "
 			+ "from Product inner join product_color on Product.product_id = product_color.product_id inner join Color on product_color.color_id = Color.color_id "
-			+ "where color_name like '%Black%' or product_color.color_id = 3", nativeQuery = true)
+			+ "where color_name like '%Black%' or product_color.color_id = 3 or product_color.color_id = 33", nativeQuery = true)
 	List<Product> filterBlack();
 	
 	//2. PINK
@@ -146,7 +150,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	@Transactional
 	@Query(value = "select Product.product_id, Product.product_name, Product.price, Product.quantity, Product.[image], Product.[description], Product.bought_count, Product.material, Product.dimension "
 			+ "from Product inner join product_color on Product.product_id = product_color.product_id inner join Color on product_color.color_id = Color.color_id "
-			+ "where color_name like '%Blue%' or product_color.color_id = 8 or product_color.color_id = 11 or product_color.color_id = 24 or product_color.color_id = 25 or product_color.color_id = 26 or product_color.color_id = 28 or product_color.color_id = 29", nativeQuery = true)
+			+ "where color_name like '%Blue%' or product_color.color_id = 8 or product_color.color_id = 11 or product_color.color_id = 24 or product_color.color_id = 25 or product_color.color_id = 26 or product_color.color_id = 28 or product_color.color_id = 29 or product_color.color_id = 34", nativeQuery = true)
 	List<Product> filterBlue();
 	
 	//5. GREEN
@@ -160,7 +164,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	@Transactional
 	@Query(value = "select Product.product_id, Product.product_name, Product.price, Product.quantity, Product.[image], Product.[description], Product.bought_count, Product.material, Product.dimension "
 			+ "from Product inner join product_color on Product.product_id = product_color.product_id inner join Color on product_color.color_id = Color.color_id "
-			+ "where color_name like '%Grey%' or product_color.color_id = 10 or product_color.color_id = 29", nativeQuery = true)
+			+ "where color_name like '%Grey%' or product_color.color_id = 10 or product_color.color_id = 29 or product_color.color_id = 33", nativeQuery = true)
 	List<Product> filterGrey();
 	
 	//7. WHITE
