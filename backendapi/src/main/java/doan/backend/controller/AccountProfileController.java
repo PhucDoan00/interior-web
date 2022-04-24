@@ -59,10 +59,10 @@ public class AccountProfileController {
 		//String email = request.getUserPrincipal().getName();
 		String email = info.getOldEmail();
 		int count1 = accountRepository.countExistEmail(email);
-    	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.OK);
+    	if (count1 == 0) return new ResponseEntity<>("NOT_FOUND" + email, HttpStatus.OK);
     	Account acc = accountRepository.findByEmail(email);
     	
-    	if (!info.getEmail().equals(email) && accountRepository.existsByEmail(info.getEmail())) return new ResponseEntity<> ("Email is already taken!", HttpStatus.OK);
+    	if (!info.getEmail().equals(email) && accountRepository.existsByEmail(info.getEmail())) return new ResponseEntity<> ("DUPLICATED", HttpStatus.OK);
     	String updatedName, updatedPhone, updatedEmail, updatedAddress;
     	
     	if (info.getName().equals("") || info.getName() == null) updatedName = acc.getName();
