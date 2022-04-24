@@ -1,11 +1,10 @@
+.noneUnderscore {
+  text-decoration: none;
+}
 .text {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 13px;
-  margin-left: 10px;
-  line-height: 26px;
-  letter-spacing: -0.015em;
-
+  font-weight: 450;
+  font-size: 17px;
+  margin: 10px 10px;
   color: #000000;
 }
 
@@ -17,5 +16,12 @@
 .divBorder {
   border: 0.8px solid rgba(0, 0, 0, 0.48);
   box-sizing: border-box;
-  padding: 20px;
+  height: 400px;
+  padding: 10px;
+}
+.styleImg {
+  height: 230px;
+  width: 230px;
+  object-fit: contain;
+  padding: 5px;
 }

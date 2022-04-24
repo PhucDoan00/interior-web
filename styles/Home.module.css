@@ -27,12 +27,6 @@
   align-items: center;
   flex-grow: 1;
 }
-
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
 .title a:hover,
 .title a:focus,
 .title a:active {
@@ -117,7 +111,7 @@
 
 .mt_400 {
   margin-top: 80px;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
 }
 
 .mt_404 {
@@ -143,6 +137,20 @@
   padding: 5px 20px;
   border-radius: 5px;
 }
+.buttonAll {
+  outline: none;
+  border: 1px solid #4f4f4f;
+  width: 100px;
+  margin-bottom: 20px;
+  background: white;
+  padding: 5px 20px;
+  border-radius: 5px;
+  transition: 0.4s;
+}
+.buttonAll:hover {
+  color: white;
+  background-color: #793841 !important;
+}
 
 .btn_search {
   margin-bottom: 0px;
@@ -156,14 +164,19 @@
   background: #d6d5d53d;
 }
 
-.width {
+.btnRooms {
   outline: none;
   border: 1px solid #4f4f4f;
   background: white;
   padding: 5px 20px;
   border-radius: 5px;
-  width: 140px;
-  margin: 0 10px;
+  width: 170px;
+  height: 3rem;
+  transition: 0.4s;
+}
+.btnRooms:hover {
+  color: white;
+  background-color: #793841 !important;
 }
 
 .width_selector {
@@ -317,4 +330,10 @@
 }
 .margin_0 {
   margin: 0;
+}
+
+.styleImg {
+  object-fit: contain;
+  width: 400px;
+  height: 300px;
 }

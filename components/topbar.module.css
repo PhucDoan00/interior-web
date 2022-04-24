@@ -88,3 +88,9 @@
 .logOutLink {
   cursor: pointer;
 }
+
+.icon:hover {
+  color: #0d6efd;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
+}
