@@ -1,6 +1,6 @@
-import Layout from '../components/layout';
-import ProductCart from '../components/shop/ProductCart';
-import withAuth from '../components/withAuth';
+import Layout from '../components/layout'
+import ProductCart from '../components/shop/ProductCart'
+import withAuth from '../components/withAuth'
 
 const Cart = () => {
   return (

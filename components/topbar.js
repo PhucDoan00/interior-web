@@ -4,13 +4,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { confirmAlert } from 'react-confirm-alert'
+import { Icon } from '@iconify/react'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import styles from './topbar.module.css'
 
 export default function Topbar() {
   const [user, setUser] = useState()
   const [navbar, setNavBar] = useState(false)
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState('')
   const router = useRouter()
 
   useEffect(() => {
@@ -61,6 +62,9 @@ export default function Topbar() {
     window.addEventListener('scroll', opacityNavBar)
   }, [])
 
+  const moveToCart = () => {
+    router.push('/cart')
+  }
   return (
     <nav className={navbar ? styles.navactive : styles.nav}>
       <div className="container d-flex justify-content-between align-items-center ">
@@ -81,16 +85,7 @@ export default function Topbar() {
         <div>
           {user ? (
             <div className="button d-flex justify-content-between align-items-center">
-              {/* <Link href="/">
-                <button
-                  type="button"
-                  onClick={handleSignOut}
-                  className={`btn mx-2 btn-outline ${styles.btnCustomOutlinePrimary}`}
-                >
-                  Sign out
-                </button>
-                  </Link> */}
-              {/* Set Avatar Here */}
+              <Icon icon="carbon:user-avatar" width="28" height="28" inline={true} />
               <li className={`nav-item dropdown ${styles.item}`}>
                 <a
                   className={`nav-link dropdown-toggle ${styles.itemDropdown}`}
@@ -100,7 +95,6 @@ export default function Topbar() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  {/* Set Name of Role or Person Name here */}
                   {role}
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -111,11 +105,13 @@ export default function Topbar() {
                       </a>
                     </li>
                   </Link>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Ordered History
-                    </a>
-                  </li>
+                  <Link href={'/product/orderHistory'}>
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        Ordered History
+                      </a>
+                    </li>
+                  </Link>
                   <Link href="/">
                     <li className={styles.logOutLink}>
                       <a className="dropdown-item" onClick={signOut}>
@@ -125,6 +121,14 @@ export default function Topbar() {
                   </Link>
                 </ul>
               </li>
+              <div className={styles.cartIcon}>
+                <Icon
+                  icon="eva:shopping-cart-outline"
+                  width="25"
+                  height="25"
+                  onClick={moveToCart}
+                />
+              </div>
             </div>
           ) : (
             <div className="button">

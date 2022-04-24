@@ -48,29 +48,41 @@ export default function Edit() {
     })
   }
   //Change Info
-  const handleUpdateInfo = (e) => {
-    e.preventDefault()
-    const authenticationDetails = {
-      email: email,
-      name: name,
-      phone: phone,
-      address: address,
-    }
-    axios
-      .post('http://localhost:8080/api/v1/profile/update', authenticationDetails)
-      .then((response) => {
-        console.log(response)
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response)
-          console.log('server responded')
-        } else if (error.request) {
-          console.log('network error')
-        } else {
-          console.log(error)
-        }
-      })
+  // const handleUpdateInfo = async (e) => {
+  //   e.preventDefault()
+  //   const authenticationDetails = {
+  //     email: email,
+  //     name: name,
+  //     phone: phone,
+  //     address: address,
+  //   }
+  //   axios
+  //     .post('http://localhost:8080/api/v1/profile/update', authenticationDetails)
+  //     .then((response) => {
+  //       console.log(response)
+  //     })
+  //     .catch((error) => {
+  //       if (error.response) {
+  //         console.log(error.response)
+  //         console.log('server responded')
+  //       } else if (error.request) {
+  //         console.log('network error')
+  //       } else {
+  //         console.log(error)
+  //       }
+  //     })
+  // }
+
+  const updateInfo = async () => {
+    const response = await fetch('http://localhost:8080/api/v1/profile/update', {
+      method: 'POST',
+      body: JSON.stringify({ email, name, phone, address }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const data = await response.json()
+    console.log(data)
   }
 
   //Change Pass
@@ -97,7 +109,8 @@ export default function Edit() {
                   className="form-control my-3"
                   id="name"
                   // value={info.name}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  onChange={(e) => setName(e.target.value)}
                   placeholder={info.name}
                 />
               </div>
@@ -115,7 +128,8 @@ export default function Edit() {
                   className="form-control my-3"
                   id="email"
                   // value={info.email}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder={info.email}
                 />
               </div>
@@ -133,7 +147,8 @@ export default function Edit() {
                   className="form-control my-3"
                   id="phone"
                   // value={info.phone}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  onChange={(e) => setPhone(e.target.value)}
                   placeholder={info.phone}
                 />
               </div>
@@ -151,7 +166,8 @@ export default function Edit() {
                   className="form-control my-3"
                   id="address"
                   // value={info.address}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  onChange={(e) => setAddress(e.target.value)}
                   placeholder={info.address}
                 />
               </div>
@@ -160,7 +176,7 @@ export default function Edit() {
               <div className="col-2 p-0 d-flex justify-content-center">
                 <Link href="/profile/edit" passHref>
                   <div className={styles.btnEditt}>
-                    <button className={`btn ${styles.btnCustom}`} onClick={handleUpdateInfo}>
+                    <button className={`btn ${styles.btnCustom}`} onClick={updateInfo}>
                       Save
                     </button>
                   </div>
