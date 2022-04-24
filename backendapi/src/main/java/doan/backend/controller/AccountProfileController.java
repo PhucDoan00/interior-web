@@ -63,7 +63,21 @@ public class AccountProfileController {
     	Account acc = accountRepository.findByEmail(email);
     	
     	if (!info.getEmail().equals(email) && accountRepository.existsByEmail(info.getEmail())) return new ResponseEntity<> ("Email is already taken!", HttpStatus.OK);
-		accountRepository.updateAccountInfo(info.getName(), info.getPhone(), info.getEmail(), info.getAddress(), acc.getAccountId());
+    	String updatedName, updatedPhone, updatedEmail, updatedAddress;
+    	
+    	if (info.getName().equals("") || info.getName() == null) updatedName = acc.getName();
+    	else updatedName = info.getName();
+    	
+    	if (info.getPhone().equals("") || info.getPhone() == null) updatedPhone = acc.getPhone();
+    	else updatedPhone = info.getPhone();
+    	
+    	if (info.getEmail().equals("") || info.getEmail() == null) updatedEmail = acc.getEmail();
+    	else updatedEmail = info.getEmail();
+    	
+    	if (info.getAddress().equals("") || info.getAddress() == null) updatedAddress = acc.getAddress();
+    	else updatedAddress = info.getAddress();
+    	
+		accountRepository.updateAccountInfo(updatedName, updatedPhone, updatedEmail, updatedAddress, acc.getAccountId());
 		return new ResponseEntity<> ("Information Updated!", HttpStatus.OK);
 	}
 	
