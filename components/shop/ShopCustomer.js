@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react'
 import styles from '../../styles/Home.module.css'
 import ProductSmall from '../productSmall'
-import { getListProduct, searchProduct, searchById, searchBySelect } from '../../lib/productStyle'
-import { useRouter } from 'next/router'
+import { getListProduct, searchProduct, searchById } from '../../lib/productStyle'
 
 export default function ShopCustomer() {
   const [listProduct, setListProduct] = useState([])
   const [search, setSearch] = useState('')
   const [searchSelect, setSearchSelect] = useState('')
 
-  useEffect(async () => {
-    const data = await getListProduct()
-    setListProduct(data)
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getListProduct()
+      setListProduct(data)
+    }
+    fetchData()
   }, [])
 
   const handleSearch = (e) => {
@@ -98,7 +100,7 @@ export default function ShopCustomer() {
         <div className="row mt-4 d-flex justify-content-between">
           <div className="col-sm-1"></div>
           <div className="col-sm-3">
-            <button className={styles.button} onClick={() => handleClickRedirectRoom('all')}>
+            <button className={styles.buttonAll} onClick={() => handleClickRedirectRoom('all')}>
               All
             </button>
           </div>
@@ -109,7 +111,7 @@ export default function ShopCustomer() {
           <div className="col-sm-10 d-flex justify-content-between">
             <div className="col-sm-2">
               <button
-                className={` ${styles.width}`}
+                className={` ${styles.btnRooms}`}
                 onClick={() => handleClickRedirectRoom('livingroom')}
               >
                 Living Room
@@ -117,7 +119,7 @@ export default function ShopCustomer() {
             </div>
             <div className="col-sm-2">
               <button
-                className={` ${styles.width}`}
+                className={` ${styles.btnRooms}`}
                 onClick={() => handleClickRedirectRoom('bedroom')}
               >
                 Bed Room
@@ -125,7 +127,7 @@ export default function ShopCustomer() {
             </div>
             <div className="col-sm-2">
               <button
-                className={` ${styles.width}`}
+                className={` ${styles.btnRooms}`}
                 onClick={() => handleClickRedirectRoom('diningroom')}
               >
                 Dining Room
@@ -133,7 +135,7 @@ export default function ShopCustomer() {
             </div>
             <div className="col-sm-2">
               <button
-                className={` ${styles.width}`}
+                className={` ${styles.btnRooms}`}
                 onClick={() => handleClickRedirectRoom('kidroom')}
               >
                 Kid’s Room
@@ -141,7 +143,7 @@ export default function ShopCustomer() {
             </div>
             <div className="col-sm-2">
               <button
-                className={` ${styles.width}`}
+                className={` ${styles.btnRooms}`}
                 onClick={() => handleClickRedirectRoom('nursery')}
               >
                 Nursery

@@ -1,32 +1,18 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import styles from './productSmall.module.css'
 import Link from 'next/link'
-import Image from 'next/image'
 
 const ProductSmall = ({ id, imgPath, name, price }) => {
   return (
     <div className={`col-sm-3 ${styles.divBig}`}>
-      <div
-        className={`d-flex align-items-center justify-content-center ${styles.divBorder}`}
-        style={{
-          height: '400px',
-          padding: '10px',
-        }}
-      >
-        <Link href={`/shop/${id}`} style={{ textDecoration: 'none' }}>
-          <a>
-            <img
-              src={imgPath}
-              style={{
-                height: '200px',
-                width: '200px',
-                objectFit: 'cover',
-                overflow: 'hidden',
-                padding: '10px',
-              }}
-            />
+      <div className={`d-flex align-items-center justify-content-center ${styles.divBorder}`}>
+        <Link href={`/shop/${id}`}>
+          <a className={styles.noneUnderscore}>
+            <img src={imgPath} className={styles.styleImg} />
             <p className={styles.text}> {name} </p>
-            <p className={styles.text}> {price} </p>
+            <p className={styles.text}> {`$${price}`} </p>
           </a>
         </Link>
       </div>

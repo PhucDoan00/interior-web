@@ -112,13 +112,11 @@ export default function Topbar() {
                       </a>
                     </li>
                   </Link>
-                  <Link href="/">
-                    <li className={styles.logOutLink}>
-                      <a className="dropdown-item" onClick={signOut}>
-                        Log out
-                      </a>
-                    </li>
-                  </Link>
+                  <li className={styles.logOutLink}>
+                    <a className="dropdown-item" onClick={signOut}>
+                      Log out
+                    </a>
+                  </li>
                 </ul>
               </li>
               <div className={styles.cartIcon}>
@@ -126,6 +124,7 @@ export default function Topbar() {
                   icon="eva:shopping-cart-outline"
                   width="25"
                   height="25"
+                  className={styles.icon}
                   onClick={moveToCart}
                 />
               </div>

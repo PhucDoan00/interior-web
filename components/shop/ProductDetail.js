@@ -66,15 +66,7 @@ const ProductDetail = () => {
           <div className="col-sm-10">
             <div className="row">
               <div className="col-sm-6">
-                <img
-                  src={product?.image}
-                  alt=""
-                  style={{
-                    objectFit: 'cover',
-                    width: '400px',
-                    height: '300px',
-                  }}
-                />
+                <img src={product?.image} alt="detail img" className={styles.styleImg} />
               </div>
               <div className="col-sm-6">
                 <div className={`${styles.ml_2} `}>
