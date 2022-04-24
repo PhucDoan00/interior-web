@@ -55,8 +55,9 @@ public class AccountProfileController {
 	//ADMIN + STAFF + CUSTOMER - Edit Personal Information (Not Change Password)
 	//REQUEST BODY DOES NOT NEED PASSWORD AND ROLE
 	@PostMapping("/update")
-	public ResponseEntity<?> editProfile(HttpServletRequest request, @RequestBody AccountInformationDTO info) {
-		String email = request.getUserPrincipal().getName();
+	public ResponseEntity<?> editProfile(/*HttpServletRequest request, */@RequestBody AccountInformationDTO info) {
+		//String email = request.getUserPrincipal().getName();
+		String email = info.getOldEmail();
 		int count1 = accountRepository.countExistEmail(email);
     	if (count1 == 0) return new ResponseEntity<>("User not found with email: " + email, HttpStatus.OK);
     	Account acc = accountRepository.findByEmail(email);

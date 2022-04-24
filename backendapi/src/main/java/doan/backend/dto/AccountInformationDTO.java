@@ -11,6 +11,7 @@ public class AccountInformationDTO {
 
 	private long accountId;
 	private String name;
+	private String oldEmail;
     private String email;
     private String password;
     private String phone;
@@ -64,6 +65,14 @@ public class AccountInformationDTO {
 	}
 	public void setRoles(Collection<? extends GrantedAuthority> roles) {
 		this.roles = roles;
+	}
+
+	public String getOldEmail() {
+		return oldEmail;
+	}
+
+	public void setOldEmail(String oldEmail) {
+		this.oldEmail = oldEmail;
 	}
 	
 }
