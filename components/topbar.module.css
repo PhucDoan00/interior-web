@@ -85,3 +85,6 @@
   border-color: #924b54 !important;
   width: 79.7px;
 }
+.logOutLink {
+  cursor: pointer;
+}

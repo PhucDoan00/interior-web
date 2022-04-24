@@ -1,6 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 import styles from '../../styles/Home.module.css'
 import { useRouter } from 'next/router'
 import { getDetailProduct } from '../../lib/productStyle'
+import { NotificationContainer, NotificationManager } from 'react-notifications'
+import 'react-notifications/lib/notifications.css'
 import { useEffect, useState } from 'react'
 
 const ProductDetail = () => {
@@ -9,10 +12,13 @@ const ProductDetail = () => {
   const router = useRouter()
   const { id } = router.query
 
-  useEffect(async () => {
-    const data = await getDetailProduct(id)
-    await setProduct(data)
-  }, [])
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getDetailProduct(id)
+      await setProduct(data)
+    }
+    fetchData()
+  }, [id])
 
   const hanleChangeSelector = (e) => {
     setSelect(e.target.value)
@@ -21,9 +27,6 @@ const ProductDetail = () => {
   const handleAddCart = () => {
     let data = JSON.parse(localStorage.getItem('cart'))
     if (data?.length > 0) {
-      //   if(data.find(el => el.product.productId == product.productId)){
-
-      //  }
       let newData = data.filter((el) => el.product.productId !== product.productId)
       let id = data.find((el) => el.product.productId == product.productId)
       if (!id) {
@@ -33,6 +36,7 @@ const ProductDetail = () => {
         }
         data.push(obj)
         localStorage.setItem('cart', JSON.stringify(data))
+        NotificationManager.success('Add Success', 'You have added product to cart')
       } else {
         const quantity = Number(id.select)
         id = {
@@ -42,6 +46,7 @@ const ProductDetail = () => {
         let datas = [...newData, id]
         localStorage.removeItem('cart')
         localStorage.setItem('cart', JSON.stringify(datas))
+        NotificationManager.success('Add Success', 'Product added to cart ')
       }
     } else {
       const obj = {
@@ -49,8 +54,8 @@ const ProductDetail = () => {
         product,
       }
       localStorage.setItem('cart', JSON.stringify([obj]))
+      NotificationManager.success('Add Success', 'You have added product to cart')
     }
-    router.push('/cart')
   }
 
   return (
@@ -124,6 +129,7 @@ const ProductDetail = () => {
           </div>
           <div className="col-sm-1"></div>
         </div>
+        <NotificationContainer />
       </div>
     </div>
   )
