@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +38,7 @@ import doan.backend.response.PaymentResponse;
 import doan.backend.response.TransactionResponse;
 import doan.backend.utils.DataUtils;
 @RestController
+@CrossOrigin(origins = "*")
 public class PaymentController {
     /*@Autowired
     private MapValidationErrorService mapValidationErrorService;
@@ -58,7 +60,7 @@ public class PaymentController {
     private List serviceId = new ArrayList();
 
     @PostMapping("create-payment")
-    public ResponseEntity<?> createPayment(@Valid @RequestBody PaymentDTO requestParams, BindingResult bindingResult, Principal principal) throws UnsupportedEncodingException, IOException {
+    public ResponseEntity<?> createPayment(@Valid @RequestBody PaymentDTO requestParams) throws UnsupportedEncodingException, IOException {
         /*if (principal == null)
             throw new LoginRequiredException("you need to login to get access");*/
         /*

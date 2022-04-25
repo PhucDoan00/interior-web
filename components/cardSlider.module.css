@@ -27,16 +27,17 @@
 
 .cardControl1 {
   position: relative;
-  bottom: 90px;
+  bottom: 85px;
   left: 290px;
   z-index: 1000;
 }
 
 .cardControl2 {
   position: relative;
-  bottom: 89px;
+  bottom: 84px;
   right: 290px;
   z-index: 1000;
+  /* margin-left: 50px; */
 }
 
 .prevIcon {
@@ -60,8 +61,8 @@
   background-color: #924b54 !important;
   border-color: #ffffff !important;
   color: #ffffff !important;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  /* transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); */
 }
 
 .btnCustomOutlinePrimary:active {
