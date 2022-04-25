@@ -23,23 +23,23 @@ const OrderHistory = () => {
     }
   }, [isRender])
 
-  const handleRemoveItem = (item) => {
-    let data = JSON.parse(localStorage.getItem('cart'))
-    let datas = data.filter((person) => person.product.productId != item)
-    // remove localstorage
-    localStorage.removeItem('cart')
-    localStorage.setItem('cart', JSON.stringify(datas))
-    setCart(datas)
-    setIsRender(true)
-  }
+  // const handleRemoveItem = (item) => {
+  //   let data = JSON.parse(localStorage.getItem('cart'))
+  //   let datas = data.filter((person) => person.product.productId != item)
+  //   // remove localstorage
+  //   localStorage.removeItem('cart')
+  //   localStorage.setItem('cart', JSON.stringify(datas))
+  //   setCart(datas)
+  //   setIsRender(true)
+  // }
 
   const handleRedirectPage = () => {
     router.push('/shop')
   }
 
-  const handleCheckOut = () => {
-    router.push('/success')
-  }
+  // const handleCheckOut = () => {
+  //   router.push('/success')
+  // }
 
   return (
     <div className={`${styles.mt_100}`}>

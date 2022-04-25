@@ -45,7 +45,7 @@ const ProductCart = () => {
   }
 
   const handleCheckOut = () => {
-    router.push('/product/order_history')
+    router.push('/success')
   }
 
   return (
