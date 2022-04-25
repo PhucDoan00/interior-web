@@ -46,14 +46,14 @@ export default function LivingRoom() {
       <div className={styles.stylesWrapper}>
         <section className={styles.imgSection}>
           <div className={styles.titlePos}>
-            <p className={styles.title}> {title}</p>
+            <p className={styles.title}> {`${title} Design Ideas`}</p>
           </div>
           <img className={styles.img} src={bigImg} alt="Main Img" />
         </section>
         <section className="roomStyles mb-5">
           <div className="container">
             <div className={styles.headertitle}>
-              <h4> Living room by style</h4>
+              <h4>{` ${title} by style`}</h4>
             </div>
             <div className="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
               {/* Card */}
