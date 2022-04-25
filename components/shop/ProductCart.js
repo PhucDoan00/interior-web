@@ -31,10 +31,11 @@ const ProductCart = () => {
     localStorage.removeItem('cart')
     localStorage.setItem('cart', JSON.stringify(datas))
     setCart(datas)
-    setIsRender(true)
+    setIsRender(!isRender ? true : false)
   }
 
   const handleRedirectPage = () => {
+    localStorage.removeItem('cart')
     router.push('/shop')
   }
 
