@@ -51,8 +51,9 @@ export const QuizImg = [
   {
     id: 2,
     img: '/quiz/pics2.jpg',
-    title: 'Mid-Century Chic 2',
-    description: 'Test data 2',
+    title: 'Modern Style',
+    description:
+      'Modern style furnishings and decor celebrate natural materials, neutral or earthy colors, and the elimination of unnecessary detailing.',
     child: [
       {
         id: 1,
@@ -99,8 +100,9 @@ export const QuizImg = [
   {
     id: 3,
     img: '/quiz/pics3.jpg',
-    title: 'Mid-Century Chic 3',
-    description: 'Test data 3',
+    title: 'Rustic style',
+    description:
+      'Rustic interiors are defined by ruggedness and letting natural beauty shine. The focus is to create a relaxing atmosphere by highlighting the use of wood, stone, leaves, and other organic elements.',
     child: [
       {
         id: 1,
@@ -147,8 +149,9 @@ export const QuizImg = [
   {
     id: 4,
     img: '/quiz/pics4.jpg',
-    title: 'Mid-Century Chic 4',
-    description: 'Test data 4',
+    title: 'Coastal Style',
+    description:
+      'Coastal style is all about that feeling of peace and fun that you get from being near the water.',
     child: [
       {
         id: 1,
@@ -195,8 +198,9 @@ export const QuizImg = [
   {
     id: 5,
     img: '/quiz/pics5.jpg',
-    title: 'Mid-Century Chic 5',
-    description: 'Test data 5',
+    title: 'Traditional Style',
+    description:
+      'Traditional fans know that your home is style starts at the front door and, with a handpainted mural and layers of patterns and textures, all in beautiful shades of blue, this entryway is a stylish stunner that sets a tasteful tone. Add in an adorable pup and, well, who wouldnt want to come home to this?!',
     child: [
       {
         id: 1,
@@ -243,8 +247,9 @@ export const QuizImg = [
   {
     id: 6,
     img: '/quiz/pics6.jpg',
-    title: 'Mid-Century Chic 6',
-    description: 'Test data 6',
+    title: 'Glam Style',
+    description:
+      'You’ve probably heard of mid-century modern style, farmhouse style, and minimalist style when it comes to decor schemes. But what happens if you want a design aesthetic that combines elements of all of them—and maybe more? Now you’re talking about eclectic style, a bit of a catch-all category to describe interiors that dont fit neatly into just one style.',
     child: [
       {
         id: 1,
@@ -290,10 +295,10 @@ export const QuizImg = [
   },
   {
     id: 7,
-    img: '/quiz/pics1.jpg',
-    title: 'Mid-Century Chic',
+    img: '/quiz/pics7.jpg',
+    title: 'Eclectic Style',
     description:
-      'You love the idea of livable spaces, but crave a bit more drama. Your style is distinctly yours, combining Mid-Century aesthetics, like warm wood tones, with bold statement pieces, like a patterned rug.',
+      'You’ve probably heard of mid-century modern style, farmhouse style, and minimalist style when it comes to decor schemes. But what happens if you want a design aesthetic that combines elements of all of them—and maybe more? Now you’re talking about eclectic style, a bit of a catch-all category to describe interiors that don t fit neatly into just one style.',
     child: [
       {
         id: 1,
@@ -340,8 +345,9 @@ export const QuizImg = [
   {
     id: 8,
     img: '/quiz/pics8.jpg',
-    title: 'Mid-Century Chic 2',
-    description: 'Test data 2',
+    title: 'Industrial style',
+    description:
+      'Industrial style or industrial chic refers to an aesthetic trend in interior design that takes clues from old factories and industrial spaces that in recent years have been converted to lofts and other living spaces. Components of industrial style include weathered wood, building systems, exposed brick, industrial lighting fixtures and concrete.',
     child: [
       {
         id: 1,
