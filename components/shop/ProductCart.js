@@ -3,13 +3,86 @@ import styles from '../../styles/Home.module.css'
 import { Icon } from '@iconify/react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { getPayment } from '../../lib/productStyle'
+import Link from 'next/link'
+import axios from 'axios'
 
 const ProductCart = () => {
   const [cart, setCart] = useState([])
   const [total, setTotal] = useState('')
+  const [payment, setPayment] = useState('')
   const [shipping, setShipping] = useState('')
   const [isRender, setIsRender] = useState(false)
   const router = useRouter()
+
+  const [data, setData] = useState({
+    bankCode: 'NCB',
+    totalPrice: '',
+    content: 'payment',
+  })
+
+  // useEffect(() => {
+  //   //Flag cleanUp to prevent memory leak
+  //   let cleanUp = true
+  //   async function fetchMyPayment() {
+  //     const response = await getPayment()
+  //     // console.log('🚀 ~ file: ProductCart.js ~ line 21 ~ fetchMyPayment ~ response', response)
+  //     if (cleanUp && response) {
+  //       setPayment(response)
+  //     }
+  //   }
+  //   fetchMyPayment()
+  //   return () => {
+  //     cleanUp = false
+  //   }
+  // })
+
+  const getPayment = async (e) => {
+    e.preventDefault()
+    const payment = {
+      bankcode: bankCode,
+      totalPrice: totalPrice,
+      content: content,
+    }
+    axios
+      .post('http://localhost:8080/create-payment', payment)
+      .then((response) => {
+        setData(response).data
+        console.log(response)
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response)
+          console.log('server responded')
+        } else if (error.request) {
+          console.log('network error')
+        } else {
+          console.log(error)
+        }
+      })
+  }
+  const getPayment2 = async () => {
+    const response = await fetch('http://localhost:8080/create-payment', {
+      method: 'POST',
+      body: JSON.stringify({ bankCode, totalPrice, content }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const data = await response.json()
+    setPayment(data.url)
+    console.log(data)
+  }
+
+  // useEffect(() => {
+  //   // POST request using axios inside useEffect React hook
+  //   const article = { title: 'React Hooks POST Request Example' }
+  //   axios
+  //     .post('http://localhost:8080/create-payment', article)
+  //     .then((response) => setPayment(response.url))
+
+  //   // empty dependency array means this effect will only run once (like componentDidMount in classes)
+  // }, [])
 
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem('cart'))
@@ -46,6 +119,19 @@ const ProductCart = () => {
 
   const handleCheckOut = () => {
     router.push('/success')
+  }
+
+  const handlePayment = () => {
+    // router.push(`${payment.url}`)
+  }
+  length = 3
+  const random3Num = (length) => {
+    let text = ''
+    let possible = 'abcdefghijklmnopqrstuvwxyz'
+    for (let index = 0; index < length; index++) {
+      text += possible.chartAt(Math.floor(Math.random() * possible.length))
+    }
+    return text
   }
 
   return (
@@ -209,9 +295,14 @@ const ProductCart = () => {
                 Shipping Address
               </h5>
               <div style={{ textAlign: 'center', marginTop: '10px' }}>
-                <button className={`${styles.button} ${styles.bg_yellow}`} onClick={handleCheckOut}>
-                  Checkout
-                </button>
+                <Link href={data.url} passHref>
+                  <button
+                    className={`${styles.button} ${styles.bg_yellow}`}
+                    onClick={handlePayment}
+                  >
+                    Checkout
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
