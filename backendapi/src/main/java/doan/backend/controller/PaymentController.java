@@ -6,9 +6,9 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TimeZone;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +34,7 @@ import doan.backend.config.PaymentConfig;
 import doan.backend.dto.PaymentDTO;
 import doan.backend.repository.AccountRepository;
 import doan.backend.response.PaymentResponse;
+import doan.backend.response.TransactionResponse;
 import doan.backend.utils.DataUtils;
 @RestController
 public class PaymentController {
@@ -161,7 +162,7 @@ public class PaymentController {
 //            paymentResponse.getWriter().write(gson.toJson(job));
         return ResponseEntity.status(HttpStatus.OK).body(paymentResponse);
     }
-/*
+
     @GetMapping("/payment-result")
     public ResponseEntity<?> transactionHandle(
             @RequestParam(value = "vnp_Amount", required = false) String amount,
@@ -183,15 +184,15 @@ public class PaymentController {
             paymentResponse.setMessage("failed");
             return ResponseEntity.status(HttpStatus.OK).body(paymentResponse);
         }
-
+/*
         paymentService.save(amount, txnRef, bankCode, bankTransNo, cardType, orderInfo,
                 responseCode, tmnCode, transNo, transStatus, secureHash, username, serviceId);
-
+*/
         paymentResponse.setStatus("00");
         paymentResponse.setMessage("success");
 
         TransactionResponse transactionResponse = new TransactionResponse();
-        transactionResponse.setTransactionTime(currentDate.now());
+        transactionResponse.setTransactionTime(LocalDateTime.now());
         transactionResponse.setAmount(Integer.parseInt(amount));
         transactionResponse.setBankCode(bankCode);
         transactionResponse.setMessage("Payment has been completed successfully");
@@ -201,7 +202,7 @@ public class PaymentController {
         return ResponseEntity.status(HttpStatus.OK).body(transactionResponse);
     }
 
-
+/*
     @GetMapping("/receipt")
     public ResponseEntity<Collection<PaymentHistoryResponse>> getAllReceipt(Principal principal){
         //check login
