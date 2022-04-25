@@ -7,11 +7,26 @@ import 'react-notifications/lib/notifications.css'
 import { useEffect, useState } from 'react'
 
 const ProductDetail = () => {
+  const [user, setUser] = useState()
   const [product, setProduct] = useState({})
   const [select, setSelect] = useState('1')
   const router = useRouter()
   const { id } = router.query
 
+  useEffect(() => {
+    async function getUser() {
+      const loggedInUser = localStorage.getItem('user')
+      if (loggedInUser) {
+        setUser(loggedInUser)
+      }
+    }
+    getUser()
+  })
+
+  // const pushToLogIn = () => {
+  //   // localStorage.removeItem('cart')
+  //   router.push('/login')
+  // }
   useEffect(() => {
     async function fetchData() {
       const data = await getDetailProduct(id)
@@ -24,40 +39,43 @@ const ProductDetail = () => {
     setSelect(e.target.value)
   }
 
-  const handleAddCart = () => {
-    let data = JSON.parse(localStorage.getItem('cart'))
-    if (data?.length > 0) {
-      let newData = data.filter((el) => el.product.productId !== product.productId)
-      let id = data.find((el) => el.product.productId == product.productId)
-      if (!id) {
+  function handleAddCart() {
+    if (user) {
+      let data = JSON.parse(localStorage.getItem('cart'))
+      if (data?.length > 0) {
+        let newData = data.filter((el) => el.product.productId !== product.productId)
+        let id = data.find((el) => el.product.productId == product.productId)
+        if (!id) {
+          const obj = {
+            select,
+            product,
+          }
+          data.push(obj)
+          localStorage.setItem('cart', JSON.stringify(data))
+          NotificationManager.success('Add Success', 'You have added product to cart time')
+        } else {
+          const quantity = Number(id.select)
+          id = {
+            select: quantity + Number(select),
+            product,
+          }
+          let datas = [...newData, id]
+          localStorage.removeItem('cart')
+          localStorage.setItem('cart', JSON.stringify(datas))
+          NotificationManager.success('Add Success', 'Product added to cart time ')
+        }
+      } else {
         const obj = {
           select,
           product,
         }
-        data.push(obj)
-        localStorage.setItem('cart', JSON.stringify(data))
-        NotificationManager.success('Add Success', 'You have added product to cart')
-      } else {
-        const quantity = Number(id.select)
-        id = {
-          select: quantity + Number(select),
-          product,
-        }
-        let datas = [...newData, id]
-        localStorage.removeItem('cart')
-        localStorage.setItem('cart', JSON.stringify(datas))
-        NotificationManager.success('Add Success', 'Product added to cart ')
+        localStorage.setItem('cart', JSON.stringify([obj]))
+        NotificationManager.success('Add Success', 'You have added product to cart time')
       }
     } else {
-      const obj = {
-        select,
-        product,
-      }
-      localStorage.setItem('cart', JSON.stringify([obj]))
-      NotificationManager.success('Add Success', 'You have added product to cart')
+      router.push('/login')
     }
   }
-
   return (
     <div className={`${styles.bg_color}`}>
       <div className="container">
@@ -72,6 +90,7 @@ const ProductDetail = () => {
                 <div className={`${styles.ml_2} `}>
                   <h6 className={`${styles.fontW} ${styles.f17}`}>{product?.productName}</h6>
                   <p className={styles.f10}>In stock: {product?.quantity}</p>
+                  {/* <p className={styles.f10}>In stock: 10</p> */}
                   <p className={styles.f13}>{product?.price}</p>
                   <p className={styles.f15}>Arrives in 3-7 business days from ship date</p>
                 </div>
@@ -95,7 +114,7 @@ const ProductDetail = () => {
                   <div className="but">
                     <button
                       className={`${styles.button} ${styles.bg_nau} ${styles.width_150} ${styles.margin_0}`}
-                      onClick={() => handleAddCart()}
+                      onClick={handleAddCart}
                     >
                       Add to Cart
                     </button>

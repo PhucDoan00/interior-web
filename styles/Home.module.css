@@ -337,3 +337,14 @@
   width: 400px;
   height: 300px;
 }
+
+.btnCustom {
+  color: #fff !important;
+  background-color: #924b54 !important;
+  width: 90px;
+  transition: 0.3s;
+}
+
+.btnCustom:hover {
+  background-color: #793841 !important;
+}

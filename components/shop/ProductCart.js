@@ -16,7 +16,7 @@ const ProductCart = () => {
     let totals = 0
     if (data) {
       data.map((e) => {
-        totals += Number(e.product.price) * Number(e.product.quantity)
+        totals += Number(e.product.price) * Number(e.select)
       })
       setShipping(totals / 100)
       setTotal(totals)
@@ -35,8 +35,13 @@ const ProductCart = () => {
   }
 
   const handleRedirectPage = () => {
-    localStorage.removeItem('cart')
     router.push('/shop')
+  }
+  function handleClear() {
+    localStorage.removeItem('cart')
+    setCart([])
+    setTotal(0)
+    setShipping(0)
   }
 
   const handleCheckOut = () => {
@@ -142,6 +147,16 @@ const ProductCart = () => {
                 </tr>
               </tbody>
             </table>
+            <div className="d-flex flex-row-reverse me-2">
+              <button
+                type="button"
+                className={`btn ${styles.btnCustom}`}
+                style={{ marginTop: 0.5 + 'em' }}
+                onClick={handleClear}
+              >
+                Clear
+              </button>
+            </div>
           </div>
           <div
             className="col-sm-4"
