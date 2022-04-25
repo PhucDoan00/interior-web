@@ -134,7 +134,7 @@ public class DesignIdeaController {
 		Category category = categoryRepository.getById(categoryId);
 		String cateName = category.getCategoryName();
 		DesignIdeaStep3DTO result = new DesignIdeaStep3DTO();
-		result.setCategoryName(cateName + " Design Ideas");
+		result.setCategoryName(cateName);
 		String bedroomsmall[] = categoryService.bedroom();
 		String livingroomsmall[] = categoryService.livingroomsmall();
 		String[][] smallthumbnail = new String[6][9];
