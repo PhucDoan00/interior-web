@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import styles from '../../styles/Home.module.css'
 import { Icon } from '@iconify/react'
-import { QuizImg } from '../../mock/dataQuiz'
+import { QuizImg } from '../../mock/dataForQuiz'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
@@ -9,6 +9,9 @@ const QuizSelect = () => {
   const [listActive, setListActive] = useState([])
   const [number, setNumber] = useState(0)
   const router = useRouter()
+  for (var i = 0; i <= 8; i++) {
+    localStorage.setItem(i.toString(), 0);
+  }
 
   const handleActiveImg = (id) => {
     let data = listActive.find((item) => item == id)
@@ -38,6 +41,12 @@ const QuizSelect = () => {
     }
   }
 
+  const getPoint = (id) => {
+    const oldPoint = localStorage.getItem(id)
+    const newPoint = Number(oldPoint) + 5
+    localStorage.setItem(id, newPoint)
+  }
+
   const handleNextPage = () => {
     localStorage.removeItem('picture')
     localStorage.removeItem('picture1')
@@ -48,6 +57,9 @@ const QuizSelect = () => {
     localStorage.setItem('picture', JSON.stringify(op))
     localStorage.setItem('picture1', JSON.stringify(op1))
     localStorage.setItem('picture2', JSON.stringify(op2))
+    getPoint(listActive[0])
+    getPoint(listActive[1])
+    getPoint(listActive[2])
     router.push('/quiz/option')
   }
 
