@@ -14,6 +14,7 @@ public class ShoppingCartDTO {
 	private float productTotal;
 	private float shippingFee;
 	
+	
 	public void setProductTotal(float productTotal) {
 		this.productTotal = productTotal;
 	}
