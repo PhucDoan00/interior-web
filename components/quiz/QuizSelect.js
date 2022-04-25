@@ -10,7 +10,7 @@ const QuizSelect = () => {
   const [number, setNumber] = useState(0)
   const router = useRouter()
   for (var i = 0; i <= 8; i++) {
-    localStorage.setItem(i.toString(), 0);
+    localStorage.setItem(i.toString(), 0)
   }
 
   const handleActiveImg = (id) => {

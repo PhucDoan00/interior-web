@@ -7,7 +7,7 @@ export default function SmallCarousel() {
       <div className="row justify-content-around">
         <div className={`col d-flex flex-column justify-content-center ${styles.title}`}>
           <h1 className="my-3"> Turn Your Result Into Reality </h1>
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo</p>
+          <p>What are you waiting for? Come to check it out !</p>
         </div>
         <div className="col">
           <div

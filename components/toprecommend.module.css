@@ -5,10 +5,18 @@
   font-size: 24px;
   line-height: 72px;
   /* or 300% */
-
+  margin-bottom: 10px;
   letter-spacing: -0.015em;
 
   color: #000000;
+}
+.titleCol {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-items: center;
+  height: 100px;
 }
 .b {
   font-family: 'Montserrat';
@@ -89,4 +97,10 @@
 .icon {
   text-align: center;
   margin: 20px;
+}
+.divStyle {
+  margin-bottom: 20px;
+}
+.firstCol {
+  width: fit-content;
 }

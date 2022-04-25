@@ -95,7 +95,7 @@ const QuizOption = () => {
                   className={`col-sm-4 p-2 ${styles.cursor}`}
                   onClick={() => handleActiveImg(e.id)}
                 >
-                  <img className={`${styles.picRightQuiz}`} src={e.img} alt="" />
+                  <img className={styles.pickRightProduct} src={e.img} alt="" />
                   <div className={checkActive(e.id)}>
                     <Icon
                       icon="akar-icons:circle-check-fill"

@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import styles from './cardSlider.module.css'
+import Link from 'next/link'
 
 export default function CardSlider() {
   return (
@@ -35,7 +36,7 @@ export default function CardSlider() {
               </div>
 
               <div className={`card-body ${styles.title}`}>
-                <h5 className="card-title d-flex justify-content-center">Card title</h5>
+                <h5 className="card-title d-flex justify-content-center">Ideas Example</h5>
                 <p className="card-text d-flex justify-content-center mt-3">
                   Some quick example text to build on the card title and make up the bulk of the
                   card's content.
@@ -46,8 +47,8 @@ export default function CardSlider() {
           <div className="carousel-item">
             <div className="card" style={{ width: 55 + 'rem', height: 25 + 'em' }}>
               <img src="/cardSlider/slider2.png" alt="img1" className=" mt-0 card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title d-flex justify-content-center">Card title</h5>
+              <div className={`card-body ${styles.title}`}>
+                <h5 className="card-title d-flex justify-content-center">Ideas Example</h5>
                 <p className="card-text d-flex justify-content-center mt-3">
                   Some quick example text to build on the card title and make up the bulk of the
                   card's content.
@@ -58,8 +59,8 @@ export default function CardSlider() {
           <div className="carousel-item">
             <div className="card" style={{ width: 55 + 'rem', height: 25 + 'em' }}>
               <img src="/cardSlider/slider3.png" alt="img1" className=" mt-0 card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title d-flex justify-content-center">Card title</h5>
+              <div className={`card-body ${styles.title}`}>
+                <h5 className="card-title d-flex justify-content-center">Ideas Example</h5>
                 <p className="card-text d-flex justify-content-center mt-3">
                   Some quick example text to build on the card title and make up the bulk of the
                   card's content.
@@ -97,9 +98,11 @@ export default function CardSlider() {
           </button>
         </div>
       </div>
-      <button type="button" className={`btn btn-outline mx-2 ${styles.btnCustomOutlinePrimary}`}>
-        Browse all ideas
-      </button>
+      <Link href="/rooms" passHref>
+        <button type="button" className={`btn btn-outline mx-2 ${styles.btnCustomOutlinePrimary}`}>
+          Browse all ideas
+        </button>
+      </Link>
     </div>
   )
 }

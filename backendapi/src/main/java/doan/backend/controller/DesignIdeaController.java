@@ -179,6 +179,7 @@ public class DesignIdeaController {
 		} else {
 			for (Style style : styles) {
 				DesignIdeaThumbnailDTO thumbnail = new DesignIdeaThumbnailDTO();
+				thumbnail.setStyleId(style.getStyleId());
 				thumbnail.setStyleName(style.getStyleName() + " " + cateName);
 				thumbnail.setImage(defaultImageS);
 				thumbnail.setImageBig(defaultImageB);

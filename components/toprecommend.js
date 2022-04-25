@@ -5,17 +5,17 @@ import { Icon } from '@iconify/react'
 
 export default function Toprecommend() {
   return (
-    <div className="container-fluid">
+    <div className="container-fluid mb-5">
       <div className="row">
         <div className="col-1"></div>
-        <div className="col-6">
-          <p className={styles.a}> This is title </p>
+        <div className={`col-6 ${styles.titleCol}`}>
+          <p className={styles.a}> Hello welcome to Sparkles </p>
         </div>
-        <div className="col-3">
+        <div className={`col-3 ${styles.titleCol}`}>
           <p className={styles.b}> Top Recommend </p>
-          <div className={styles.icon}>
+          {/* <div className={styles.icon}>
             <Icon icon="akar-icons:arrow-up" />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="row">
@@ -23,12 +23,8 @@ export default function Toprecommend() {
           <div className="row">
             <div className="col-2"></div>
 
-            <div className="col-4">
-              <div
-                style={{
-                  marginBottom: '20px',
-                }}
-              >
+            <div className={`col-4 ${styles.firstCol}`}>
+              <div className={styles.divStyle}>
                 <Image src={'/topRecommend/6.png'} width={208.62} height={230.47} alt="img" />
               </div>
 
@@ -37,11 +33,7 @@ export default function Toprecommend() {
               </div>
             </div>
             <div className="col-4">
-              <div
-                style={{
-                  marginBottom: '20px',
-                }}
-              >
+              <div className={styles.divStyle}>
                 <Image src={'/topRecommend/7.png'} width={208.62} height={315.96} alt="img" />
               </div>
               <div>
@@ -122,9 +114,9 @@ export default function Toprecommend() {
                     </div>
                   </div>
                 </div>
-                <div className={styles.icon} style={{ transform: 'translateX(65px)' }}>
+                {/* <div className={styles.icon} style={{ transform: 'translateX(65px)' }}>
                   <Icon icon="akar-icons:arrow-down" />
-                </div>
+                </div> */}
               </div>
               <div className="col-2"></div>
             </div>
