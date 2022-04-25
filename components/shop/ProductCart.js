@@ -3,6 +3,8 @@ import styles from '../../styles/Home.module.css'
 import { Icon } from '@iconify/react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { confirmAlert } from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 const ProductCart = () => {
   const [cart, setCart] = useState([])
@@ -37,6 +39,12 @@ const ProductCart = () => {
   const handleRedirectPage = () => {
     router.push('/shop')
   }
+
+  const checkOut = () => {
+    localStorage.removeItem('cart')
+    handleRedirectPage()
+  }
+
   function handleClear() {
     localStorage.removeItem('cart')
     setCart([])
@@ -44,8 +52,21 @@ const ProductCart = () => {
     setShipping(0)
   }
 
-  const handleCheckOut = () => {
-    router.push('/success')
+  function handleCheckOut() {
+    confirmAlert({
+      title: 'Coming soon...',
+      message: 'This feature is in development process.',
+      buttons: [
+        {
+          label: 'Back to shop',
+          onClick: () => checkOut(),
+        },
+        // {
+        //   label: 'No',
+        //   onClick: () => { },
+        // },
+      ],
+    })
   }
 
   return (

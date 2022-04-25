@@ -48,7 +48,7 @@ export default function LogIn() {
             <div className={styles.title}>
               <h2 className="d-flex justify-content-center">Welcome Back</h2>
               <p className="d-flex justify-content-center">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                Please log in to access our services!
               </p>
             </div>
             <div className={styles.input}>
