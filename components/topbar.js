@@ -46,8 +46,7 @@ export default function Topbar() {
 
   const handleSignOut = () => {
     setUser('')
-    // localStorage.setItem('user', '')
-    localStorage.removeItem('user')
+    localStorage.clear()
     router.push('/')
   }
 
