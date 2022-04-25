@@ -19,60 +19,22 @@ const ResultQuizSelect = () => {
     if (op) {
       setMainPicture(op)
     }
-    // findMax()
     var maxValue = 0
     var ind = 1
     for (var i = 1; i <= 8; i++) {
       if (maxValue < Number(localStorage.getItem(i.toString()))) {
         maxValue = localStorage.getItem(i.toString())
         ind = i
-        // console.log("i: ", i)
-        // console.log("index: ", index)
-        // console.log("value: ", localStorage.getItem(i.toString()))
-        // console.log("value Max: ", maxValue)
       }
     }
-    // setMax(maxValue)
     setIndex(ind)
     for (var i = 1; i <= 8; i++) {
-      console.log("i: ", i)
-      console.log("max", maxValue)
-      console.log("i value: ", localStorage.getItem(i.toString()))
-      console.log("index", index)
       if (Number(maxValue) == Number(localStorage.getItem(i.toString())) && i != ind) {
         console.log("set flag ", i)
         setUndefinedFlag(true)
       }
     }
   }, [index])
-
-  function findMax() {
-    let maxValue = 0
-    let ind = 1
-    for (var i = 1; i <= 8; i++) {
-      if (maxValue < localStorage.getItem(i.toString())) {
-        maxValue = localStorage.getItem(i.toString())
-        ind = i
-      }
-    }
-    console.log("maxvalue: ", maxValue)
-    setMax(maxValue)
-    console.log("Max all:", max)
-    setIndex(ind)
-    checkMax()
-  }
-
-  function checkMax() {
-    for (var i = 1; i <= 8; i++) {
-      console.log("max: ", max)
-      if (max == localStorage.getItem(i.toString()) && i != index) {
-        console.log("i: ", i)
-        console.log("i value: ", localStorage.getItem(i.toString()))
-        setUndefinedFlag(true)
-      }
-    }
-    console.log(undefinedFlag)
-  }
 
   const handleRedirectHome = () => {
     router.push('/')
