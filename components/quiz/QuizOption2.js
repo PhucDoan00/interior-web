@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import styles from '../../styles/Home.module.css'
 import { useRouter } from 'next/router'
-import { QuizImg } from '../../mock/dataQuiz'
+import { Quiz2 } from '../../mock/dataForQuiz'
 import { useEffect, useState } from 'react'
 import { Icon } from '@iconify/react'
 
@@ -15,18 +15,24 @@ const QuizOption = () => {
     const op = JSON.parse(localStorage.getItem('picture1'))
     if (op) {
       setMainPicture(op)
-      let check = QuizImg.find((e) => e.id == op.id)
-      if (check) {
-        setListImgItem(check.child2)
-      }
+      setListImgItem(Quiz2)
     }
   }, [])
 
+  const getPoint = (id) => {
+    const oldPoint = localStorage.getItem(id)
+    const newPoint = Number(oldPoint) + 2
+    localStorage.setItem(id, newPoint)
+  }
+
   const handleBack = () => {
-    router.push('/quiz/option')
+    router.push('/quiz')
   }
 
   const handleResult = () => {
+    getPoint(listItemActive[0])
+    getPoint(listItemActive[1])
+    getPoint(listItemActive[2])
     router.push('/quiz/option3')
   }
 
@@ -38,12 +44,8 @@ const QuizOption = () => {
       setListItemActive([...newList])
       setCheck(check - 1)
     } else {
-      if (listItemActive.length >= 3) {
-        alert('Ban chi duoc chon toi da 3 anhh')
-      } else {
-        setListItemActive([...listItemActive, id])
-        setCheck(check + 1)
-      }
+      setListItemActive([...listItemActive, id])
+      setCheck(check + 1)
     }
   }
 
@@ -114,7 +116,7 @@ const QuizOption = () => {
       <div className={`${styles.bottomBar}`}>
         <div className={`${styles.bottomQuiz}`}>
           <button className={`${styles.btnBack}`} onClick={handleBack}>
-            <span>Back</span>
+            <span>Retry</span>
           </button>
           {check > 0 && (
             <button className={`${styles.btnSelected}`} onClick={handleResult}>
