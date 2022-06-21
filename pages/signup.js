@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import axios from 'axios';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { confirmAlert } from 'react-confirm-alert';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
-import 'react-notifications/lib/notifications.css';
-import Layout from '../components/layout';
-import Topbar from '../components/topbar';
-import styles from '../styles/Signup.module.css';
+import axios from 'axios'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { confirmAlert } from 'react-confirm-alert'
+import { NotificationContainer, NotificationManager } from 'react-notifications'
+import 'react-notifications/lib/notifications.css'
+import Layout from '../components/layout'
+import Topbar from '../components/topbar'
+import styles from '../styles/Signup.module.css'
 
 export default function SignUp() {
   const [name, setName] = useState()
@@ -25,17 +25,19 @@ export default function SignUp() {
       address: address,
       phone: phone,
     }
-    axios.post('http://localhost:8080/api/auth/signup', signUpDetails).then(function (result) {
-      popupNoti();
-    }).catch(function (error) {
-      console.log(error);
-
-    })
+    axios
+      .post('http://localhost:8080/api/auth/signup', signUpDetails)
+      .then(function (result) {
+        popupNoti()
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   }
 
   const popupNoti = async () => {
-    NotificationManager.success('Login successfully', 'Succeed');
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    NotificationManager.success('Login successfully', 'Succeed')
+    await new Promise((resolve) => setTimeout(resolve, 3000))
     router.push('/login')
   }
 
@@ -46,14 +48,14 @@ export default function SignUp() {
       buttons: [
         {
           label: 'Yes',
-          onClick: () => handleSignUp()
+          onClick: () => handleSignUp(),
         },
         {
           label: 'Cancel',
-          onClick: () => { }
-        }
-      ]
-    });
+          onClick: () => {},
+        },
+      ],
+    })
   }
 
   return (
@@ -63,7 +65,7 @@ export default function SignUp() {
           <div className={styles.title}>
             <h2 className="d-flex justify-content-center">Welcome To Sprakles</h2>
             <p className="d-flex justify-content-center">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+              Be our customer, we will make your dream come to real life !
             </p>
           </div>
           <div className={styles.input}>
@@ -141,11 +143,11 @@ export default function SignUp() {
               id="exampleFormControlInput2"
               placeholder="Confirm your password"
               required
-            //TODO
+              //TODO
             />
           </div>
           <div className="d-flex justify-content-center">
-            <button type="button" onClick={submit} className={`btn ${styles.btnCustom} `} >
+            <button type="button" onClick={submit} className={`btn ${styles.btnCustom} `}>
               Sign Up
             </button>
           </div>
